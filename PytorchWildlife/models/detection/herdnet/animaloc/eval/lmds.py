@@ -217,3 +217,60 @@ class HerdNetLMDS(LMDS):
             b_dscores.append(dscores)
 
         return b_counts, b_locs, b_labels, b_scores, b_dscores
+
+class HerdNetLMDSLocBranch(LMDS):
+
+    def __init__(
+        self, 
+        kernel_size: tuple = (3,3), 
+        adapt_ts: float = 0.3, 
+        neg_ts: float = 0.1
+        ) -> None:
+        '''
+        Args:
+            up (bool, optional): set to False to disable class maps upsampling.
+                Defaults to True.
+            kernel_size (tuple, optional): size of the kernel used to select local
+                maxima. Defaults to (3,3) (as in the paper).
+            adapt_ts (float, optional): adaptive threshold to select final points
+                from candidates. Defaults to 0.3.
+            neg_ts (float, optional): negative sample threshold used to define if 
+                an image is a negative sample or not. Defaults to 0.1 (as in the paper).
+        '''
+
+        super().__init__(kernel_size=kernel_size, adapt_ts=adapt_ts, neg_ts=neg_ts)
+    
+    def __call__(self, outputs: List[torch.Tensor]) -> Tuple[list, list, list, list, list]:
+        '''
+        Args:
+            outmaps (torch.Tensor): outputs of HerdNet localization branch, i.e. 1 tensors:
+                - heatmap: [B,1,H,W], 
+        
+        Returns:
+            Tuple[list,list,list,list,list]
+                counts, locations, labels, class scores and detection scores per batch
+        '''
+        heatmap = outputs
+
+        # LMDS
+        batch_size, channels = heatmap.shape[:2]
+
+        b_counts, b_labels, b_locs, b_dscores = [], [], [], []
+        for b in range(batch_size):
+
+            _, locs, _ = self._lmds(heatmap[b][0])
+
+            h_idx = torch.Tensor([l[0] for l in locs]).long()
+            w_idx = torch.Tensor([l[1] for l in locs]).long()
+            labels = [1] * len(locs)
+
+            dscores = heatmap[b, 0, h_idx, w_idx].float().tolist()
+
+            counts = len(locs)
+
+            b_labels.append(labels)
+            b_locs.append(locs)
+            b_counts.append(counts)
+            b_dscores.append(dscores)
+
+        return b_counts, b_locs, b_labels, b_dscores
