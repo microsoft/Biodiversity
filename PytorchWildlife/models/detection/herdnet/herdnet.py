@@ -51,7 +51,7 @@ class HerdNet(BaseDetector):
             version (str, optional):
                 Version name based on what dataset the model is trained on. It should be either 'general' or 'ennedi'. Defaults to 'general'.
             url (str, optional): 
-                URL to fetch the model weights. Defaults to None.
+                URL to fetch the model weights. Defaults to "https://zenodo.org/records/13899852/files/20220413_HerdNet_General_dataset_2022.pth?download=1".
             transform (torchvision.transforms.Compose, optional):
                 Image transformation for inference. Defaults to None.
         """

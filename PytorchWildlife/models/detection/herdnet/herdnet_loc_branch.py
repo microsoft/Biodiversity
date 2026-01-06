@@ -39,7 +39,7 @@ class HerdNetLocBranch(BaseDetector):
     loading the model, generating results, and performing single and batch image detections.
     """
 
-    def __init__(self, weights=None, device="cpu", url=None, transform=None):
+    def __init__(self, weights=None, device="cpu", url="https://zenodo.org/records/18165116/files/herdnet_loc_branch_wildme.pth?download=1", transform=None):
         """
         Initialize the HerdNet detector.
         
@@ -49,7 +49,7 @@ class HerdNetLocBranch(BaseDetector):
             device (str, optional): 
                 Device for model inference. Defaults to "cpu".
             url (str, optional): 
-                URL to fetch the model weights. Defaults to None.
+                URL to fetch the model weights. Defaults to "https://zenodo.org/records/18165116/files/herdnet_loc_branch_wildme.pth?download=1".
             transform (torchvision.transforms.Compose, optional):
                 Image transformation for inference. Defaults to None.
         """
@@ -112,7 +112,7 @@ class HerdNetLocBranch(BaseDetector):
         self.img_std = checkpoint['std']
 
         # Load the model architecture
-        self.model = HerdNetArch(pretrained=False)
+        self.model = HerdNetArchLocBranch(pretrained=False)
 
         # Load checkpoint into model
         state_dict = checkpoint['model_state_dict']  
@@ -233,7 +233,6 @@ class HerdNetLocBranch(BaseDetector):
             counts (list): Number of detections for each species.
             locs (list): Locations of the detections.
             labels (list): Labels of the detections.
-            scores (list): Scores of the detections.
             dscores (list): Detection scores.
             det_conf_thres (float, optional): Confidence threshold for detections. Defaults to 0.2.
 
@@ -241,12 +240,11 @@ class HerdNetLocBranch(BaseDetector):
             numpy.ndarray: Processed detection results.
         """
         # Flatten the lists since we know its a single image 
-        counts = counts[0]  
+        #counts = counts[0]  
         locs = locs[0]  
         labels = labels[0]  
-        scores = scores[0]
         dscores = dscores[0]  
-    
+
         # Calculate the total number of detections  
         total_detections = sum(counts)  
         
@@ -263,7 +261,6 @@ class HerdNetLocBranch(BaseDetector):
             # Get the detections for this species  
             species_locs = np.array(locs[detection_idx : detection_idx + count])
             species_locs[:, [0, 1]] = species_locs[:, [1, 0]] # Swap x and y in species_locs
-            species_scores = np.array(scores[detection_idx : detection_idx + count])
             species_dscores = np.array(dscores[detection_idx : detection_idx + count])
             species_labels = np.array(labels[detection_idx : detection_idx + count])
 
@@ -276,7 +273,7 @@ class HerdNetLocBranch(BaseDetector):
             if valid_detections_count > 0:
                 preds_array[valid_detections_idx - valid_detections_count : valid_detections_idx, :2] = species_locs[valid_detections] - 1
                 preds_array[valid_detections_idx - valid_detections_count : valid_detections_idx, 2:4] = species_locs[valid_detections] + 1
-                preds_array[valid_detections_idx - valid_detections_count : valid_detections_idx, 4] = species_scores[valid_detections]
+                preds_array[valid_detections_idx - valid_detections_count : valid_detections_idx, 4] = species_dscores[valid_detections]
                 preds_array[valid_detections_idx - valid_detections_count : valid_detections_idx, 5] = species_labels[valid_detections]
             
             detection_idx += count # Move to the next species 

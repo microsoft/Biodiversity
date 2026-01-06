@@ -248,7 +248,7 @@ class HerdNetStitcherLocBranch(Stitcher):
         for patch in dataloader:
             patch = patch[0].to(self.device)
             #outputs = self.model(patch)[0]
-            outputs = self.model(patch)[0] # LossWrapper is not used
+            outputs = self.model(patch) # LossWrapper is not used
             heatmap = outputs
             outmaps = heatmap.unsqueeze(0)
             maps = [*maps, *outmaps]

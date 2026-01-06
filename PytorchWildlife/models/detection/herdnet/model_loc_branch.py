@@ -30,7 +30,7 @@ class HerdNet_Loc_Branch(nn.Module):
             head_conv (int, optional): number of supplementary convolutional layers at the end 
                 of decoder. Defaults to 64.
         '''
-        super(HerdNet_Detection_Branch, self).__init__()
+        super(HerdNet_Loc_Branch, self).__init__()
 
         assert down_ratio in [1, 2, 4, 8, 16], \
             f'Downsample ratio possible values are 1, 2, 4, 8 or 16, got {down_ratio}'
