@@ -1,5 +1,5 @@
 from ..base_detector import BaseDetector
-from ..herdnet.animaloc.eval import HerdNetStitcher, HerdNetLMDS
+from ..localization.animaloc.eval import HerdNetStitcher, HerdNetLMDS
 from ....data import datasets as pw_data
 from .model import HerdNet as HerdNetArch
 

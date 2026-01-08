@@ -1,5 +1,5 @@
 from ..base_detector import BaseDetector
-from ..herdnet.animaloc.eval import HerdNetStitcherLocBranch, HerdNetLMDSLocBranch
+from ..localization.animaloc.eval import HerdNetStitcherLocBranch, HerdNetLMDSLocBranch
 from ....data import datasets as pw_data
 from .model_loc_branch import HerdNet_Loc_Branch as HerdNetArchLocBranch
 
@@ -39,7 +39,7 @@ class HerdNetLocBranch(BaseDetector):
     loading the model, generating results, and performing single and batch image detections.
     """
 
-    def __init__(self, weights=None, device="cpu", url="https://zenodo.org/records/18165116/files/herdnet_loc_branch_wildme.pth?download=1", transform=None):
+    def __init__(self, weights=None, device="cpu", version='general', url="https://zenodo.org/records/18165116/files/herdnet_loc_branch_wildme.pth?download=1", transform=None):
         """
         Initialize the HerdNet detector.
         
@@ -48,13 +48,19 @@ class HerdNetLocBranch(BaseDetector):
                 Path to the model weights. Defaults to None.
             device (str, optional): 
                 Device for model inference. Defaults to "cpu".
+            version (str, optional):
+                Version of the model to use. Defaults to 'general'. It should be either 'general' or 'caribou'.
             url (str, optional): 
                 URL to fetch the model weights. Defaults to "https://zenodo.org/records/18165116/files/herdnet_loc_branch_wildme.pth?download=1".
             transform (torchvision.transforms.Compose, optional):
                 Image transformation for inference. Defaults to None.
         """
         super(HerdNetLocBranch, self).__init__(weights=weights, device=device, url=url)
-
+        # Assert version is either 'general' or 'caribou'
+        version = version.lower()
+        assert version in ['general', 'caribou'], "Version should be either 'general' or 'caribou'."
+        if version == 'caribou':
+            url = "https://zenodo.org/records/18177050/files/caribou_herdnet_loc_branch.pth?download=1"
         self._load_model(weights, device, url)
 
         self.stitcher = HerdNetStitcherLocBranch( # This module enables patch-based inference
@@ -154,7 +160,7 @@ class HerdNetLocBranch(BaseDetector):
         ]
         return results
     
-    def single_image_detection(self, img, img_path=None, det_conf_thres=0.15, id_strip=None) -> dict:
+    def single_image_detection(self, img, img_path=None, det_conf_thres=0.20, id_strip=None) -> dict:
         """
         Perform detection on a single image.
 
@@ -164,7 +170,7 @@ class HerdNetLocBranch(BaseDetector):
             img_path (str, optional): 
                 Path to the image. Defaults to None.
             det_conf_thres (float, optional):
-                Confidence threshold for detections. Defaults to 0.15.
+                Confidence threshold for detections. Defaults to 0.20.
             id_strip (str, optional): 
                 Characters to strip from img_id. Defaults to None.
 
@@ -187,13 +193,13 @@ class HerdNetLocBranch(BaseDetector):
             results_dict = self.results_generation(preds_array, img=img)
         return results_dict
 
-    def batch_image_detection(self, data_path: str, det_conf_thres: float = 0.15, batch_size: int = 1, id_strip: str = None) -> list[dict]:
+    def batch_image_detection(self, data_path: str, det_conf_thres: float = 0.20, batch_size: int = 1, id_strip: str = None) -> list[dict]:
         """
         Perform detection on a batch of images.
 
         Args:
             data_path (str): Path containing all images for inference.
-            det_conf_thres (float, optional): Confidence threshold for detections. Defaults to 0.15.
+            det_conf_thres (float, optional): Confidence threshold for detections. Defaults to 0.20.
             batch_size (int, optional): Batch size for inference. Defaults to 1.
             id_strip (str, optional): Characters to strip from img_id. Defaults to None.
 
@@ -206,7 +212,7 @@ class HerdNetLocBranch(BaseDetector):
         )
         # Creating a Dataloader for batching and parallel processing of the images
         loader = DataLoader(dataset, batch_size=batch_size, shuffle=False, 
-                            pin_memory=True, num_workers=0, drop_last=False) # TODO: discuss. why is num_workers 0?
+                            pin_memory=True, num_workers=0, drop_last=False)
         
         results = []
 
@@ -220,7 +226,7 @@ class HerdNetLocBranch(BaseDetector):
                 results_dict = self.results_generation(preds_array, img_id=paths[0], id_strip=id_strip)
                 pbar.update(1)
                 sizes = sizes.numpy()
-                normalized_coords = [[x1 / sizes[0][0], y1 / sizes[0][1], x2 / sizes[0][0], y2 / sizes[0][1]] for x1, y1, x2, y2 in preds_array[:, :4]] # TODO: Check if this is correct due to xy swapping 
+                normalized_coords = [[x1 / sizes[0][0], y1 / sizes[0][1], x2 / sizes[0][0], y2 / sizes[0][1]] for x1, y1, x2, y2 in preds_array[:, :4]]
                 results_dict['normalized_coords'] = normalized_coords
                 results.append(results_dict)
         return results
