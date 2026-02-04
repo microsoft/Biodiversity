@@ -22,3 +22,9 @@ mkdocs-material-extensions
 pymdown-extensions
 mkdocstrings
 mkdocstrings-python
+
+# Bioacoustics dependencies
+librosa
+soundfile
+pyyaml
+torchmetrics
