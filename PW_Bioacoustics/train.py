@@ -25,7 +25,6 @@ from torchinfo import summary
 
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping, LearningRateMonitor
-from pytorch_lightning.loggers import WandbLogger
 
 # Import from PytorchWildlife core library
 from PytorchWildlife.models.bioacoustics import ResNetClassifier
@@ -330,13 +329,6 @@ def main():
 
     lr_cb = LearningRateMonitor(logging_interval="epoch")
 
-    name = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    logger = WandbLogger(
-        project="bioacoustics_megadetector",
-        name=name,
-        config=vars(args),
-    )
-
     trainer = pl.Trainer(
         max_epochs=args.epochs,
         accelerator="gpu",
@@ -345,7 +337,7 @@ def main():
         gradient_clip_val=1.0,
         log_every_n_steps=20,
         callbacks=[cb for cb in [ckpt_cb, lr_cb, early_cb] if cb is not None],
-        logger=logger,
+        logger=False,
     )
 
     if args.ckpt_path is None:
