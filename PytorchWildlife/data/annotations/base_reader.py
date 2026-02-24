@@ -7,7 +7,6 @@ from .annotation_creator import AnnotationCreator
 class BaseReader:
     def __init__(self, data_path):
         self.data_path = data_path
-        self.dataset_name = os.path.basename(data_path)
         self.output_path = os.path.join(data_path, "annotations.json")
         self.annotation_creator = AnnotationCreator()
         self.data = None
@@ -40,6 +39,17 @@ class BaseReader:
         self.categories = {cat["id"]: cat["name"] for cat in self.data["categories"]}
         self.sounds = self.data["sounds"]
         self.annotations = self.data["annotations"]
+    
+    def show_summary(self):
+        """Displays a general summary of the dataset."""
+        total_duration = sum(sound['duration'] for sound in self.sounds)
+        total_hours = total_duration / 3600
+
+        print(f"Dataset: {self.data['info']['title']}")
+        print(f"Total species: {len(self.categories)}")
+        print(f"Total audio recordings: {len(self.sounds)}")
+        print(f"Total annotations: {len(self.annotations)}")
+        print(f"Total duration: {total_hours:.2f} hours")
 
     def process_dataset(self):
         """Executes the full dataset processing pipeline."""
@@ -49,3 +59,4 @@ class BaseReader:
         self.add_annotations()
         self.save_dataset()
         self.load_dataset()
+        self.show_summary()
