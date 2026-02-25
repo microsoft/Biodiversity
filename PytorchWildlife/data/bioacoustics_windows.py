@@ -17,7 +17,24 @@ import numpy as np
 
 __all__ = [
     "build_windows",
+    "count_window_labels",
 ]
+
+
+def count_window_labels(windows: List[Dict]) -> Dict:
+    """Count label distribution in windows.
+
+    Args:
+        windows: List of window dicts as returned by :func:`build_windows`.
+
+    Returns:
+        Dictionary mapping each label value to its count.
+    """
+    counts: Dict = {}
+    for w in windows:
+        label = w.get('label', 0)
+        counts[label] = counts.get(label, 0) + 1
+    return counts
 
 
 def build_windows(
@@ -28,6 +45,8 @@ def build_windows(
     datasets_names: List[str],
     strategy: str = "sliding",
     negative_proportion: float = 0.5,
+    multiclass: bool = False,
+    min_overlap_sec: float = 0,
 ) -> List[Dict]:
     """
     Build audio windows with their labels using the specified strategy.
@@ -45,20 +64,27 @@ def build_windows(
                          then samples negatives to achieve desired proportion.
         negative_proportion: Proportion of negatives for "balanced" strategy.
             0.5 means 50% negatives, 50% positives.
+        multiclass: If True, use the annotation's category_id as the label
+            instead of a binary 0/1. Defaults to False (binary).
+        min_overlap_sec: Minimum overlap in seconds between a window and an
+            annotation for the window to be labelled positive. Defaults to 0
+            (any overlap counts).
 
     Returns:
         List of window dicts with keys: 'window_id', 'dataset', 'sample_rate',
-        'sound_id', 'start', 'end', 'label'.
+        'sound_id', 'start', 'end', 'label'.  When *multiclass* is True an
+        extra 'ann_overlap' key is included with the overlap amount in samples.
     """
     if strategy == "sliding":
         return _build_windows_sliding(
             annotation_file, window_size_sec, overlap_sec,
-            sample_rate, datasets_names
+            sample_rate, datasets_names, multiclass, min_overlap_sec
         )
     elif strategy == "balanced":
         return _build_windows_balanced(
             annotation_file, window_size_sec, overlap_sec,
-            sample_rate, datasets_names, negative_proportion
+            sample_rate, datasets_names, negative_proportion,
+            multiclass, min_overlap_sec
         )
     else:
         raise ValueError(f"Unknown strategy: {strategy}. Use 'sliding' or 'balanced'.")
@@ -70,10 +96,16 @@ def _build_windows_sliding(
     overlap_sec: float,
     sample_rate: int,
     datasets_names: List[str],
+    multiclass: bool = False,
+    min_overlap_sec: float = 0,
 ) -> List[Dict]:
     """
     Sliding window strategy: generates windows with fixed overlap across entire audio.
     Labels each window based on whether it overlaps with any annotation.
+
+    When *multiclass* is False (default) the label is binary (0 or 1).
+    When *multiclass* is True the label is the annotation's ``category_id``
+    and an extra ``ann_overlap`` field records the overlap in samples.
     """
     with open(annotation_file, 'r') as f:
         data = json.load(f)
@@ -82,6 +114,7 @@ def _build_windows_sliding(
 
     window_size = int(window_size_sec * sample_rate)
     hop_size = int((window_size_sec - overlap_sec) * sample_rate)
+    min_overlap_samples = int(min_overlap_sec * sample_rate)
 
     windows = []
     window_idx = 0
@@ -96,7 +129,8 @@ def _build_windows_sliding(
             if ev['sound_id'] == sound_id:
                 sound_events.append((
                     int(ev['t_min'] * sample_rate),
-                    int(ev['t_max'] * sample_rate)
+                    int(ev['t_max'] * sample_rate),
+                    ev.get('category_id', 1)
                 ))
 
         dataset = None
@@ -113,20 +147,27 @@ def _build_windows_sliding(
 
             # Check overlap with any event
             label = 0
-            for event_start, event_end in sound_events:
+            ann_overlap = 0
+            for event_start, event_end, category_id in sound_events:
                 if event_end > start and event_start < end:
-                    label = 1
-                    break
+                    overlap = min(end, event_end) - max(start, event_start)
+                    if overlap > min_overlap_samples:
+                        label = category_id if multiclass else 1
+                        ann_overlap = overlap
+                        break
 
-            windows.append({
+            win = {
                 'window_id': window_idx,
                 'dataset': dataset,
                 'sample_rate': sound["sample_rate"],
                 'sound_id': sound_id,
                 'start': start,
                 'end': end,
-                'label': label
-            })
+                'label': label,
+            }
+            if multiclass:
+                win['ann_overlap'] = ann_overlap
+            windows.append(win)
             window_idx += 1
 
     return windows
@@ -139,6 +180,8 @@ def _build_windows_balanced(
     sample_rate: int,
     datasets_names: List[str],
     negative_proportion: float = 0.5,
+    multiclass: bool = False,
+    min_overlap_sec: float = 0,
 ) -> List[Dict]:
     """
     Balanced strategy: centers windows on annotations for positives,
@@ -148,6 +191,8 @@ def _build_windows_balanced(
         negative_proportion: Final proportion of negative examples in the dataset.
             0.5 means 50% negatives, 50% positives (equal amounts).
             0.7 means 70% negatives, 30% positives.
+        multiclass: If True, use the annotation's category_id as the label.
+        min_overlap_sec: Minimum overlap in seconds for negative rejection.
     """
     with open(annotation_file, 'r') as f:
         data = json.load(f)
@@ -156,6 +201,7 @@ def _build_windows_balanced(
 
     window_size = int(window_size_sec * sample_rate)
     hop_size = int((window_size_sec - overlap_sec) * sample_rate)
+    min_overlap_samples = int(min_overlap_sec * sample_rate)
 
     window_idx = 0
     positive_windows = []
@@ -176,11 +222,12 @@ def _build_windows_balanced(
             if ev['sound_id'] == sound_id:
                 sound_events.append((
                     int(ev['t_min'] * sample_rate),
-                    int(ev['t_max'] * sample_rate)
+                    int(ev['t_max'] * sample_rate),
+                    ev.get('category_id', 1)
                 ))
 
         positive_regions = []
-        for event_start, event_end in sound_events:
+        for event_start, event_end, category_id in sound_events:
             # Center the window on the annotation
             annotation_center = (event_start + event_end) // 2
             win_start = annotation_center - window_size // 2
@@ -196,15 +243,21 @@ def _build_windows_balanced(
 
             # Only add if we have enough samples
             if win_end - win_start == window_size and win_end <= duration_samples:
-                positive_windows.append({
+                win = {
                     'window_id': window_idx,
                     'dataset': dataset,
                     'sample_rate': sound["sample_rate"],
                     'sound_id': sound_id,
                     'start': win_start,
                     'end': win_end,
-                    'label': 1
-                })
+                    'label': category_id if multiclass else 1,
+                }
+                if multiclass:
+                    overlap = (
+                        min(win_end, event_end) - max(win_start, event_start)
+                    )
+                    win['ann_overlap'] = overlap
+                positive_windows.append(win)
                 positive_regions.append((win_start, win_end))
                 window_idx += 1
 
@@ -235,6 +288,16 @@ def _build_windows_balanced(
                 dataset = dataset_name
                 break
 
+        # Filter annotations for this sound (needed for min_overlap check)
+        sound_events = []
+        if min_overlap_samples > 0:
+            for ev in annotations:
+                if ev['sound_id'] == sound_id:
+                    sound_events.append((
+                        int(ev['t_min'] * sample_rate),
+                        int(ev['t_max'] * sample_rate),
+                    ))
+
         # Generate all possible negative windows with overlap
         candidates = []
         start = 0
@@ -245,7 +308,16 @@ def _build_windows_balanced(
             is_negative = True
             for pos_start, pos_end in positive_regions:
                 if not (end <= pos_start or start >= pos_end):
-                    is_negative = False
+                    # When min_overlap_sec > 0, only reject if actual
+                    # annotation overlap exceeds the threshold
+                    if min_overlap_samples > 0:
+                        for ev_start, ev_end in sound_events:
+                            ov = min(end, ev_end) - max(start, ev_start)
+                            if ov > min_overlap_samples:
+                                is_negative = False
+                                break
+                    else:
+                        is_negative = False
                     break
 
             if is_negative:
@@ -254,15 +326,18 @@ def _build_windows_balanced(
             start += hop_size
 
         for start, end in candidates:
-            negative_windows.append({
+            win = {
                 'window_id': None,
                 'dataset': dataset,
                 'sample_rate': sound["sample_rate"],
                 'sound_id': sound_id,
                 'start': start,
                 'end': end,
-                'label': 0
-            })
+                'label': 0,
+            }
+            if multiclass:
+                win['ann_overlap'] = 0
+            negative_windows.append(win)
 
     # Shuffle and select the required number of negative examples
     np.random.shuffle(negative_windows)

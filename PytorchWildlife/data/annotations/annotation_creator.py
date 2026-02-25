@@ -193,16 +193,21 @@ class AnnotationCreator:
         Raises:
             ValueError: If any of the provided values are out of valid range, or if the
                         time/frequency constraints are violated.
+
         """
         sound_dict = self.data['sounds'][sound_id]
         if t_min < 0:
             raise ValueError("t_min must be a positive value.")
         if t_max < 0:
             raise ValueError("t_max must be a positive value.")
-        if t_max < t_min:
-            raise ValueError("t_max must be greater than t_min.")
         if t_max > sound_dict["duration"]:
             t_max = sound_dict["duration"]
+        if t_max < t_min:
+            raise ValueError(
+                f"t_max ({t_max:.4f}) must be greater than t_min ({t_min:.4f}). "
+                f"Sound duration is {sound_dict['duration']:.4f}s "
+                f"(anno_id={anno_id}, sound_id={sound_id})."
+            )
         if f_min and f_max:
             if f_min < 0:
                 raise ValueError("f_min must be a positive value.")

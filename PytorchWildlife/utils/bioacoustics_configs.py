@@ -48,6 +48,7 @@ class PathConfig:
     output_root: str = ""
     spectrograms_dir: str = ""
     annotations_file: str = "annotations.json"
+    windows_file: str = "windows_mapping.json"
 
     def __post_init__(self):
         """Expand environment variables and resolve paths."""
@@ -69,6 +70,8 @@ class AudioConfig:
     overlap_sec: float = 4.0
     window_strategy: str = "sliding"  # "sliding" or "balanced"
     negative_proportion: float = 0.5  # For "balanced" strategy
+    multiclass: bool = False  # Use category_id labels instead of binary 0/1
+    min_overlap_sec: float = 0  # Minimum overlap (s) to label a window positive
 
     @property
     def hop_size_sec(self) -> float:
