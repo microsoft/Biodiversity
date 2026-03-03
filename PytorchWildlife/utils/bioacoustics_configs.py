@@ -68,8 +68,9 @@ class AudioConfig:
     sample_rate: int = 48000
     window_size_sec: float = 5.0
     overlap_sec: float = 4.0
-    window_strategy: str = "sliding"  # "sliding" or "balanced"
+    window_strategy: str = "sliding"  # "sliding", "balanced", or "customized"
     negative_proportion: float = 0.5  # For "balanced" strategy
+    windows_csv: str = ""  # Path to pre-built CSV for "customized" strategy
     multiclass: bool = False  # Use category_id labels instead of binary 0/1
     min_overlap_sec: float = 0  # Minimum overlap (s) to label a window positive
 
@@ -86,7 +87,10 @@ class SpectrogramConfig:
     hop_length: int = 512
     n_mels: int = 224
     top_db: float = 80.0
-    fill_noise: bool = True
+    f_min: float = 0.0  # Minimum frequency (Hz) for the mel filterbank
+    mono_channel: str = "left"  # "left", "right", or "mean" for stereo→mono
+    fill_highfreq: bool = True
+    fill_mean_below_sr: bool = False  # Fill with mean instead of noise when orig_sr < target_sr
     noise_db_std: float = 3.0
     storage_dtype: str = "float32"
 

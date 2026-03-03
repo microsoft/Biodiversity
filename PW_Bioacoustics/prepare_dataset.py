@@ -152,7 +152,7 @@ def run_spectrograms(config: DomainConfig, windows: List[dict]) -> None:
     print(f"  - hop_length: {config.spectrogram.hop_length}")
     print(f"  - n_mels: {config.spectrogram.n_mels}")
     print(f"  - top_db: {config.spectrogram.top_db}")
-    print(f"  - fill_noise: {config.spectrogram.fill_noise}")
+    print(f"  - fill_highfreq: {config.spectrogram.fill_highfreq}")
 
     # Load annotations to get audio file paths
     with open(config.paths.annotations_path, 'r') as f:
@@ -181,7 +181,7 @@ def run_spectrograms(config: DomainConfig, windows: List[dict]) -> None:
         top_db=config.spectrogram.top_db,
         spectrograms_path=spectrograms_dir,
         save_npy=True,
-        fill_noise=config.spectrogram.fill_noise,
+        fill_highfreq=config.spectrogram.fill_highfreq,
         noise_db_std=config.spectrogram.noise_db_std,
         storage_dtype=config.spectrogram.storage_dtype,
     )

@@ -172,7 +172,7 @@ def compute_mel_spectrograms_gpu(
     top_db: float,
     spectrograms_path: str,
     save_npy: bool = True,
-    fill_noise: bool = True,
+    fill_highfreq: bool = True,
     noise_db_mean: Optional[float] = None,
     noise_db_std: float = 3.0,
     storage_dtype: str = "float32",
@@ -266,7 +266,7 @@ def compute_mel_spectrograms_gpu(
                 S_db = to_db(S)
 
                 # Optional high-frequency fill
-                if fill_noise and orig_sr < sample_rate:
+                if fill_highfreq and orig_sr < sample_rate:
                     mel_freqs = librosa.mel_frequencies(n_mels=n_mels, fmin=0.0, fmax=sample_rate / 2.0)
                     nyq_orig = (float(orig_sr) / 2.0) - 2500
                     noise_mask = torch.from_numpy((mel_freqs > nyq_orig).astype(np.bool_)).to(device)
@@ -606,7 +606,7 @@ def main():
             top_db=args.top_db,
             spectrograms_path=spectrograms_path,
             save_npy=True,
-            fill_noise=True,
+            fill_highfreq=True,
             noise_db_mean=None,
             noise_db_std=3.0,
             storage_dtype="float32",

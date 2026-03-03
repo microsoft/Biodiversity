@@ -47,6 +47,7 @@ def build_windows(
     negative_proportion: float = 0.5,
     multiclass: bool = False,
     min_overlap_sec: float = 0,
+    custom_builder=None,
 ) -> List[Dict]:
     """
     Build audio windows with their labels using the specified strategy.
@@ -62,6 +63,8 @@ def build_windows(
                         Labels based on annotation overlap.
             - "balanced": Centers windows on annotations for positives,
                          then samples negatives to achieve desired proportion.
+            - "customized": Delegates to a user-supplied ``custom_builder``
+                           callable.
         negative_proportion: Proportion of negatives for "balanced" strategy.
             0.5 means 50% negatives, 50% positives.
         multiclass: If True, use the annotation's category_id as the label
@@ -69,6 +72,9 @@ def build_windows(
         min_overlap_sec: Minimum overlap in seconds between a window and an
             annotation for the window to be labelled positive. Defaults to 0
             (any overlap counts).
+        custom_builder: Callable used when ``strategy="customized"``.  It
+            receives ``(annotation_file, sample_rate, datasets_names)`` and
+            must return a list of window dicts.
 
     Returns:
         List of window dicts with keys: 'window_id', 'dataset', 'sample_rate',
@@ -86,8 +92,19 @@ def build_windows(
             sample_rate, datasets_names, negative_proportion,
             multiclass, min_overlap_sec
         )
+    elif strategy == "customized":
+        if custom_builder is None:
+            raise ValueError(
+                "The 'customized' strategy requires a 'custom_builder' callable."
+            )
+        return custom_builder(
+            annotation_file, sample_rate, datasets_names
+        )
     else:
-        raise ValueError(f"Unknown strategy: {strategy}. Use 'sliding' or 'balanced'.")
+        raise ValueError(
+            f"Unknown strategy: {strategy}. "
+            f"Use 'sliding', 'balanced', or 'customized'."
+        )
 
 
 def _build_windows_sliding(

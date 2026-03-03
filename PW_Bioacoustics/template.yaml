@@ -29,7 +29,7 @@ spectrogram:
   hop_length: 512
   n_mels: 224
   top_db: 80.0
-  fill_noise: true
+  fill_highfreq: true
   noise_db_std: 3.0
   storage_dtype: "float32"
 
