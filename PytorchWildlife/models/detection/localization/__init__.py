@@ -1,3 +1,3 @@
 from .herdnet import *
-from .herdnet_loc_branch import *
-from .herdnet_hybrid_multiscale_residual import *
+from .OWL_C import *
+from .OWL_T import *
