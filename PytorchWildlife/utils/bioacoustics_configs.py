@@ -48,7 +48,7 @@ class PathConfig:
     output_root: str = ""
     spectrograms_dir: str = ""
     annotations_file: str = "annotations.json"
-    windows_file: str = "windows_mapping.json"
+    windows_json: str = "windows_annotations.json"
 
     def __post_init__(self):
         """Expand environment variables and resolve paths."""
@@ -71,6 +71,7 @@ class AudioConfig:
     window_strategy: str = "sliding"  # "sliding", "balanced", or "customized"
     negative_proportion: float = 0.5  # For "balanced" strategy
     windows_csv: str = ""  # Path to pre-built CSV for "customized" strategy
+    windows_json: str = ""  # Filename for saving/loading the windows JSON file
     multiclass: bool = False  # Use category_id labels instead of binary 0/1
     min_overlap_sec: float = 0  # Minimum overlap (s) to label a window positive
 
@@ -173,6 +174,9 @@ def load_config(config_path: str) -> DomainConfig:
     # Build nested config objects
     paths = PathConfig(**data.get('paths', {}))
     audio = AudioConfig(**data.get('audio', {}))
+    # If windows_json is set in audio but not in paths, propagate it
+    if audio.windows_json and not data.get('paths', {}).get('windows_json'):
+        paths.windows_json = audio.windows_json
     spectrogram = SpectrogramConfig(**data.get('spectrogram', {}))
     training = TrainingConfig(**data.get('training', {}))
     splits = SplitsConfig(**data.get('splits', {}))
