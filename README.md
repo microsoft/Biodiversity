@@ -17,49 +17,46 @@
 </div>
 
 
-
 ## 📣 Announcements
 
-### 🚀 We’re Open for Contributions!
+### What we've been up to
+Hey everyone! It’s been a while since our last update — we hope you haven’t forgotten about us! 😊
 
-We’re excited to announce that **Pytorch-Wildlife** is now open to community contributions!  
-If you’d like to get involved and help improve the project, we’d love to have you on board.
+Over the past couple of months we’ve been thinking hard about the future of PyTorchWildlife and cooking up some exciting new features just for you.
 
-👉 **Check out our Contribution Guidelines:**  
+After two years of community use, one thing has become super clear: most people prefer a nice graphical interface over writing code. People have been asking for a more seamless, unified experience that covers data management, processing, AI inference, analysis, and annotation all in one place.
 
-[📚 How to Participate](https://microsoft.github.io/CameraTraps/contribute/#how-to-participate)
+So we built Sparrow Studio — a clean, unified UI built on top of PyTorchWildlife that brings exactly those tools together:
 
-You’ll find everything you need there — from how to pick an issue, to submitting your first pull request.  
-Let’s build this together! 🐾🌱
+- Local and cloud-based data storage & management
+- AI inference using the PyTorchWildlife model zoo
+- Post-inference statistics and analysis
+- Pre- and post-inference data annotation (easy bounding-box and category editing)
+- Embedding visualization and feature retrieval tools
 
-### V 1.2.4
+We’re kicking things off with a beta test before the official release. If you’d like to try it, just reach out — we’ll send you the Windows MSI installer. We’re actively making it compatible to Mac and Linux right now. So Mac and Linux users, we got you covered too!
 
-The inference code for the MIT YOLO and Apache RT‑DETR models is now available! To use either one, just load it like any other PyTorch‑Wildlife model:
+We’ve also been expanding PyTorchWildlife itself into bioacoustics and overhead animal localization. Later this month we’ll release:
 
-```python
-from pw_detection import MegaDetectorV6MIT, MegaDetectorV6Apache
+- A dedicated bioacoustics module + several newly trained bioacoustics models
+- OWL (Overhead Wildlife Locator) — our new generalized, point-based detection model for overhead imagery
 
-# MIT YOLO
-detector = MegaDetectorV6MIT(
-    device=DEVICE,
-    pretrained=True,
-    version="MDV6-mit-yolov9-e"
-)
+Even better, Sparrow Studio already has dedicated support for both, so beta testers will be able to run inference and annotate bioacoustics recordings or overhead images directly in the UI.
 
-# Apache RT‑DETR
-detector = MegaDetectorV6Apache(
-    device=DEVICE,
-    pretrained=True,
-    version="MDV6-apa-rtdetr-e"
-)
-```
-Valid versions:
-- MDV6-mit-yolov9-c
-- MDV6-mit-yolov9-e
-- MDV6-apa-rtdetr-c
-- MDV6-apa-rtdetr-e
+### The future of PyTorchWildlife
+With Sparrow Studio stepping into the picture, PyTorchWildlife will gradually evolve into a clean, stable API + high‑quality model zoo, while Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend.
 
-You can also try out the full pipeline using the `detection_classification_pipeline_demo.py` script in the demo folder.
+If you’re interested in API or backend work, we’d love your help shaping the next chapter of PyTorchWildlife. We’ll update our public task board later this month.
+
+And one dream we’ve had for a long time: letting non‑coders fine‑tune their own models on their own data. Thanks to recent advances, we’re finally close — and this will be a major focus for both PyTorchWildlife and Sparrow Studio next.
+
+### Why "Sparrow Studio"?
+Some of the UI features we needed for PyTorchWildlife also fit naturally as a frontend for Project Sparrow, another effort in our group focused on remote data-collection hardwares and edge computing. Since the name “Sparrow” already carried a warm, lively spirit — and the overlap between the projects made things simpler — we decided to call the UI Sparrow Studio. The name just reflects some shared roots and a bit of personality we liked.
+
+Stay tuned! These updates are dropping very soon, and we’d genuinely love to have you in the Sparrow Studio beta. Drop us a message anytime — the more feedback the better! 🐦
+
+![image](https://zenodo.org/records/18870374/files/sparrow_studio.png)
+
 
 #### Previous versions:
 - [What's New](https://microsoft.github.io/CameraTraps/releases/release_notes/)
@@ -139,6 +136,19 @@ Also, don't forget to cite our original paper for MegaDetector:
       archivePrefix={arXiv},
 }
 ```
+
+## 🚀 We’re Open for Contributions!
+
+We’re excited to announce that **Pytorch-Wildlife** is now open to community contributions!  
+If you’d like to get involved and help improve the project, we’d love to have you on board.
+
+👉 **Check out our Contribution Guidelines:**  
+
+[📚 How to Participate](https://microsoft.github.io/CameraTraps/contribute/#how-to-participate)
+
+You’ll find everything you need there — from how to pick an issue, to submitting your first pull request.  
+Let’s build this together! 🐾🌱
+
 
 ## 🤝 Existing Collaborators and Contributors
 
