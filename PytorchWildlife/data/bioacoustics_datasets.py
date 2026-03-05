@@ -30,6 +30,7 @@ except ImportError:
 
 __all__ = [
     "BioacousticsDataset",
+    "BioacousticsInferenceDataset",
     "SpectrogramAugmentations",
     "MixUpCollator",
     "PerSampleNormalize",
@@ -423,3 +424,76 @@ class BioacousticsDataset(Dataset):
         y = int(self.df.iloc[idx][self.y_col])
 
         return x, y, path
+
+
+class BioacousticsInferenceDataset(Dataset):
+    """
+    Dataset that reads spectrograms from .npy files whose paths are listed in a dataframe.
+
+    Unlike :class:`BioacousticsDataset`, this class does **not** require a
+    label column and returns ``(tensor, path)`` pairs suitable for inference.
+
+    Parameters
+    ----------
+    dataframe : pd.DataFrame
+        DataFrame containing at least the column specified by `x_col`.
+    x_col : str
+        Column containing the path to the .npy file (default: "spec_name").
+    target_size : Optional[List[int]]
+        [H, W] to resize spectrograms to; if None, keep original size.
+    normalize : bool
+        Whether to apply per-sample normalization.
+    """
+
+    def __init__(
+        self,
+        dataframe: pd.DataFrame,
+        x_col: str = "spec_name",
+        target_size: Optional[List[int]] = None,
+        normalize: bool = True,
+    ):
+        super().__init__()
+        self.df = dataframe
+        self.x_col = x_col
+        self.paths = self.df[self.x_col].astype(str).tolist()
+        self._resize = ResizeTo(target_size) if target_size is not None else None
+        self._normalize = PerSampleNormalize() if normalize else None
+
+    def __len__(self) -> int:
+        return len(self.df)
+
+    def _load_npy(self, idx: int):
+        path = self.paths[idx]
+        try:
+            arr = np.load(path)
+        except Exception as e:
+            print(f"\n{'='*80}")
+            print(f"ERROR loading file at index {idx}:")
+            print(f"Path: {path}")
+            print(f"Exception: {e}")
+            print(f"{'='*80}\n")
+            raise
+        return arr, path
+
+    def __getitem__(self, idx: int):
+        arr, path = self._load_npy(idx)
+        arr = arr.astype(np.float32, copy=False)
+
+        # shape to [C,H,W]
+        if arr.ndim == 2:
+            arr = arr[None, ...]  # [1,H,W]
+        elif arr.ndim == 3:
+            if arr.shape[0] not in (1, 2, 3) and arr.shape[-1] in (1, 2, 3):
+                arr = np.moveaxis(arr, -1, 0)
+        else:
+            raise ValueError(f"Unexpected .npy shape {arr.shape} at index {idx}")
+
+        x = torch.from_numpy(arr)  # [C,H,W]
+
+        if self._normalize is not None:
+            x = self._normalize(x)
+
+        if self._resize is not None:
+            x = self._resize(x)
+
+        return x, path

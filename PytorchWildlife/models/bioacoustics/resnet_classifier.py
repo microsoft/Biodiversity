@@ -447,3 +447,22 @@ class ResNetClassifier(pl.LightningModule):
 
         sch = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=self.hparams.T_max)
         return {"optimizer": opt, "lr_scheduler": {"scheduler": sch, "interval": "epoch"}}
+
+
+def load_model_from_checkpoint(checkpoint_path: str, device: str = "cuda") -> ResNetClassifier:
+    """Load a trained :class:`ResNetClassifier` from a Lightning checkpoint.
+
+    The model is set to eval mode and frozen (no gradients).
+
+    Args:
+        checkpoint_path: Path to the ``.ckpt`` file.
+        device: Target device (default ``"cuda"``).
+
+    Returns:
+        The loaded model on *device*, ready for inference.
+    """
+    print(f"Loading model from checkpoint: {checkpoint_path}")
+    model = ResNetClassifier.load_from_checkpoint(checkpoint_path)
+    model.eval()
+    model.freeze()
+    return model.to(device)

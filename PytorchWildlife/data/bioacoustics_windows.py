@@ -10,13 +10,20 @@ audio files for training and inference.
 
 import json
 import math
-from typing import Dict, List
+import os
+from typing import Dict, List, Union
 
 import numpy as np
+
+try:
+    import librosa
+except ImportError:
+    librosa = None
 
 
 __all__ = [
     "build_windows",
+    "build_inference_windows",
     "count_window_labels",
 ]
 
@@ -371,3 +378,72 @@ def _build_windows_balanced(
     print(f"Final proportion - Negatives: {len(selected_negatives)/final_total:.1%}, Positives: {num_positives/final_total:.1%}")
 
     return positive_windows + selected_negatives
+
+
+def build_inference_windows(
+    audios_source: Union[str, List[str]],
+    window_size_sec: float,
+    overlap_sec: float,
+    sample_rate: int,
+) -> List[Dict]:
+    """
+    Build inference windows with fixed overlap from audio files.
+
+    Parameters
+    ----------
+    audios_source : str or list of str
+        Path to a directory of audio files, or a list of audio file paths.
+    window_size_sec : float
+        Window size in seconds.
+    overlap_sec : float
+        Overlap between consecutive windows in seconds.
+    sample_rate : int
+        Target sample rate for computing window boundaries.
+
+    Returns
+    -------
+    list of dict
+        Each dict has keys: ``window_id``, ``sound_path``, ``start``, ``end``.
+    """
+    if librosa is None:
+        raise ImportError("librosa is required for build_inference_windows. Install with: pip install librosa")
+
+    window_size = int(window_size_sec * sample_rate)
+    hop_size = int((window_size_sec - overlap_sec) * sample_rate)
+
+    windows = []
+    window_idx = 0
+
+    if isinstance(audios_source, str):
+        wav_files = [
+            os.path.join(audios_source, f)
+            for f in os.listdir(audios_source)
+            if f.lower().endswith(('.wav', '.flac', '.mp3', '.m4a', '.aac', '.ogg'))
+            and not f.startswith('.')
+        ]
+    elif isinstance(audios_source, list):
+        wav_files = audios_source
+    else:
+        raise TypeError("audios_source must be either a folder path (str) or a list of file paths (list[str])")
+
+    for filename in wav_files:
+        sound_duration = librosa.get_duration(path=filename)
+        duration_samples = int(sound_duration * sample_rate)
+        num_windows = math.ceil((duration_samples - window_size) / hop_size) + 1
+
+        for i in range(num_windows):
+            start = i * hop_size
+            end = start + window_size
+
+            if end > duration_samples:
+                continue
+
+            windows.append({
+                'window_id': window_idx,
+                'sound_path': filename,
+                'start': start,
+                'end': end,
+            })
+            window_idx += 1
+
+    return windows
