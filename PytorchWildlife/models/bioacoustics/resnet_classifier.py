@@ -9,6 +9,8 @@ Supports both binary classification (num_classes=2) and multiclass (num_classes>
 
 from typing import List, Optional
 
+import os
+
 import numpy as np
 import pandas as pd
 import torch
@@ -130,6 +132,10 @@ class ResNetClassifier(pl.LightningModule):
         self.test_paths = []
         self.test_preds = []
 
+        # Path to the test CSV; when set, on_test_epoch_end exports
+        # predictions alongside the original columns.
+        self.test_csv_path: Optional[str] = None
+
     def _init_binary_loss_and_metrics(self):
         """Initialize loss and metrics for binary classification."""
         if BCEWithLogitsLSLoss is not None:
@@ -216,7 +222,7 @@ class ResNetClassifier(pl.LightningModule):
     def _compute_loss(self, logits, y):
         """Compute loss handling both regular and MixUp batches."""
         # Import here to avoid circular dependency
-        from PytorchWildlife.data.bioacoustics_datasets import mixup_criterion
+        from PytorchWildlife.data.bioacoustics.bioacoustics_datasets import mixup_criterion
 
         if self.is_binary:
             logits = logits.squeeze(1)
@@ -359,6 +365,7 @@ class ResNetClassifier(pl.LightningModule):
         self.log("test/acc_neg", acc_neg)
         self.log("test/acc_pos", acc_pos)
 
+        self._export_test_predictions()
         self._reset_test_state()
 
     def _on_test_epoch_end_multiclass(self):
@@ -395,7 +402,97 @@ class ResNetClassifier(pl.LightningModule):
             "test/macro_average_precision": macro_ap,
         })
 
+        self._export_test_predictions()
         self._reset_test_state()
+
+    def _export_test_predictions(self):
+        """Export per-sample predictions to CSV alongside original test data.
+
+        Reads the CSV at ``self.test_csv_path``, appends prediction,
+        probability, confidence and prediction_type columns, and writes
+        a new file with the suffix ``_with_predictions``.
+
+        Column order is arranged so that ``label`` appears right before
+        ``prediction``.
+        """
+        if self.test_csv_path is None:
+            return
+
+        logits = torch.cat(self.test_logits, dim=0)
+        targets = torch.cat(self.test_targets, dim=0).numpy()
+        preds = torch.cat(self.test_preds, dim=0).numpy()
+
+        if self.is_binary:
+            probs = torch.sigmoid(logits).numpy()
+            confidence = np.abs(probs - 0.5) * 2
+        else:
+            probs = torch.softmax(logits, dim=1).numpy()
+            confidence = probs.max(axis=1)
+
+        df = pd.read_csv(self.test_csv_path)
+
+        # Convert start/end from samples to mm:ss format
+        for col in ("start", "end"):
+            if col in df.columns:
+                sr_col = "sample_rate" if "sample_rate" in df.columns else None
+                if sr_col is not None:
+                    secs = df[col] / df[sr_col]
+                else:
+                    secs = df[col]
+                df[col] = secs.apply(lambda s: f"{int(s // 60):02d}:{int(s % 60):02d}")
+
+        # Determine the label column present in the CSV
+        label_col = "label"
+        for candidate in ("label", "y", "target"):
+            if candidate in df.columns:
+                label_col = candidate
+                break
+
+        # Build new columns in desired order: ..., label, prediction, probability/probs, confidence, prediction_type
+        new_cols = [c for c in df.columns if c != label_col]
+        insert_pos = len(new_cols)
+        new_cols.insert(insert_pos, label_col)
+
+        df["prediction"] = preds
+
+        if self.is_binary:
+            df["probability"] = probs
+            df["confidence"] = confidence
+            new_cols += ["prediction", "probability", "confidence"]
+        else:
+            class_names = self.hparams.get("class_names") or [
+                f"class_{i}" for i in range(self.hparams.num_classes)
+            ]
+            new_cols.append("prediction")
+            for i, name in enumerate(class_names):
+                col = name.replace(" ", "_") + "_prob"
+                df[col] = probs[:, i]
+                new_cols.append(col)
+            df["confidence"] = confidence
+            new_cols.append("confidence")
+
+        # Classify each prediction as TP, TN, FP or FN
+        if self.is_binary:
+            conditions = [
+                (targets == 1) & (preds == 1),
+                (targets == 0) & (preds == 0),
+                (targets == 0) & (preds == 1),
+                (targets == 1) & (preds == 0),
+            ]
+            labels = ["TP", "TN", "FP", "FN"]
+            df["prediction_type"] = np.select(conditions, labels, default="")
+        else:
+            df["prediction_type"] = np.where(
+                targets == preds, "Correct", "Incorrect"
+            )
+        new_cols.append("prediction_type")
+
+        df = df[new_cols]
+
+        base, ext = os.path.splitext(self.test_csv_path)
+        output_path = f"{base}_with_predictions{ext}"
+        df.to_csv(output_path, index=False)
+        print(f"Test predictions saved to: {output_path}")
 
     def _reset_test_state(self):
         """Reset test metrics and storage."""
