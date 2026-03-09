@@ -76,7 +76,6 @@ class AnnotationCreator:
         Raises:
             ValueError: If the year is in the future or the date format is incorrect.
         """
-        #TODO: Check if set title and license as required values
         if url is not None and "zenodo.org/records/" in url:
             try:
                 record_id = url.split("zenodo.org/records/")[1]
@@ -120,7 +119,7 @@ class AnnotationCreator:
         categories_list = sorted_df.reset_index().to_dict(orient='records')
         self.data['categories'] = categories_list
 
-    def add_sound(self, id:int, file_name_path:str, duration:int, sample_rate:int, latitude:float, longitude:float, date_recorded:Optional[datetime]=None, location:Optional[str]=None):
+    def add_sound(self, id:int, file_name_path:str, duration:int, sample_rate:int, latitude:float, longitude:float, date_recorded:Optional[datetime]=None, project:Optional[str]=None):
         """
         Adds a sound entry to the dataset.
 
@@ -132,7 +131,7 @@ class AnnotationCreator:
             latitude (float): The geographical latitude where the bioacoustic recording was taken.
             longitude (float):The geographical longitude where the bioacoustic recording was taken.
             date_recorded (Optional[str]): The datetime when the audio was recoded in YYYY-MM-DD format.
-
+            project (Optional[str]): The name of the project associated with the sound recording.
         Raises:
             ValueError: If duration, sample rate, latitude, or longitude are out of valid range,
                         or if the date format is incorrect.
@@ -158,7 +157,7 @@ class AnnotationCreator:
             "latitude": latitude,
             "longitude": longitude,
             "date_recorded": date_recorded,
-            "location": location,
+            "project": project,
         }
         self.data['sounds'].append(sound)
 
@@ -173,7 +172,6 @@ class AnnotationCreator:
         supercategory:Optional[str]=None,
         f_min:Optional[float]=None,
         f_max:Optional[float]=None,
-        #ismultilabel:Optional[bool]=None
         ):
         """
         Adds an annotation entry to the dataset.
@@ -188,8 +186,6 @@ class AnnotationCreator:
             supercategory (Optional[str]): A higher-level grouping that the category belongs to.
             f_min (Optional[float]): The lowest frequency of the annotated sound within the recording, in Hz.
             f_max (Optional[float]): The highest frequency of the annotated sound within the recording, in Hz
-            ismultilabel (Optional[bool]): A boolean indicating whether the sound is labeled with multiple classes simultaneously.
-
         Raises:
             ValueError: If any of the provided values are out of valid range, or if the
                         time/frequency constraints are violated.
@@ -228,7 +224,6 @@ class AnnotationCreator:
             "t_max": t_max,
             "f_min": f_min,
             "f_max": f_max,
-            #"ismultilabel": ismultilabel
         }
         self.data['annotations'].append(annotation)
 
