@@ -135,6 +135,14 @@ class ResNetClassifier(pl.LightningModule):
         # Path to the test CSV; when set, on_test_epoch_end exports
         # predictions alongside the original columns.
         self.test_csv_path: Optional[str] = None
+        # Directory where the predictions CSV is saved.  When None the
+        # file is written next to the original test CSV.
+        self.predictions_dir: Optional[str] = None
+        # When True, test_step skips metric updates and on_test_epoch_end
+        # skips metric computation.  Useful when the test set labels are
+        # in a different label space than the model (e.g. running a
+        # 3-class model on a 4-class test set just to export predictions).
+        self.predict_only: bool = False
 
     def _init_binary_loss_and_metrics(self):
         """Initialize loss and metrics for binary classification."""
@@ -311,37 +319,45 @@ class ResNetClassifier(pl.LightningModule):
 
         if self.is_binary:
             logits = logits.squeeze(1)
-            loss = self.criterion(logits, y.float())
             prob = torch.sigmoid(logits)
             preds = (prob > self.hparams.conf_threshold).int()
             targets = y.int()
         else:
-            loss = self.criterion(logits, y)
             preds = torch.argmax(logits, dim=1)
             targets = y
-
-        self.test_acc.update(preds, targets)
-        self.test_f1.update(preds, targets)
-        self.test_prec.update(preds, targets)
-        self.test_rec.update(preds, targets)
-        self.test_cm.update(preds, targets)
-
-        if self.is_binary:
-            self.test_auprc.update(logits, targets)
-            self.test_prcurve.update(logits, targets)
-        else:
-            self.test_f1_per_class.update(preds, targets)
-            self.test_prec_per_class.update(preds, targets)
-            self.test_rec_per_class.update(preds, targets)
 
         self.test_logits.append(logits.detach().cpu())
         self.test_targets.append(targets.detach().cpu())
         self.test_paths.extend(path)
         self.test_preds.append(preds.detach().cpu())
 
-        self.log("test/loss", loss, batch_size=self.hparams.batch_size, on_step=False, on_epoch=True)
+        if not self.predict_only:
+            if self.is_binary:
+                loss = self.criterion(logits, y.float())
+            else:
+                loss = self.criterion(logits, y)
+
+            self.test_acc.update(preds, targets)
+            self.test_f1.update(preds, targets)
+            self.test_prec.update(preds, targets)
+            self.test_rec.update(preds, targets)
+            self.test_cm.update(preds, targets)
+
+            if self.is_binary:
+                self.test_auprc.update(logits, targets)
+                self.test_prcurve.update(logits, targets)
+            else:
+                self.test_f1_per_class.update(preds, targets)
+                self.test_prec_per_class.update(preds, targets)
+                self.test_rec_per_class.update(preds, targets)
+
+            self.log("test/loss", loss, batch_size=self.hparams.batch_size, on_step=False, on_epoch=True)
 
     def on_test_epoch_end(self):
+        if self.predict_only:
+            self._export_test_predictions()
+            self._reset_test_state()
+            return
         if self.is_binary:
             self._on_test_epoch_end_binary()
         else:
@@ -489,8 +505,15 @@ class ResNetClassifier(pl.LightningModule):
 
         df = df[new_cols]
 
-        base, ext = os.path.splitext(self.test_csv_path)
-        output_path = f"{base}_with_predictions{ext}"
+        base_name = os.path.basename(self.test_csv_path)
+        name, ext = os.path.splitext(base_name)
+        out_name = f"{name}_with_predictions{ext}"
+
+        if self.predictions_dir is not None:
+            os.makedirs(self.predictions_dir, exist_ok=True)
+            output_path = os.path.join(self.predictions_dir, out_name)
+        else:
+            output_path = os.path.join(os.path.dirname(self.test_csv_path), out_name)
         df.to_csv(output_path, index=False)
         print(f"Test predictions saved to: {output_path}")
 
