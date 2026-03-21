@@ -2,11 +2,10 @@
 # Licensed under the MIT License.
 
 import torch
+
 from .base_classifier import PlainResNetInference
 
-__all__ = [
-    "AI4GOpossum"
-]
+__all__ = ["AI4GOpossum"]
 
 
 class AI4GOpossum(PlainResNetInference):
@@ -14,15 +13,12 @@ class AI4GOpossum(PlainResNetInference):
     Opossum Classifier that inherits from PlainResNetInference.
     This classifier is specialized for distinguishing between Opossums and Non-opossums.
     """
-    
+
     # Image size for the Opossum classifier
     IMAGE_SIZE = 224
-    
+
     # Class names for prediction
-    CLASS_NAMES = {
-        0: "Non-opossum",
-        1: "Opossum"
-    }
+    CLASS_NAMES = {0: "Non-opossum", 1: "Opossum"}
 
     def __init__(self, weights=None, device="cpu", pretrained=True):
         """
@@ -40,17 +36,20 @@ class AI4GOpossum(PlainResNetInference):
         else:
             url = None
 
-        super(AI4GOpossum, self).__init__(weights=weights, device=device,
-                                          num_cls=1, num_layers=50, url=url)
+        super(AI4GOpossum, self).__init__(
+            weights=weights, device=device, num_cls=1, num_layers=50, url=url
+        )
 
-    def results_generation(self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None) -> list[dict]:
+    def results_generation(
+        self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None
+    ) -> list[dict]:
         """
         Generate results for classification.
 
         Args:
             logits (torch.Tensor): Output tensor from the model.
             img_ids (list): List of image identifier.
-            id_strip (str): stiping string for better image id saving.       
+            id_strip (str): stiping string for better image id saving.
 
         Returns:
             dict: Dictionary containing image ID, prediction, and confidence score.
@@ -66,5 +65,5 @@ class AI4GOpossum(PlainResNetInference):
             r["class_id"] = pred
             r["confidence"] = prob.item() if pred == 1 else (1 - prob.item())
             results.append(r)
-        
+
         return results

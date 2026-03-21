@@ -1,9 +1,11 @@
+import inspect
 from typing import Any, Dict, List, Optional, Tuple, Union
+
 import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 from torch.nn.common_types import _size_2_t
-import inspect
+
 
 # ----------- Utils ----------- #
 def get_layer_map():
@@ -109,7 +111,14 @@ class Concat(nn.Module):
 class Detection(nn.Module):
     """A single YOLO Detection head for detection models"""
 
-    def __init__(self, in_channels: Tuple[int], num_classes: int, *, reg_max: int = 16, use_group: bool = True):
+    def __init__(
+        self,
+        in_channels: Tuple[int],
+        num_classes: int,
+        *,
+        reg_max: int = 16,
+        use_group: bool = True,
+    ):
         super().__init__()
 
         groups = 4 if use_group else 1
@@ -125,7 +134,9 @@ class Detection(nn.Module):
             nn.Conv2d(anchor_neck, anchor_channels, 1, groups=groups),
         )
         self.class_conv = nn.Sequential(
-            Conv(in_channels, class_neck, 3), Conv(class_neck, class_neck, 3), nn.Conv2d(class_neck, num_classes, 1)
+            Conv(in_channels, class_neck, 3),
+            Conv(class_neck, class_neck, 3),
+            nn.Conv2d(class_neck, num_classes, 1),
         )
 
         self.anc2vec = Anchor2Vec(reg_max=reg_max)
@@ -151,7 +162,10 @@ class MultiheadDetection(nn.Module):
             DetectionHead = IDetection
 
         self.heads = nn.ModuleList(
-            [DetectionHead((in_channels[0], in_channel), num_classes, **head_kwargs) for in_channel in in_channels]
+            [
+                DetectionHead((in_channels[0], in_channel), num_classes, **head_kwargs)
+                for in_channel in in_channels
+            ]
         )
 
     def forward(self, x_list: List[torch.Tensor]) -> List[torch.Tensor]:
@@ -166,11 +180,11 @@ class Anchor2Vec(nn.Module):
         self.anc2vec.weight = nn.Parameter(reverse_reg, requires_grad=False)
 
     def forward(self, anchor_x: Tensor) -> Tensor:
-        #anchor_x = rearrange(anchor_x, "B (P R) h w -> B R P h w", P=4)
+        # anchor_x = rearrange(anchor_x, "B (P R) h w -> B R P h w", P=4)
         B, PR, h, w = anchor_x.shape
         P = 4
         R = PR // P
-        anchor_x = anchor_x.reshape(B, P, R, h, w).permute(0, 2, 1, 3, 4) 
+        anchor_x = anchor_x.reshape(B, P, R, h, w).permute(0, 2, 1, 3, 4)
         vector_x = anchor_x.softmax(dim=1)
         vector_x = self.anc2vec(vector_x)[:, 0]
         return anchor_x, vector_x
@@ -338,6 +352,7 @@ class AConv(nn.Module):
         x = self.conv(x)
         return x
 
+
 class ADown(nn.Module):
     """Downsampling module combining average and max pooling with convolution for feature reduction."""
 
@@ -373,6 +388,7 @@ class CBLinear(nn.Module):
         x = self.conv(x)
         return x.split(self.out_channels, dim=1)
 
+
 class CBFuse(nn.Module):
     def __init__(self, index: List[int], mode: str = "nearest"):
         super().__init__()
@@ -383,10 +399,14 @@ class CBFuse(nn.Module):
         target = x_list[-1]
         target_size = target.shape[2:]  # Batch, Channel, H, W
 
-        res = [F.interpolate(x[pick_id], size=target_size, mode=self.mode) for pick_id, x in zip(self.idx, x_list)]
+        res = [
+            F.interpolate(x[pick_id], size=target_size, mode=self.mode)
+            for pick_id, x in zip(self.idx, x_list)
+        ]
         out = torch.stack(res + [target]).sum(dim=0)
         return out
-        
+
+
 class SPPELAN(nn.Module):
     """SPPELAN module comprising multiple pooling and convolution layers."""
 

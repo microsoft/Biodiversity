@@ -1,20 +1,20 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-import numpy as np
-from PIL import Image
-from tqdm import tqdm
 from collections import OrderedDict
 
+import numpy as np
 import torch
 import torch.nn as nn
-from torchvision.models.resnet import BasicBlock, Bottleneck, ResNet
+from PIL import Image
 from torch.hub import load_state_dict_from_url
 from torch.utils.data import DataLoader
+from torchvision.models.resnet import BasicBlock, Bottleneck, ResNet
+from tqdm import tqdm
 
-from ..base_classifier import BaseClassifierInference 
+from ....data import datasets as pw_data
 from ....data import transforms as pw_trans
-from ....data import datasets as pw_data 
+from ..base_classifier import BaseClassifierInference
 
 # Making the PlainResNetInference class available for import from this module
 __all__ = ["PlainResNetInference"]
@@ -24,6 +24,7 @@ class ResNetBackbone(ResNet):
     """
     Custom ResNet Backbone that extracts features from input images.
     """
+
     def _forward_impl(self, x):
         # Following the ResNet structure to extract features
         x = self.conv1(x)
@@ -45,6 +46,7 @@ class PlainResNetClassifier(nn.Module):
     """
     Basic ResNet Classifier that uses a custom ResNet backbone.
     """
+
     name = "PlainResNetClassifier"
 
     def __init__(self, num_cls=1, num_layers=50):
@@ -88,8 +90,12 @@ class PlainResNetClassifier(nn.Module):
         Initialize the features using pretrained weights.
         """
         init_weights = self.pretrained_weights.get_state_dict(progress=True)
-        init_weights = OrderedDict({k.replace("module.", "").replace("feature.", ""): init_weights[k]
-                                    for k in init_weights})
+        init_weights = OrderedDict(
+            {
+                k.replace("module.", "").replace("feature.", ""): init_weights[k]
+                for k in init_weights
+            }
+        )
         self.feature.load_state_dict(init_weights, strict=False)
         # Print missing and unused keys for debugging purposes
         load_keys = set(init_weights.keys())
@@ -104,8 +110,12 @@ class PlainResNetInference(BaseClassifierInference):
     """
     Inference module for the PlainResNet Classifier.
     """
+
     IMAGE_SIZE = None
-    def __init__(self, num_cls=36, num_layers=50, weights=None, device="cpu", url=None, transform=None):
+
+    def __init__(
+        self, num_cls=36, num_layers=50, weights=None, device="cpu", url=None, transform=None
+    ):
         super(PlainResNetInference, self).__init__()
         self.device = device
         self.net = PlainResNetClassifier(num_cls=num_cls, num_layers=num_layers)
@@ -122,16 +132,20 @@ class PlainResNetInference(BaseClassifierInference):
         if transform:
             self.transform = transform
         else:
-            self.transform = pw_trans.Classification_Inference_Transform(target_size=self.IMAGE_SIZE)
+            self.transform = pw_trans.Classification_Inference_Transform(
+                target_size=self.IMAGE_SIZE
+            )
 
-    def results_generation(self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None) -> list[dict]:
+    def results_generation(
+        self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None
+    ) -> list[dict]:
         """
-        Process logits to produce final results. 
+        Process logits to produce final results.
 
         Args:
             logits (torch.Tensor): Logits from the network.
             img_ids (list[str]): List of image paths.
-            id_strip (str): Stripping string for better image ID saving.       
+            id_strip (str): Stripping string for better image ID saving.
 
         Returns:
             list[dict]: List of dictionaries containing the results.
@@ -158,26 +172,19 @@ class PlainResNetInference(BaseClassifierInference):
         """
 
         if data_path:
-            dataset = pw_data.ImageFolder(
-                data_path,
-                transform=self.transform,
-                path_head='.'
-            )
+            dataset = pw_data.ImageFolder(data_path, transform=self.transform, path_head=".")
         elif det_results:
-            dataset = pw_data.DetectionCrops(
-                det_results,
-                transform=self.transform,
-                path_head='.'
-            )
+            dataset = pw_data.DetectionCrops(det_results, transform=self.transform, path_head=".")
         else:
             raise Exception("Need data for inference.")
 
-        dataloader = DataLoader(dataset, batch_size=32, shuffle=False, 
-                                pin_memory=True, num_workers=4, drop_last=False)
+        dataloader = DataLoader(
+            dataset, batch_size=32, shuffle=False, pin_memory=True, num_workers=4, drop_last=False
+        )
         total_logits = []
         total_paths = []
 
-        with tqdm(total=len(dataloader)) as pbar: 
+        with tqdm(total=len(dataloader)) as pbar:
             for batch in dataloader:
                 imgs, paths = batch
                 imgs = imgs.to(self.device)

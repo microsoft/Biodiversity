@@ -1,5 +1,6 @@
 from sklearn.metrics import confusion_matrix
 
+
 def acc(preds, labels):
     """
     Calculate the accuracy metrics based on predictions and true labels.

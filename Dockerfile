@@ -23,4 +23,3 @@ RUN rm -rf /tmp/*
 RUN pip install --no-cache-dir PytorchWildlife
 
 EXPOSE 80
-

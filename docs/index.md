@@ -60,4 +60,3 @@ Please refer to our [installation guide](installation.md) for more installation 
 ### Opossum ID with `MegaDetector` and `AI4GOpossum`
 <img src="https://zenodo.org/records/15376499/files/opossum_det.png" alt="opossum_det" width="300"/><br>
 *Credits to the Agency for Regulation and Control of Biosecurity and Quarantine for Galápagos (ABG), Ecuador.*
-

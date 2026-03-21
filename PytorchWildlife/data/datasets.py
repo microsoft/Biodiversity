@@ -3,10 +3,11 @@
 
 import os
 from glob import glob
-from PIL import Image, ImageFile
+
 import numpy as np
 import supervision as sv
 import torch
+from PIL import Image, ImageFile
 from torch.utils.data import Dataset
 
 # To handle truncated images during loading
@@ -15,23 +16,28 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 # Making the DetectionImageFolder class available for import from this module
 __all__ = [
     "DetectionImageFolder",
-    ]
+]
 
-# Define the allowed image extensions  
-IMG_EXTENSIONS = (".jpg", ".jpeg", ".png", ".ppm", ".bmp", ".pgm", ".tif", ".tiff", ".webp")  
-  
-def has_file_allowed_extension(filename: str, extensions: tuple) -> bool:  
-    """Checks if a file is an allowed extension."""  
-    return filename.lower().endswith(extensions if isinstance(extensions, str) else tuple(extensions))
-  
-def is_image_file(filename: str) -> bool:  
-    """Checks if a file is an allowed image extension."""  
-    return has_file_allowed_extension(filename, IMG_EXTENSIONS) 
+# Define the allowed image extensions
+IMG_EXTENSIONS = (".jpg", ".jpeg", ".png", ".ppm", ".bmp", ".pgm", ".tif", ".tiff", ".webp")
+
+
+def has_file_allowed_extension(filename: str, extensions: tuple) -> bool:
+    """Checks if a file is an allowed extension."""
+    return filename.lower().endswith(
+        extensions if isinstance(extensions, str) else tuple(extensions)
+    )
+
+
+def is_image_file(filename: str) -> bool:
+    """Checks if a file is an allowed image extension."""
+    return has_file_allowed_extension(filename, IMG_EXTENSIONS)
+
 
 class ImageFolder(Dataset):
     """
     A PyTorch Dataset for loading images from a specified directory.
-    Each item in the dataset is a tuple containing the image data, 
+    Each item in the dataset is a tuple containing the image data,
     the image's path, and the original size of the image.
     """
 
@@ -46,7 +52,12 @@ class ImageFolder(Dataset):
         super(ImageFolder, self).__init__()
         self.image_dir = image_dir
         self.transform = transform
-        self.images = [os.path.join(dp, f) for dp, dn, filenames in os.walk(image_dir) for f in filenames if is_image_file(f)] # dp: directory path, dn: directory name, f: filename
+        self.images = [
+            os.path.join(dp, f)
+            for dp, dn, filenames in os.walk(image_dir)
+            for f in filenames
+            if is_image_file(f)
+        ]  # dp: directory path, dn: directory name, f: filename
 
     def __getitem__(self, idx) -> tuple:
         """
@@ -59,7 +70,7 @@ class ImageFolder(Dataset):
             tuple: Contains the image data, the image's path, and its original size.
         """
         pass
-    
+
     def __len__(self) -> int:
         """
         Returns the total number of images in the dataset.
@@ -69,10 +80,11 @@ class ImageFolder(Dataset):
         """
         return len(self.images)
 
+
 class ClassificationImageFolder(ImageFolder):
     """
     A PyTorch Dataset for loading images from a specified directory.
-    Each item in the dataset is a tuple containing the image data, 
+    Each item in the dataset is a tuple containing the image data,
     the image's path, and the original size of the image.
     """
 
@@ -101,7 +113,7 @@ class ClassificationImageFolder(ImageFolder):
 
         # Load and convert image to RGB
         img = Image.open(img_path).convert("RGB")
-        
+
         # Apply transformation if specified
         if self.transform:
             img = self.transform(img)
@@ -112,7 +124,7 @@ class ClassificationImageFolder(ImageFolder):
 class DetectionImageFolder(ImageFolder):
     """
     A PyTorch Dataset for loading images from a specified directory.
-    Each item in the dataset is a tuple containing the image data, 
+    Each item in the dataset is a tuple containing the image data,
     the image's path, and the original size of the image.
     """
 
@@ -142,23 +154,23 @@ class DetectionImageFolder(ImageFolder):
         # Load and convert image to RGB
         img = Image.open(img_path).convert("RGB")
         img_size_ori = img.size[::-1]
-        
+
         # Apply transformation if specified
         if self.transform:
             img = self.transform(img)
 
         return img, img_path, torch.tensor(img_size_ori)
-    
+
 
 # TODO: Under development for efficiency improvement
 class DetectionCrops(Dataset):
-
     def __init__(self, detection_results, transform=None, path_head=None, animal_cls_id=0):
-
         self.detection_results = detection_results
         self.transform = transform
         self.path_head = path_head
-        self.animal_cls_id = animal_cls_id # This determines which detection class id represents animals.
+        self.animal_cls_id = (
+            animal_cls_id  # This determines which detection class id represents animals.
+        )
         self.img_ids = []
         self.xyxys = []
 
@@ -188,11 +200,10 @@ class DetectionCrops(Dataset):
         xyxy = self.xyxys[idx]
 
         img_path = os.path.join(self.path_head, img_id) if self.path_head else img_id
-        
+
         # Load and crop image with supervision
-        img = sv.crop_image(np.array(Image.open(img_path).convert("RGB")),
-                            xyxy=xyxy)
-        
+        img = sv.crop_image(np.array(Image.open(img_path).convert("RGB")), xyxy=xyxy)
+
         # Apply transformation if specified
         if self.transform:
             img = self.transform(Image.fromarray(img))

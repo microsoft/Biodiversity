@@ -2,5 +2,4 @@
 """
 
 # for register purpose
-from . import backbone
-from . import rtdetr
+from . import backbone, rtdetr

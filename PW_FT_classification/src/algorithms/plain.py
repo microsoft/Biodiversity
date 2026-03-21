@@ -1,21 +1,19 @@
-import os
-import numpy as np
 import json
-from datetime import datetime
-from tqdm import tqdm
+import os
 import random
+from datetime import datetime
 
+import numpy as np
+import pytorch_lightning as pl
 import torch
 import torch.optim as optim
-import pytorch_lightning as pl
+from src import models
+from tqdm import tqdm
 
 from .utils import acc
-from src import models
 
+__all__ = ["Plain"]
 
-__all__ = [
-    'Plain'
-]
 
 class Plain(pl.LightningModule):
     """
@@ -25,7 +23,7 @@ class Plain(pl.LightningModule):
     and training/validation/testing steps for the training process.
     """
 
-    name = 'Plain'
+    name = "Plain"
 
     def __init__(self, conf, train_class_counts, id_to_labels, **kwargs):
         """
@@ -39,11 +37,12 @@ class Plain(pl.LightningModule):
         """
         super().__init__()
         self.hparams.update(conf.__dict__)
-        self.save_hyperparameters(ignore=['conf', 'train_class_counts'])
+        self.save_hyperparameters(ignore=["conf", "train_class_counts"])
         self.train_class_counts = train_class_counts
         self.id_to_labels = id_to_labels
-        self.net = models.__dict__[self.hparams.model_name](num_cls=self.hparams.num_classes, 
-                                                            num_layers=self.hparams.num_layers)
+        self.net = models.__dict__[self.hparams.model_name](
+            num_cls=self.hparams.num_classes, num_layers=self.hparams.num_layers
+        )
 
     def configure_optimizers(self):
         """
@@ -55,19 +54,25 @@ class Plain(pl.LightningModule):
         # Define parameters for the optimizer
         net_optim_params_list = [
             # Optimizer parameters for feature extraction
-            {'params': self.net.feature.parameters(),
-             'lr': self.hparams.lr_feature,
-             'momentum': self.hparams.momentum_feature,
-             'weight_decay': self.hparams.weight_decay_feature},
+            {
+                "params": self.net.feature.parameters(),
+                "lr": self.hparams.lr_feature,
+                "momentum": self.hparams.momentum_feature,
+                "weight_decay": self.hparams.weight_decay_feature,
+            },
             # Optimizer parameters for the classifier
-            {'params': self.net.classifier.parameters(),
-             'lr': self.hparams.lr_classifier,
-             'momentum': self.hparams.momentum_classifier,
-             'weight_decay': self.hparams.weight_decay_classifier}
+            {
+                "params": self.net.classifier.parameters(),
+                "lr": self.hparams.lr_classifier,
+                "momentum": self.hparams.momentum_classifier,
+                "weight_decay": self.hparams.weight_decay_classifier,
+            },
         ]
         # Setup optimizer and optimizer scheduler
         optimizer = torch.optim.SGD(net_optim_params_list)
-        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=self.hparams.step_size, gamma=self.hparams.gamma)   
+        scheduler = optim.lr_scheduler.StepLR(
+            optimizer, step_size=self.hparams.step_size, gamma=self.hparams.gamma
+        )
         return [optimizer], [scheduler]
 
     def on_train_start(self):
@@ -90,14 +95,14 @@ class Plain(pl.LightningModule):
             Tensor: The loss for the current training step.
         """
         data, label_ids = batch[0], batch[1]
-        
+
         # Forward pass
         feats = self.net.feature(data)
         logits = self.net.classifier(feats)
         # Calculate loss
         loss = self.net.criterion_cls(logits, label_ids)
         self.log("train_loss", loss)
-        
+
         return loss
 
     def on_validation_start(self):
@@ -119,9 +124,8 @@ class Plain(pl.LightningModule):
         feats = self.net.feature(data)
         logits = self.net.classifier(feats)
         preds = logits.argmax(dim=1)
-        
-        self.val_st_outs.append((preds.detach().cpu().numpy(),
-                                 label_ids.detach().cpu().numpy()))
+
+        self.val_st_outs.append((preds.detach().cpu().numpy(), label_ids.detach().cpu().numpy()))
 
     def on_validation_epoch_end(self):
         """
@@ -150,14 +154,17 @@ class Plain(pl.LightningModule):
         feats = self.net.feature(data)
         logits = self.net.classifier(feats)
         preds = logits.argmax(dim=1)
-        
-        self.te_st_outs.append((preds.detach().cpu().numpy(),
-                               label_ids.detach().cpu().numpy(),
-                               feats.detach().cpu().numpy(),
-                               logits.detach().cpu().numpy(), 
-                               labels, file_ids 
-                               ))
-    
+
+        self.te_st_outs.append(
+            (
+                preds.detach().cpu().numpy(),
+                label_ids.detach().cpu().numpy(),
+                feats.detach().cpu().numpy(),
+                logits.detach().cpu().numpy(),
+                labels,
+                file_ids,
+            )
+        )
 
     def on_test_epoch_end(self):
         """
@@ -172,14 +179,23 @@ class Plain(pl.LightningModule):
         total_file_ids = np.concatenate([x[5] for x in self.te_st_outs], axis=0)
 
         # Calculate the metrics and save the output
-        self.eval_logging(total_preds[total_label_ids != -1],
-                          total_label_ids[total_label_ids != -1],
-                          print_class_acc=False)
+        self.eval_logging(
+            total_preds[total_label_ids != -1],
+            total_label_ids[total_label_ids != -1],
+            print_class_acc=False,
+        )
 
-        output_path = self.hparams.evaluate.replace('.ckpt', 'eval.npz') 
-        np.savez(output_path, preds=total_preds, label_ids=total_label_ids, feats=total_feats,
-                 logits=total_logits, labels=total_labels, file_ids=total_file_ids)  
-        print('Test output saved to {}.'.format(output_path))
+        output_path = self.hparams.evaluate.replace(".ckpt", "eval.npz")
+        np.savez(
+            output_path,
+            preds=total_preds,
+            label_ids=total_label_ids,
+            feats=total_feats,
+            logits=total_logits,
+            labels=total_labels,
+            file_ids=total_file_ids,
+        )
+        print("Test output saved to {}.".format(output_path))
 
     def on_predict_start(self):
         """
@@ -201,14 +217,16 @@ class Plain(pl.LightningModule):
         logits = self.net.classifier(feats)
         preds = logits.argmax(dim=1)
         probs = torch.softmax(logits, dim=1).max(dim=1)[0]
-        
-        self.pr_st_outs.append((preds.detach().cpu().numpy(),
-                                feats.detach().cpu().numpy(),
-                                logits.detach().cpu().numpy(), 
-                                probs.detach().cpu().numpy(),
-                                file_ids 
-                                ))
-    
+
+        self.pr_st_outs.append(
+            (
+                preds.detach().cpu().numpy(),
+                feats.detach().cpu().numpy(),
+                logits.detach().cpu().numpy(),
+                probs.detach().cpu().numpy(),
+                file_ids,
+            )
+        )
 
     def on_predict_epoch_end(self):
         """
@@ -223,25 +241,31 @@ class Plain(pl.LightningModule):
 
         json_output = []
         for i in range(len(total_preds)):
-            json_output.append({
-                "marker_id": "",
-                "survey_pic_id": total_file_ids[i],
-                "marker_confidence": float(total_probs[i]),
-                "marker_gear_type": "ghostnet" if total_preds[i] == 1 else "neg",
-                "marker_bounding_polygon": "",
-                "marker_status": "unverified",
-                "marker_ai_model": ""
-            })
+            json_output.append(
+                {
+                    "marker_id": "",
+                    "survey_pic_id": total_file_ids[i],
+                    "marker_confidence": float(total_probs[i]),
+                    "marker_gear_type": "ghostnet" if total_preds[i] == 1 else "neg",
+                    "marker_bounding_polygon": "",
+                    "marker_status": "unverified",
+                    "marker_ai_model": "",
+                }
+            )
 
-        output_path_full = self.hparams.evaluate.replace('.ckpt', '_predict.npz') 
-        np.savez(output_path_full, preds=total_preds, feats=total_feats,
-                 logits=total_logits, file_ids=total_file_ids)  
-        print('Predict output saved to {}.'.format(output_path_full))
+        output_path_full = self.hparams.evaluate.replace(".ckpt", "_predict.npz")
+        np.savez(
+            output_path_full,
+            preds=total_preds,
+            feats=total_feats,
+            logits=total_logits,
+            file_ids=total_file_ids,
+        )
+        print("Predict output saved to {}.".format(output_path_full))
 
-        output_path_json = self.hparams.evaluate.replace('.ckpt', '_predict.json') 
-        json.dump(json_output, open(output_path_json, 'w'))
-        print('Predict output json saved to {}.'.format(output_path_json))
-
+        output_path_json = self.hparams.evaluate.replace(".ckpt", "_predict.json")
+        json.dump(json_output, open(output_path_json, "w"))
+        print("Predict output json saved to {}.".format(output_path_json))
 
     def eval_logging(self, preds, labels, print_class_acc=False):
         """
@@ -259,27 +283,32 @@ class Plain(pl.LightningModule):
         self.log("valid_mic_acc", mic_acc * 100)
 
         if print_class_acc:
-
             if self.train_class_counts:
-                acc_list = [(class_acc[i], unique_eval_labels[i],
-                             self.id_to_labels[unique_eval_labels[i]],
-                             self.train_class_counts[unique_eval_labels[i]])
-                             for i in range(len(class_acc))]
+                acc_list = [
+                    (
+                        class_acc[i],
+                        unique_eval_labels[i],
+                        self.id_to_labels[unique_eval_labels[i]],
+                        self.train_class_counts[unique_eval_labels[i]],
+                    )
+                    for i in range(len(class_acc))
+                ]
 
-                print('\n')
+                print("\n")
                 for i in range(len(class_acc)):
-                    info = '{:>20} ({:<3}, tr {:>3}) Acc: '.format(acc_list[i][2],
-                                                                   acc_list[i][1],
-                                                                   acc_list[i][3])
-                    info += '{:.2f}'.format(acc_list[i][0] * 100)
+                    info = "{:>20} ({:<3}, tr {:>3}) Acc: ".format(
+                        acc_list[i][2], acc_list[i][1], acc_list[i][3]
+                    )
+                    info += "{:.2f}".format(acc_list[i][0] * 100)
                     print(info)
             else:
-                acc_list = [(class_acc[i], unique_eval_labels[i],
-                             self.id_to_labels[unique_eval_labels[i]])
-                             for i in range(len(class_acc))]
+                acc_list = [
+                    (class_acc[i], unique_eval_labels[i], self.id_to_labels[unique_eval_labels[i]])
+                    for i in range(len(class_acc))
+                ]
 
-                print('\n')
+                print("\n")
                 for i in range(len(class_acc)):
-                    info = '{:>20} ({:<3}) Acc: '.format(acc_list[i][2], acc_list[i][1])
-                    info += '{:.2f}'.format(acc_list[i][0] * 100)
+                    info = "{:>20} ({:<3}) Acc: ".format(acc_list[i][2], acc_list[i][1])
+                    info += "{:.2f}".format(acc_list[i][0] * 100)
                     print(info)

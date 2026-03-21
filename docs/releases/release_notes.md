@@ -18,4 +18,3 @@ classification_model = pw_classification.DeepfauneClassifier(device=DEVICE)
 #### Deepfaune-New-England in Our Model Zoo Too!!
 - Besides the original Deepfaune mode, there is another fine-tuned Deepfaune model developed by USGS for the Northeastern NA area called Deepfaune-New-England (DFNE). It can also be loaded with `classification_model = pw_classification.DFNE(device=DEVICE)`
 - Please take a look at the orignal [DFNE repo](https://code.usgs.gov/vtcfwru/deepfaune-new-england/-/tree/main?ref_type=heads) and give them a star! 
-

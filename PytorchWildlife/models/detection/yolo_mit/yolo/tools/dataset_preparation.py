@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import Optional
 
 import requests
-
 from yolo.config import DatasetConfig
 
 
@@ -48,4 +47,3 @@ def prepare_weight(download_link: Optional[str] = None, weight_path: Path = Path
         download_file(weight_link, weight_path)
     except requests.exceptions.RequestException as e:
         raise RuntimeError(f"Failed to download the weight file: {e}")
-

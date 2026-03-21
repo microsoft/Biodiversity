@@ -3,7 +3,6 @@ from typing import List, Optional, Union
 import torch
 from torch import Tensor, tensor
 from torchvision.ops import batched_nms
-
 from yolo.config import AnchorConfig, NMSConfig
 from yolo.model.yolo import YOLO
 
@@ -109,7 +108,9 @@ class Anc2Box:
 
         self.head_num = len(anchor_cfg.anchor)
         self.anchor_grids = self.generate_anchors(image_size)
-        self.anchor_scale = tensor(anchor_cfg.anchor, device=device).view(self.head_num, 1, -1, 1, 1, 2)
+        self.anchor_scale = tensor(anchor_cfg.anchor, device=device).view(
+            self.head_num, 1, -1, 1, 1, 2
+        )
         self.anchor_num = self.anchor_scale.size(2)
         self.class_num = model.num_classes
 
@@ -128,7 +129,9 @@ class Anc2Box:
         for stride in self.strides:
             W, H = image_size[0] // stride, image_size[1] // stride
             anchor_h, anchor_w = torch.meshgrid([torch.arange(H), torch.arange(W)], indexing="ij")
-            anchor_grid = torch.stack((anchor_w, anchor_h), 2).view((1, 1, H, W, 2)).float().to(self.device)
+            anchor_grid = (
+                torch.stack((anchor_w, anchor_h), 2).view((1, 1, H, W, 2)).float().to(self.device)
+            )
             anchor_grids.append(anchor_grid)
         return anchor_grids
 
@@ -147,11 +150,9 @@ class Anc2Box:
             pred_box = pred_box.sigmoid()
 
             pred_box[..., 0:2] = (
-                (pred_box[..., 0:2] * 2.0 - 0.5 + self.anchor_grids[layer_idx]) * self.strides[layer_idx]
-            )
-            pred_box[..., 2:4] = (
-                (pred_box[..., 2:4] * 2) ** 2 * self.anchor_scale[layer_idx]
-            )
+                pred_box[..., 0:2] * 2.0 - 0.5 + self.anchor_grids[layer_idx]
+            ) * self.strides[layer_idx]
+            pred_box[..., 2:4] = (pred_box[..., 2:4] * 2) ** 2 * self.anchor_scale[layer_idx]
 
             B, L, h, w, A = pred_box.shape
             preds_box.append(pred_box.reshape(B, L * h * w, A))
@@ -177,20 +178,29 @@ def create_converter(model_version: str = "v9-c", *args, **kwargs) -> Union[Anc2
     return converter
 
 
-def bbox_nms(cls_dist: Tensor, bbox: Tensor, nms_cfg: NMSConfig, confidence: Optional[Tensor] = None):
+def bbox_nms(
+    cls_dist: Tensor, bbox: Tensor, nms_cfg: NMSConfig, confidence: Optional[Tensor] = None
+):
     cls_dist = cls_dist.sigmoid() * (1 if confidence is None else confidence)
 
     batch_idx, valid_grid, valid_cls = torch.where(cls_dist > nms_cfg.min_confidence)
     valid_con = cls_dist[batch_idx, valid_grid, valid_cls]
     valid_box = bbox[batch_idx, valid_grid]
 
-    nms_idx = batched_nms(valid_box, valid_con, batch_idx + valid_cls * bbox.size(0), nms_cfg.min_iou)
+    nms_idx = batched_nms(
+        valid_box, valid_con, batch_idx + valid_cls * bbox.size(0), nms_cfg.min_iou
+    )
     predicts_nms = []
     for idx in range(cls_dist.size(0)):
         instance_idx = nms_idx[idx == batch_idx[nms_idx]]
 
         predict_nms = torch.cat(
-            [valid_cls[instance_idx][:, None], valid_box[instance_idx], valid_con[instance_idx][:, None]], dim=-1
+            [
+                valid_cls[instance_idx][:, None],
+                valid_box[instance_idx],
+                valid_con[instance_idx][:, None],
+            ],
+            dim=-1,
         )
 
         predicts_nms.append(predict_nms[: nms_cfg.max_bbox])

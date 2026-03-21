@@ -2,11 +2,10 @@
 # Licensed under the MIT License.
 
 import torch
+
 from .base_classifier import PlainResNetInference
 
-__all__ = [
-    "CustomWeights"
-]
+__all__ = ["CustomWeights"]
 
 
 class CustomWeights(PlainResNetInference):
@@ -14,10 +13,9 @@ class CustomWeights(PlainResNetInference):
     Custom Weight Classifier that inherits from PlainResNetInference.
     This classifier can load any model that was based on the PytorchWildlife finetuning tool.
     """
-    
+
     # Image size for the classifier
     IMAGE_SIZE = 224
-
 
     def __init__(self, weights=None, class_names=None, device="cpu"):
         """
@@ -30,10 +28,13 @@ class CustomWeights(PlainResNetInference):
         """
         self.CLASS_NAMES = class_names
         self.num_cls = len(self.CLASS_NAMES)
-        super(CustomWeights, self).__init__(weights=weights, device=device,
-                                                   num_cls=self.num_cls, num_layers=50, url=None)
+        super(CustomWeights, self).__init__(
+            weights=weights, device=device, num_cls=self.num_cls, num_layers=50, url=None
+        )
 
-    def results_generation(self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None) -> list[dict]:
+    def results_generation(
+        self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None
+    ) -> list[dict]:
         """
         Generate results for classification.
 
@@ -45,7 +46,7 @@ class CustomWeights(PlainResNetInference):
         Returns:
             list[dict]: List of dictionaries containing image ID, prediction, and confidence score.
         """
-        
+
         probs = torch.softmax(logits, dim=1)
         preds = probs.argmax(dim=1)
         confs = probs.max(dim=1)[0]
@@ -60,5 +61,5 @@ class CustomWeights(PlainResNetInference):
             r["confidence"] = conf.item()
             r["all_confidences"] = result
             results.append(r)
-        
+
         return results

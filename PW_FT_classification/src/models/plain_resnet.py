@@ -1,25 +1,24 @@
-import os
 import copy
+import os
 from collections import OrderedDict
+
 import torch
 import torch.nn as nn
-from torchvision.models.resnet import BasicBlock, Bottleneck
 from torchvision.models.resnet import *
-
+from torchvision.models.resnet import BasicBlock, Bottleneck
 
 try:
     from torch.hub import load_state_dict_from_url
 except ImportError:
     from torch.utils.model_zoo import load_state_dict_from_url
 # Exportable class names for external use
-__all__ = [
-    'PlainResNetClassifier'
-]
+__all__ = ["PlainResNetClassifier"]
 
 model_urls = {
-    'resnet18': 'https://download.pytorch.org/models/resnet18-f37072fd.pth',
-    'resnet50': 'https://download.pytorch.org/models/resnet50-0676ba61.pth'
+    "resnet18": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "resnet50": "https://download.pytorch.org/models/resnet50-0676ba61.pth",
 }
+
 
 class ResNetBackbone(ResNet):
     """
@@ -93,7 +92,7 @@ class PlainResNetClassifier(nn.Module):
     Extends nn.Module and provides a complete ResNet-based classifier, including feature extraction and classification layers.
     """
 
-    name = 'PlainResNetClassifier'
+    name = "PlainResNetClassifier"
 
     def __init__(self, num_cls=10, num_layers=18):
         """
@@ -123,17 +122,19 @@ class PlainResNetClassifier(nn.Module):
         if self.num_layers == 18:
             block = BasicBlock
             layers = [2, 2, 2, 2]
-            #self.pretrained_weights = ResNet18_Weights.IMAGENET1K_V1
-            self.pretrained_weights = state_dict = load_state_dict_from_url(model_urls['resnet18'],
-                                              progress=True)
+            # self.pretrained_weights = ResNet18_Weights.IMAGENET1K_V1
+            self.pretrained_weights = state_dict = load_state_dict_from_url(
+                model_urls["resnet18"], progress=True
+            )
         elif self.num_layers == 50:
             block = Bottleneck
             layers = [3, 4, 6, 3]
-            #self.pretrained_weights = ResNet50_Weights.IMAGENET1K_V1
-            self.pretrained_weights = state_dict = load_state_dict_from_url(model_urls['resnet50'],
-                                              progress=True)
+            # self.pretrained_weights = ResNet50_Weights.IMAGENET1K_V1
+            self.pretrained_weights = state_dict = load_state_dict_from_url(
+                model_urls["resnet50"], progress=True
+            )
         else:
-            raise Exception('ResNet Type not supported.')
+            raise Exception("ResNet Type not supported.")
 
         # Constructing the feature extractor and classifier
         self.feature = ResNetBackbone(block, layers, **kwargs)
@@ -151,10 +152,14 @@ class PlainResNetClassifier(nn.Module):
         Initialize the feature extractor with pre-trained weights.
         """
         # Load pre-trained weights and adjust for the current model
-        #init_weights = self.pretrained_weights.get_state_dict(progress=True)
+        # init_weights = self.pretrained_weights.get_state_dict(progress=True)
         init_weights = self.pretrained_weights
-        init_weights = OrderedDict({k.replace('module.', '').replace('feature.', ''): init_weights[k]
-                                    for k in init_weights})
+        init_weights = OrderedDict(
+            {
+                k.replace("module.", "").replace("feature.", ""): init_weights[k]
+                for k in init_weights
+            }
+        )
 
         # Load the weights into the feature extractor
         self.feature.load_state_dict(init_weights, strict=False)
@@ -165,5 +170,5 @@ class PlainResNetClassifier(nn.Module):
 
         missing_keys = self_keys - load_keys
         unused_keys = load_keys - self_keys
-        print('missing keys: {}'.format(sorted(list(missing_keys))))
-        print('unused_keys: {}'.format(sorted(list(unused_keys))))
+        print("missing keys: {}".format(sorted(list(missing_keys))))
+        print("unused_keys: {}".format(sorted(list(unused_keys))))

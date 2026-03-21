@@ -1,4 +1,5 @@
 from typing import List, Optional, Union
+
 from torch import Tensor
 from yolo.config import NMSConfig
 from yolo.model.yolo import YOLO
@@ -25,5 +26,7 @@ class PostProcess:
         pred_conf = prediction[3] if len(prediction) == 4 else None
         if rev_tensor is not None:
             pred_bbox = (pred_bbox - rev_tensor[:, None, 1:]) / rev_tensor[:, 0:1, None]
-        pred_bbox = bbox_nms(pred_class, pred_bbox, self.nms, pred_conf) #pred_box: [cls, x1, y1, x2, y2, conf]
+        pred_bbox = bbox_nms(
+            pred_class, pred_bbox, self.nms, pred_conf
+        )  # pred_box: [cls, x1, y1, x2, y2, conf]
         return pred_bbox

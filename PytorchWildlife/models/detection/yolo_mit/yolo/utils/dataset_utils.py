@@ -3,8 +3,10 @@ import os
 from itertools import chain
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
 import torch
+
 
 def discretize_categories(categories: List[Dict[str, int]]) -> Dict[int, int]:
     """
@@ -54,8 +56,14 @@ def create_image_metadata(labels_path: str) -> Tuple[Dict[str, List], Dict[str, 
     """
     with open(labels_path, "r") as file:
         labels_data = json.load(file)
-        id_to_idx = discretize_categories(labels_data.get("categories", [])) if "categories" in labels_data else None
-        annotations_index = organize_annotations_by_image(labels_data, id_to_idx)  # check lookup is a good name?
+        id_to_idx = (
+            discretize_categories(labels_data.get("categories", []))
+            if "categories" in labels_data
+            else None
+        )
+        annotations_index = organize_annotations_by_image(
+            labels_data, id_to_idx
+        )  # check lookup is a good name?
         image_info_dict = {Path(img["file_name"]).stem: img for img in labels_data["images"]}
         return annotations_index, image_info_dict
 
@@ -89,7 +97,9 @@ def scale_segmentation(
         scaled_seg_data = (
             np.array(seg_list).reshape(-1, 2) / [w, h]
         ).tolist()  # make the list group in x, y pairs and scaled with image width, height
-        scaled_flat_seg_data = [category_id] + list(chain(*scaled_seg_data))  # flatten the scaled_seg_data list
+        scaled_flat_seg_data = [category_id] + list(
+            chain(*scaled_seg_data)
+        )  # flatten the scaled_seg_data list
         seg_array_with_cat.append(scaled_flat_seg_data)
 
     return seg_array_with_cat
