@@ -20,7 +20,7 @@ class MegaDetectorV6Apache(RTDETRApacheBase):
         2: "vehicle"
     }
 
-    def __init__(self, weights=None, device="cpu", pretrained=True, version='MDV6-rtdetr-x-apache'):
+    def __init__(self, weights=None, device="cpu", pretrained=True, version='MDV6-apa-rtdetr-c'):
         """
         Initializes the MegaDetectorV6 model with the option to load pretrained weights.
         

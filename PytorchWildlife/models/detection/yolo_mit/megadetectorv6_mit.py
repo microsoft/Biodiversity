@@ -20,7 +20,7 @@ class MegaDetectorV6MIT(YOLOMITBase):
         2: "vehicle"
     }
 
-    def __init__(self, weights=None, device="cpu", pretrained=True, version='MDV6-yolov9-c-mit'):
+    def __init__(self, weights=None, device="cpu", pretrained=True, version='MDV6-mit-yolov9-c'):
         """
         Initializes the MegaDetectorV6 model with the option to load pretrained weights.
         
