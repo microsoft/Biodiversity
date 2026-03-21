@@ -38,4 +38,3 @@ weight_decay_classifier: 0.0005
 ## lr_scheduler
 step_size: 10
 gamma: 0.1
-

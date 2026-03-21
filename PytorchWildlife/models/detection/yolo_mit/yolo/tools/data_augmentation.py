@@ -45,7 +45,9 @@ class PadAndResize:
 
         pad_left = (self.target_width - new_width) // 2
         pad_top = (self.target_height - new_height) // 2
-        padded_image = Image.new("RGB", (self.target_width, self.target_height), self.background_color)
+        padded_image = Image.new(
+            "RGB", (self.target_width, self.target_height), self.background_color
+        )
         padded_image.paste(resized_image, (pad_left, pad_top))
 
         boxes[:, [1, 3]] = (boxes[:, [1, 3]] * new_width + pad_left) / self.target_width

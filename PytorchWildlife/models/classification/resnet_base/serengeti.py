@@ -2,11 +2,10 @@
 # Licensed under the MIT License.
 
 import torch
+
 from .base_classifier import PlainResNetInference
 
-__all__ = [
-    "AI4GSnapshotSerengeti"
-]
+__all__ = ["AI4GSnapshotSerengeti"]
 
 
 class AI4GSnapshotSerengeti(PlainResNetInference):
@@ -14,22 +13,22 @@ class AI4GSnapshotSerengeti(PlainResNetInference):
     Snapshot Serengeti Animal Classifier that inherits from PlainResNetInference.
     This classifier is specialized for recognizing 9 different animals and has 1 'other' class.
     """
-    
+
     # Image size for the Opossum classifier
     IMAGE_SIZE = 224
-    
+
     # Class names for prediction
     CLASS_NAMES = {
-        0: 'wildebeest',
-        1: 'guineafowl',
-        2: 'zebra',
-        3: 'buffalo',
-        4: 'gazellethomsons',
-        5: 'gazellegrants',
-        6: 'warthog',
-        7: 'impala',
-        8: 'hyenaspotted',
-        9: 'other'
+        0: "wildebeest",
+        1: "guineafowl",
+        2: "zebra",
+        3: "buffalo",
+        4: "gazellethomsons",
+        5: "gazellegrants",
+        6: "warthog",
+        7: "impala",
+        8: "hyenaspotted",
+        9: "other",
     }
 
     def __init__(self, weights=None, device="cpu", pretrained=True):
@@ -48,22 +47,25 @@ class AI4GSnapshotSerengeti(PlainResNetInference):
         else:
             url = None
 
-        super(AI4GSnapshotSerengeti, self).__init__(weights=weights, device=device,
-                                                   num_cls=10, num_layers=18, url=url)
+        super(AI4GSnapshotSerengeti, self).__init__(
+            weights=weights, device=device, num_cls=10, num_layers=18, url=url
+        )
 
-    def results_generation(self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None) -> list[dict]:
+    def results_generation(
+        self, logits: torch.Tensor, img_ids: list[str], id_strip: str = None
+    ) -> list[dict]:
         """
         Generate results for classification.
 
         Args:
             logits (torch.Tensor): Output tensor from the model.
             img_ids (str): Image identifier.
-            id_strip (str): stiping string for better image id saving.       
+            id_strip (str): stiping string for better image id saving.
 
         Returns:
             dict: Dictionary containing image ID, prediction, and confidence score.
         """
-        
+
         probs = torch.softmax(logits, dim=1)
         preds = probs.argmax(dim=1)
         confs = probs.max(dim=1)[0]
@@ -78,5 +80,5 @@ class AI4GSnapshotSerengeti(PlainResNetInference):
             r["confidence"] = conf.item()
             r["all_confidences"] = result
             results.append(r)
-        
+
         return results

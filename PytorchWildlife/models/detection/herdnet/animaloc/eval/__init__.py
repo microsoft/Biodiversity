@@ -1,5 +1,4 @@
-__copyright__ = \
-    """
+__copyright__ = """
     Copyright (C) 2024 University of Liège, Gembloux Agro-Bio Tech, Forest Is Life
     All rights reserved.
 
@@ -13,5 +12,5 @@ __author__ = "Alexandre Delplanque"
 __license__ = "MIT License"
 __version__ = "0.2.1"
 
-from .stitchers import *
 from .lmds import *
+from .stitchers import *

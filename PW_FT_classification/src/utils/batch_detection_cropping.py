@@ -3,15 +3,19 @@
 
 """ Demo for batch detection, cropping and resizing"""
 
-#%% 
-# PyTorch imports 
+# %%
+# PyTorch imports
 import torch
-# Importing the model, dataset, transformations and utility functions from PytorchWildlife
-from PytorchWildlife.models import detection as pw_detection
-from PytorchWildlife.data import transforms as pw_trans
-from PytorchWildlife.data import datasets as pw_data 
+
 # Importing the utility function for saving cropped images
 from src.utils import utils
+
+from PytorchWildlife.data import datasets as pw_data
+from PytorchWildlife.data import transforms as pw_trans
+
+# Importing the model, dataset, transformations and utility functions from PytorchWildlife
+from PytorchWildlife.models import detection as pw_detection
+
 
 def batch_detection_cropping(folder_path, output_path, annotation_file):
     # Setting the device to use for computations ('cuda' indicates GPU)
@@ -27,7 +31,6 @@ def batch_detection_cropping(folder_path, output_path, annotation_file):
     # Saving the detected objects as cropped images
     crop_annotation_path = utils.save_crop_images(results, output_path, annotation_file)
     return crop_annotation_path
-
 
 
 # %%

@@ -5,10 +5,9 @@ from typing import Dict, List, Optional, Union
 import torch
 from omegaconf import ListConfig, OmegaConf
 from torch import nn
-
 from yolo.config import ModelConfig, YOLOLayer
-from yolo.tools.dataset_preparation import prepare_weight
 from yolo.model.module import get_layer_map
+from yolo.tools.dataset_preparation import prepare_weight
 
 
 class YOLO(nn.Module):
@@ -40,9 +39,15 @@ class YOLO(nn.Module):
                 source = self.get_source_idx(layer_info.get("source", -1), layer_idx)
 
                 # Find in channels
-                if any(module in layer_type for module in ["Conv", "ELAN", "ADown", "AConv", "CBLinear"]):
+                if any(
+                    module in layer_type
+                    for module in ["Conv", "ELAN", "ADown", "AConv", "CBLinear"]
+                ):
                     layer_args["in_channels"] = output_dim[source]
-                if any(module in layer_type for module in ["Detection", "Segmentation", "Classification"]):
+                if any(
+                    module in layer_type
+                    for module in ["Detection", "Segmentation", "Classification"]
+                ):
                     if isinstance(source, list):
                         layer_args["in_channels"] = [output_dim[idx] for idx in source]
                     else:
@@ -85,7 +90,9 @@ class YOLO(nn.Module):
                     return output
         return output
 
-    def get_out_channels(self, layer_type: str, layer_args: dict, output_dim: list, source: Union[int, list]):
+    def get_out_channels(
+        self, layer_type: str, layer_args: dict, output_dim: list, source: Union[int, list]
+    ):
         if hasattr(layer_args, "out_channels"):
             return layer_args["out_channels"]
         if layer_type == "CBFuse":
@@ -106,7 +113,9 @@ class YOLO(nn.Module):
             self.model[source - 1].usable = True
         return source
 
-    def create_layer(self, layer_type: str, source: Union[int, list], layer_info: Dict, **kwargs) -> YOLOLayer:
+    def create_layer(
+        self, layer_type: str, source: Union[int, list], layer_info: Dict, **kwargs
+    ) -> YOLOLayer:
         if layer_type in self.layer_map:
             layer = self.layer_map[layer_type](**kwargs)
             setattr(layer, "layer_type", layer_type)
@@ -133,7 +142,7 @@ class YOLO(nn.Module):
             weights = weights["state_dict"]
 
         # Drop the prefix 'model.model.' from the keys
-        if "model.model." in list(weights.keys())[0]: 
+        if "model.model." in list(weights.keys())[0]:
             weights = {k.replace("model.model.", ""): v for k, v in weights.items()}
 
         model_state_dict = self.model.state_dict()
@@ -142,7 +151,7 @@ class YOLO(nn.Module):
         # TODO2: weight transform if num_class difference
 
         error_dict = {"Mismatch": set(), "Not Found": set()}
-        
+
         for model_key, model_weight in model_state_dict.items():
             if model_key not in weights:
                 error_dict["Not Found"].add(tuple(model_key.split(".")[:-2]))
@@ -155,7 +164,9 @@ class YOLO(nn.Module):
         self.model.load_state_dict(model_state_dict)
 
 
-def create_model(model_cfg: ModelConfig, weight_path: Union[bool, Path] = True, class_num: int = 80) -> YOLO:
+def create_model(
+    model_cfg: ModelConfig, weight_path: Union[bool, Path] = True, class_num: int = 80
+) -> YOLO:
     """Constructs and returns a model from a Dictionary configuration file.
 
     Args:

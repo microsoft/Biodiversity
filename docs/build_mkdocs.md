@@ -33,4 +33,3 @@ To build the MkDocs site locally, follow these steps:
 
 5. **Exclude the `site/` Directory**:
    The `site/` directory is automatically generated and should not be included in version control. It is already added to `.gitignore`.
-

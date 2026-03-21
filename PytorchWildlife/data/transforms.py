@@ -3,23 +3,28 @@
 
 import numpy as np
 import torch
-from torchvision import transforms
-import torchvision.transforms as T
 import torch.nn.functional as F
+import torchvision.transforms as T
 from PIL import Image
+from torchvision import transforms
 
 # Making the provided classes available for import from this module
-__all__ = [
-    "MegaDetector_v5_Transform",
-    "Classification_Inference_Transform"
-]
+__all__ = ["MegaDetector_v5_Transform", "Classification_Inference_Transform"]
 
 
-def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=False, scaleFill=False, scaleup=True, stride=32) -> torch.Tensor:
+def letterbox(
+    im,
+    new_shape=(640, 640),
+    color=(114, 114, 114),
+    auto=False,
+    scaleFill=False,
+    scaleup=True,
+    stride=32,
+) -> torch.Tensor:
     """
     Resize and pad an image to a desired shape while keeping the aspect ratio unchanged.
 
-    This function is commonly used in object detection tasks to prepare images for models like YOLOv5. 
+    This function is commonly used in object detection tasks to prepare images for models like YOLOv5.
     It resizes the image to fit into the new shape with the correct aspect ratio and then pads the rest.
 
     Args:
@@ -64,18 +69,25 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=False, scale
 
     dw /= 2
     dh /= 2
-   
+
     # Resize image
     if shape[::-1] != new_unpad:
-        resize_transform = T.Resize(new_unpad[::-1], interpolation=T.InterpolationMode.BILINEAR,
-                                    antialias=False)
+        resize_transform = T.Resize(
+            new_unpad[::-1], interpolation=T.InterpolationMode.BILINEAR, antialias=False
+        )
         im = resize_transform(im)
 
     # Pad image
-    padding = (int(round(dw - 0.1)), int(round(dw + 0.1)), int(round(dh + 0.1)), int(round(dh - 0.1)))
-    im = F.pad(im*255.0, padding, value=114)/255.0
+    padding = (
+        int(round(dw - 0.1)),
+        int(round(dw + 0.1)),
+        int(round(dh + 0.1)),
+        int(round(dh - 0.1)),
+    )
+    im = F.pad(im * 255.0, padding, value=114) / 255.0
 
     return im
+
 
 class MegaDetector_v5_Transform:
     """
@@ -113,16 +125,18 @@ class MegaDetector_v5_Transform:
             np_img = torch.from_numpy(np_img).float()
             np_img /= 255.0
 
-        # Resize and pad the image using a customized letterbox function. 
+        # Resize and pad the image using a customized letterbox function.
         img = letterbox(np_img, new_shape=self.target_size, stride=self.stride, auto=False)
 
         return img
+
 
 class Classification_Inference_Transform:
     """
     A transformation class to preprocess images for classification inference.
     This includes resizing, normalization, and conversion to a tensor.
     """
+
     # Normalization constants
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
@@ -135,12 +149,14 @@ class Classification_Inference_Transform:
             target_size (int): Desired size for the height and width after resizing.
         """
         # Define the sequence of transformations
-        self.trans = transforms.Compose([
-            # transforms.Resize((target_size, target_size)),
-            transforms.Resize((target_size, target_size), **kwargs),
-            transforms.ToTensor(),
-            transforms.Normalize(self.mean, self.std)
-        ])
+        self.trans = transforms.Compose(
+            [
+                # transforms.Resize((target_size, target_size)),
+                transforms.Resize((target_size, target_size), **kwargs),
+                transforms.ToTensor(),
+                transforms.Normalize(self.mean, self.std),
+            ]
+        )
 
     def __call__(self, img) -> torch.Tensor:
         """

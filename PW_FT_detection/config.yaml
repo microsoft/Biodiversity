@@ -25,7 +25,3 @@ save_json: True
 plot: True
 device_val: 0
 batch_size_val: 12
-
-
-
-

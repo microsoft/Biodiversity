@@ -8,7 +8,6 @@ from PIL import Image
 from rich.progress import track
 from torch import Tensor
 from torch.utils.data import DataLoader, Dataset
-
 from yolo.config import DataConfig, DatasetConfig
 from yolo.tools.data_augmentation import AugmentationComposer
 from yolo.tools.dataset_preparation import prepare_dataset
@@ -32,7 +31,9 @@ class YoloDataset(Dataset):
         transforms = [eval(aug)(prob) for aug, prob in augment_cfg.items()]
         self.transform = AugmentationComposer(transforms, self.image_size, self.base_size)
         self.transform.get_more_data = self.get_more_data
-        self.img_paths, self.bboxes, self.ratios = tensorlize(self.load_data(Path(dataset_cfg.path), phase_name))
+        self.img_paths, self.bboxes, self.ratios = tensorlize(
+            self.load_data(Path(dataset_cfg.path), phase_name)
+        )
 
     def load_data(self, dataset_path: Path, phase_name: str):
         """
@@ -94,7 +95,9 @@ class YoloDataset(Dataset):
                 if not label_path.is_file():
                     continue
                 with open(label_path, "r") as file:
-                    image_seg_annotations = [list(map(float, line.strip().split())) for line in file]
+                    image_seg_annotations = [
+                        list(map(float, line.strip().split())) for line in file
+                    ]
             else:
                 image_seg_annotations = []
 
@@ -140,43 +143,42 @@ class YoloDataset(Dataset):
         else:
             return torch.zeros((0, 5))
 
-    def adapt_labels(self, bboxes: Tensor) -> Tensor: 
-        """  
-        Adapt bounding box labels using vectorized operations.  
+    def adapt_labels(self, bboxes: Tensor) -> Tensor:
+        """
+        Adapt bounding box labels using vectorized operations.
 
-        Args:  
-            bboxes (Tensor): Tensor of bounding boxes in the format [class_id, width, height, x_center, y_center].  
-        
-        Returns:  
-            Tensor: Tensor of adapted bounding boxes in the format [class_id, xmin, ymin, xmax, ymax].  
-        """  
-        class_ids = bboxes[:, 0]  
-        widths = bboxes[:, 1]  
-        heights = bboxes[:, 2]  
-        x_centers = bboxes[:, 3]  
-        y_centers = bboxes[:, 4]  
-    
-        xmins = x_centers - widths / 2  
-        ymins = y_centers - heights / 2  
-        xmaxs = x_centers + widths / 2  
-        ymaxs = y_centers + heights / 2  
-    
-        adapted_bboxes = torch.stack([class_ids, xmins, ymins, xmaxs, ymaxs], dim=1)  
-    
-        return adapted_bboxes 
+        Args:
+            bboxes (Tensor): Tensor of bounding boxes in the format [class_id, width, height, x_center, y_center].
+
+        Returns:
+            Tensor: Tensor of adapted bounding boxes in the format [class_id, xmin, ymin, xmax, ymax].
+        """
+        class_ids = bboxes[:, 0]
+        widths = bboxes[:, 1]
+        heights = bboxes[:, 2]
+        x_centers = bboxes[:, 3]
+        y_centers = bboxes[:, 4]
+
+        xmins = x_centers - widths / 2
+        ymins = y_centers - heights / 2
+        xmaxs = x_centers + widths / 2
+        ymaxs = y_centers + heights / 2
+
+        adapted_bboxes = torch.stack([class_ids, xmins, ymins, xmaxs, ymaxs], dim=1)
+
+        return adapted_bboxes
 
     def adapt_labels_list(self, points):
- 
-        x_center = points[0]  
-        y_center = points[1]  
-        width = points[2]  
-        height = points[3]  
-    
-        xmin = x_center - width / 2  
-        ymin = y_center - height / 2  
-        xmax = x_center + width / 2  
-        ymax = y_center + height / 2  
-    
+        x_center = points[0]
+        y_center = points[1]
+        width = points[2]
+        height = points[3]
+
+        xmin = x_center - width / 2
+        ymin = y_center - height / 2
+        xmax = x_center + width / 2
+        ymax = y_center + height / 2
+
         return [xmin, ymin, xmax, ymax]
 
     def get_data(self, idx):

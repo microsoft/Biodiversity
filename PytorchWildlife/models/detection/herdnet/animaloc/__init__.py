@@ -1,5 +1,4 @@
-__copyright__ = \
-    """
+__copyright__ = """
     Copyright (C) 2024 University of Liège, Gembloux Agro-Bio Tech, Forest Is Life
     All rights reserved.
 

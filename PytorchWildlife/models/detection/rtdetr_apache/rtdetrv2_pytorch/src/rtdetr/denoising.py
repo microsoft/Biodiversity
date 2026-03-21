@@ -1,26 +1,28 @@
 """Copyright(c) 2023 lyuwenyu. All Rights Reserved.
 """
 
-import torch 
+import torch
 
-from .utils import inverse_sigmoid
 from .box_ops import box_cxcywh_to_xyxy, box_xyxy_to_cxcywh
+from .utils import inverse_sigmoid
 
 
-def get_contrastive_denoising_training_group(targets,
-                                             num_classes,
-                                             num_queries,
-                                             class_embed,
-                                             num_denoising=100,
-                                             label_noise_ratio=0.5,
-                                             box_noise_scale=1.0,):
+def get_contrastive_denoising_training_group(
+    targets,
+    num_classes,
+    num_queries,
+    class_embed,
+    num_denoising=100,
+    label_noise_ratio=0.5,
+    box_noise_scale=1.0,
+):
     """cnd"""
     if num_denoising <= 0:
         return None, None, None, None
 
-    num_gts = [len(t['labels']) for t in targets]
-    device = targets[0]['labels'].device
-    
+    num_gts = [len(t["labels"]) for t in targets]
+    device = targets[0]["labels"].device
+
     max_gt_num = max(num_gts)
     if max_gt_num == 0:
         return None, None, None, None
@@ -37,8 +39,8 @@ def get_contrastive_denoising_training_group(targets,
     for i in range(bs):
         num_gt = num_gts[i]
         if num_gt > 0:
-            input_query_class[i, :num_gt] = targets[i]['labels']
-            input_query_bbox[i, :num_gt] = targets[i]['boxes']
+            input_query_class[i, :num_gt] = targets[i]["labels"]
+            input_query_bbox[i, :num_gt] = targets[i]["boxes"]
             pad_gt_mask[i, :num_gt] = 1
     # each group has positive and negative queries.
     input_query_class = input_query_class.tile([1, 2 * num_group])
@@ -68,7 +70,7 @@ def get_contrastive_denoising_training_group(targets,
         rand_sign = torch.randint_like(input_query_bbox, 0, 2) * 2.0 - 1.0
         rand_part = torch.rand_like(input_query_bbox)
         rand_part = (rand_part + 1.0) * negative_gt_mask + rand_part * (1 - negative_gt_mask)
-        known_bbox += (rand_sign * rand_part * diff)
+        known_bbox += rand_sign * rand_part * diff
         known_bbox = torch.clip(known_bbox, min=0.0, max=1.0)
         input_query_bbox = box_xyxy_to_cxcywh(known_bbox)
         input_query_bbox_unact = inverse_sigmoid(input_query_bbox)
@@ -79,21 +81,27 @@ def get_contrastive_denoising_training_group(targets,
     attn_mask = torch.full([tgt_size, tgt_size], False, dtype=torch.bool, device=device)
     # match query cannot see the reconstruction
     attn_mask[num_denoising:, :num_denoising] = True
-    
+
     # reconstruct cannot see each other
     for i in range(num_group):
         if i == 0:
-            attn_mask[max_gt_num * 2 * i: max_gt_num * 2 * (i + 1), max_gt_num * 2 * (i + 1): num_denoising] = True
+            attn_mask[
+                max_gt_num * 2 * i : max_gt_num * 2 * (i + 1),
+                max_gt_num * 2 * (i + 1) : num_denoising,
+            ] = True
         if i == num_group - 1:
-            attn_mask[max_gt_num * 2 * i: max_gt_num * 2 * (i + 1), :max_gt_num * i * 2] = True
+            attn_mask[max_gt_num * 2 * i : max_gt_num * 2 * (i + 1), : max_gt_num * i * 2] = True
         else:
-            attn_mask[max_gt_num * 2 * i: max_gt_num * 2 * (i + 1), max_gt_num * 2 * (i + 1): num_denoising] = True
-            attn_mask[max_gt_num * 2 * i: max_gt_num * 2 * (i + 1), :max_gt_num * 2 * i] = True
-        
+            attn_mask[
+                max_gt_num * 2 * i : max_gt_num * 2 * (i + 1),
+                max_gt_num * 2 * (i + 1) : num_denoising,
+            ] = True
+            attn_mask[max_gt_num * 2 * i : max_gt_num * 2 * (i + 1), : max_gt_num * 2 * i] = True
+
     dn_meta = {
         "dn_positive_idx": dn_positive_idx,
         "dn_num_group": num_group,
-        "dn_num_split": [num_denoising, num_queries]
+        "dn_num_split": [num_denoising, num_queries],
     }
 
     return input_query_logits, input_query_bbox_unact, attn_mask, dn_meta
