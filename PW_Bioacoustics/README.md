@@ -87,6 +87,10 @@ python inference.py --config config/my_domain.yaml \
     --dataset my_inference
 ```
 
+## Demo
+
+The recommended way to get started is the **end-to-end demo notebook** at [`demo/bioacoustics_demo.ipynb`](demo/bioacoustics_demo.ipynb). It walks through the full pipeline — annotation creation, data preparation, binary and multiclass training, and inference — using real bird recordings from the [Humboldt Aves dataset](https://zenodo.org/records/18563039). See [`demo/README.md`](demo/README.md) for details.
+
 ## Module Structure
 
 ```
@@ -96,26 +100,50 @@ PW_Bioacoustics/
 ├── inference.py          # Inference CLI script
 ├── prepare_dataset.py    # Dataset preparation pipeline
 ├── template.yaml         # Template configuration file
-└── README.md
+└── demo/
+    ├── bioacoustics_demo.ipynb   # End-to-end demo notebook
+    ├── README.md
+    ├── data/                     # Sample audio + annotations
+    └── config/                   # Demo YAML configs
 ```
+
+The CLI scripts (`train.py`, `prepare_dataset.py`, `inference.py`) can be used standalone or imported as modules (as the demo notebook does). `template.yaml` documents all configuration parameters.
 
 ## Core Library (PytorchWildlife)
 
-This module uses the following components from PytorchWildlife:
+This module uses the following components from `PytorchWildlife`:
 
 ### Models (`PytorchWildlife.models.bioacoustics`)
-- `ResNetClassifier`: PyTorch Lightning module for spectrogram classification
+- `ResNetClassifier`: PyTorch Lightning module for spectrogram classification (binary and multiclass)
 - `BaseBioacousticsClassifier`: Base class for bioacoustics models
+- `load_model_from_checkpoint()`: Load a trained model from a `.ckpt` file for inference
 
-### Datasets (`PytorchWildlife.data`)
-- `BioacousticsDataset`: Dataset for loading spectrograms from .npy files
-- `SpectrogramAugmentations`: Spectrogram-specific augmentations
+### Datasets (`PytorchWildlife.data.bioacoustics.bioacoustics_datasets`)
+- `BioacousticsDataset`: Training dataset for loading spectrograms from `.npy` files
+- `BioacousticsInferenceDataset`: Inference dataset (no labels required)
+- `SpectrogramAugmentations`: SpecAugment-style augmentations (time/frequency masking)
 - `MixUpCollator`: Batch-level MixUp augmentation
+- `PerSampleNormalize`, `ResizeTo`: Spectrogram transforms
 
-### Utilities (`PytorchWildlife.utils`)
-- `DomainConfig`: Configuration dataclass for domain settings
+### Annotations (`PytorchWildlife.data.bioacoustics.bioacoustics_annotations`)
+- `BaseReader`: Abstract base class for converting annotation formats to COCO-like JSON
+- `AnnotationCreator`: Builds COCO-like annotation files from `BaseReader` subclasses
+
+### Configuration (`PytorchWildlife.data.bioacoustics.bioacoustics_configs`)
+- `DomainConfig`: Nested dataclass for domain settings (paths, audio, spectrogram, training, splits)
 - `load_config()`: YAML configuration loader with environment variable expansion
-- `build_windows()`: Window generation from annotations
+- `save_config()`: Serialize a `DomainConfig` back to YAML
+
+### Windows (`PytorchWildlife.data.bioacoustics.bioacoustics_windows`)
+- `build_windows()`: Generate training windows from annotations (sliding, balanced, or customized strategies)
+- `build_inference_windows()`: Generate sliding windows for inference on raw audio files
+
+### Spectrograms (`PytorchWildlife.data.bioacoustics.bioacoustics_spectrograms`)
+- `compute_mel_spectrograms_gpu()`: GPU-accelerated mel spectrogram computation, saves `.npy` files
+
+## Projects Using PytorchWildlife Bioacoustics
+
+- **[PteroSet](https://github.com/microsoft/PteroSet)** — A machine learning pipeline for detecting and classifying tropical bird vocalizations from passive acoustic monitoring recordings. Built on the PytorchWildlife bioacoustics core library, it demonstrates the full workflow: COCO annotation creation from Raven Pro labels, mel spectrogram preparation, binary ResNet training, and leave-one-project-out cross-validation.
 
 ## Training Arguments
 
