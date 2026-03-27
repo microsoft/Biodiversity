@@ -242,9 +242,9 @@ class ResNetClassifier(pl.LightningModule):
                 loss = self.criterion(logits, targets.float())
             preds = (logits > 0).int()
         else:
-            loss = self.criterion(logits, y)
+            targets = y.long()
+            loss = self.criterion(logits, targets)
             preds = torch.argmax(logits, dim=1)
-            targets = y
 
         return loss, preds, targets, logits
 
@@ -285,9 +285,9 @@ class ResNetClassifier(pl.LightningModule):
             preds = (logits > 0).int()
             targets = y.int()
         else:
-            loss = self.criterion(logits, y)
+            targets = y.long()
+            loss = self.criterion(logits, targets)
             preds = torch.argmax(logits, dim=1)
-            targets = y
 
         self.val_acc.update(preds, targets)
         self.val_f1.update(preds, targets)
@@ -323,8 +323,8 @@ class ResNetClassifier(pl.LightningModule):
             preds = (prob > self.hparams.conf_threshold).int()
             targets = y.int()
         else:
+            targets = y.long()
             preds = torch.argmax(logits, dim=1)
-            targets = y
 
         self.test_logits.append(logits.detach().cpu())
         self.test_targets.append(targets.detach().cpu())
@@ -335,7 +335,7 @@ class ResNetClassifier(pl.LightningModule):
             if self.is_binary:
                 loss = self.criterion(logits, y.float())
             else:
-                loss = self.criterion(logits, y)
+                loss = self.criterion(logits, targets)
 
             self.test_acc.update(preds, targets)
             self.test_f1.update(preds, targets)

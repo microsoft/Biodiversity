@@ -36,8 +36,8 @@ import soundfile as sf
 
 # Import from PytorchWildlife core library
 from PytorchWildlife.models.bioacoustics import ResNetClassifier
-from PytorchWildlife.data.bioacoustics_datasets import ResizeTo, PerSampleNormalize
-from PytorchWildlife.utils.bioacoustics_configs import load_config
+from PytorchWildlife.data.bioacoustics.bioacoustics_datasets import ResizeTo, PerSampleNormalize
+from PytorchWildlife.data.bioacoustics.bioacoustics_configs import load_config
 
 
 class BioacousticsInferenceDataset(Dataset):
@@ -127,14 +127,17 @@ def build_inference_windows(
     windows = []
     window_idx = 0
 
-    # Determine whether audios_source is a folder or a list
+    # Determine whether audios_source is a folder, a single file, or a list
     if isinstance(audios_source, str):
-        wav_files = [
-            os.path.join(audios_source, f)
-            for f in os.listdir(audios_source)
-            if f.lower().endswith(('.wav', '.flac', '.mp3', '.m4a', '.aac', '.ogg'))
-            and not f.startswith('.')
-        ]
+        if os.path.isfile(audios_source):
+            wav_files = [audios_source]
+        else:
+            wav_files = [
+                os.path.join(audios_source, f)
+                for f in os.listdir(audios_source)
+                if f.lower().endswith(('.wav', '.flac', '.mp3', '.m4a', '.aac', '.ogg'))
+                and not f.startswith('.')
+            ]
     elif isinstance(audios_source, list):
         wav_files = audios_source
     else:

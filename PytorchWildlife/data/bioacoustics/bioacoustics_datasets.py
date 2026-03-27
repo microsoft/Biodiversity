@@ -303,11 +303,11 @@ def mixup_criterion(criterion, pred, targets):
         Mixed loss value.
     """
     if targets['is_mixed']:
-        y_a, y_b = targets['original_labels'], targets['shuffled_labels']
+        y_a, y_b = targets['original_labels'].float(), targets['shuffled_labels'].float()
         lam = targets['lambda']
         return lam * criterion(pred, y_a) + (1 - lam) * criterion(pred, y_b)
     else:
-        return criterion(pred, targets['original_labels'])
+        return criterion(pred, targets['original_labels'].float())
 
 
 # --------------- Dataset ---------------

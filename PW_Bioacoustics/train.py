@@ -27,12 +27,12 @@ from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping, Learning
 
 # Import from PytorchWildlife core library
 from PytorchWildlife.models.bioacoustics import ResNetClassifier
-from PytorchWildlife.data.bioacoustics_datasets import (
+from PytorchWildlife.data.bioacoustics.bioacoustics_datasets import (
     BioacousticsDataset,
     SpectrogramAugmentations,
     MixUpCollator,
 )
-from PytorchWildlife.utils.bioacoustics_configs import load_config
+from PytorchWildlife.data.bioacoustics.bioacoustics_configs import load_config
 
 
 @dataclass

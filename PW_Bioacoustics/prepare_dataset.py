@@ -20,8 +20,8 @@ from typing import List, Optional
 import pandas as pd
 
 # Import from PytorchWildlife core library
-from PytorchWildlife.utils.bioacoustics_configs import load_config, DomainConfig
-from PytorchWildlife.data.bioacoustics_windows import build_windows
+from PytorchWildlife.data.bioacoustics.bioacoustics_configs import load_config, DomainConfig
+from PytorchWildlife.data.bioacoustics.bioacoustics_windows import build_windows
 
 
 def count_window_labels(windows: List[dict]) -> dict:
