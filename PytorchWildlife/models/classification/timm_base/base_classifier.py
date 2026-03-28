@@ -152,6 +152,7 @@ class TIMM_BaseClassifierInference(BaseClassifierInference):
             img = Image.fromarray(img)
         img = self.transform(img)
 
+        with torch.no_grad():
         logits = self.predictor(img.unsqueeze(0).to(self.device))
         return self.results_generation(logits.cpu(), [img_id], id_strip=id_strip)[0]
 
