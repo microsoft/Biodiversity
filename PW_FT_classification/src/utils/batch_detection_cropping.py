@@ -6,6 +6,7 @@
 #%% 
 # PyTorch imports 
 import torch
+import os
 # Importing the model, dataset, transformations and utility functions from PytorchWildlife
 from PytorchWildlife.models import detection as pw_detection
 from PytorchWildlife.data import transforms as pw_trans
@@ -14,6 +15,8 @@ from PytorchWildlife.data import datasets as pw_data
 from src.utils import utils
 
 def batch_detection_cropping(folder_path, output_path, annotation_file):
+    # Ensure the output directory exists
+    os.makedirs(output_path, exist_ok=True)
     # Setting the device to use for computations ('cuda' indicates GPU)
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
