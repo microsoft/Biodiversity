@@ -6,6 +6,7 @@
 #%% 
 # PyTorch imports 
 import torch
+from tkinter import Tk, filedialog
 # Importing the model, dataset, transformations and utility functions from PytorchWildlife
 from PytorchWildlife.models import detection as pw_detection
 from PytorchWildlife.data import transforms as pw_trans
@@ -13,7 +14,23 @@ from PytorchWildlife.data import datasets as pw_data
 # Importing the utility function for saving cropped images
 from src.utils import utils
 
-def batch_detection_cropping(folder_path, output_path, annotation_file):
+def batch_detection_cropping(folder_path=None, output_path=None, annotation_file=None):
+    # Interactive selection if paths are not provided
+    if not folder_path:
+        root = Tk()
+        root.withdraw()
+        folder_path = filedialog.askdirectory(title="Select folder containing images")
+        root.destroy()
+    if not output_path:
+        root = Tk()
+        root.withdraw()
+        output_path = filedialog.askdirectory(title="Select output folder for cropped images")
+        root.destroy()
+    if not annotation_file:
+        root = Tk()
+        root.withdraw()
+        annotation_file = filedialog.askopenfilename(title="Select annotation CSV file", filetypes=[("CSV files", "*.csv")])
+        root.destroy()
     # Setting the device to use for computations ('cuda' indicates GPU)
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
