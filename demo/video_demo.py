@@ -34,7 +34,7 @@ detection_model = pw_detection.MegaDetectorV6(device=DEVICE, pretrained=True, ve
 
 # Uncomment the following line to use MegaDetectorV6 with RT-DETR Apache weights
 # Valid versions are MDV6-apa-rtdetr-c, MDV6-apa-rtdetr-e
-# etection_model = pw_detection.MegaDetectorV6Apache(device=DEVICE, pretrained=True, version="MDV6-apa-rtdetr-e")
+# detection_model = pw_detection.MegaDetectorV6Apache(device=DEVICE, pretrained=True, version="MDV6-apa-rtdetr-e")
 
 # Uncomment the following line to use MegaDetectorV5 instead of MegaDetectorV6
 # detection_model = pw_detection.MegaDetectorV5(device=DEVICE, pretrained=True, version="a")

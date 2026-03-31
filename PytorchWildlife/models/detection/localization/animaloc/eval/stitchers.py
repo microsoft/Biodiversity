@@ -229,3 +229,28 @@ class HerdNetStitcher(Stitcher):
             maps = [*maps, *outmaps.unsqueeze(0)]
 
         return maps
+
+class HerdNetStitcherLocBranch(Stitcher):
+
+    @torch.no_grad()
+    def _inference(self, patches: torch.Tensor) -> List[torch.Tensor]:
+        
+        self.model.eval()
+
+        dataset = TensorDataset(patches)
+        dataloader = DataLoader(
+            dataset,   
+            batch_size=self.batch_size,
+            sampler=SequentialSampler(dataset)
+            )
+
+        maps = []
+        for patch in dataloader:
+            patch = patch[0].to(self.device)
+            #outputs = self.model(patch)[0]
+            outputs = self.model(patch) # LossWrapper is not used
+            heatmap = outputs
+            outmaps = heatmap.unsqueeze(0)
+            maps = [*maps, *outmaps]
+
+        return maps
