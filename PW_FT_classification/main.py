@@ -55,8 +55,12 @@ def main(
     """
 
     # GPU configuration: set up GPUs based on availability and user specification
-    gpus = gpus if torch.cuda.is_available() else None
-    gpus = [int(i) for i in gpus.split(',')]
+    if torch.cuda.is_available():
+        gpus = [int(i) for i in gpus.split(',')]
+    else:
+        # If no CUDA devices are available, set gpus to None to indicate CPU usage
+        # PyTorch Lightning Trainer will default to CPU if devices is None
+        gpus = None
 
     # Environment variable setup for numpy multi-threading. It is important to avoid cpu and ram issues.
     os.environ["OMP_NUM_THREADS"] = str(np_threads)
