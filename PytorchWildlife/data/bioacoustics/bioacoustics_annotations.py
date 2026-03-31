@@ -351,7 +351,7 @@ class BaseReader:
         total_hours = total_duration / 3600
 
         print(f"Dataset: {self.data['info']['title']}")
-        print(f"Total species: {len(self.categories)}")
+        print(f"Total categories: {len(self.categories)}")
         print(f"Total audio recordings: {len(self.sounds)}")
         print(f"Total annotations: {len(self.annotations)}")
         print(f"Total duration: {total_hours:.2f} hours")

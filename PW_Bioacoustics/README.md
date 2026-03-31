@@ -89,7 +89,16 @@ python inference.py --config config/my_domain.yaml \
 
 ## Demo
 
-The recommended way to get started is the **end-to-end demo notebook** at [`demo/bioacoustics_demo.ipynb`](demo/bioacoustics_demo.ipynb). It walks through the full pipeline — annotation creation, data preparation, binary and multiclass training, and inference — using real bird recordings from the [Humboldt Aves dataset](https://zenodo.org/records/18563039). See [`demo/README.md`](demo/README.md) for details.
+The recommended way to get started is the **end-to-end demo notebook** at [`demo/bioacoustics_demo.ipynb`](demo/bioacoustics_demo.ipynb). It walks through the full pipeline using real bird recordings from the [PteroSet](https://zenodo.org/records/19137071) dataset:
+
+1. **Data Exploration** — annotation counts, species distribution
+2. **Inference** — download `MD_AudioBirds_V1.onnx` from Zenodo, run ONNX inference on all 5 recordings, visualise predictions vs. ground-truth
+3. **Train**
+   - **3.0 Build COCO Annotations** — `PteroSetReader` converts Raven Pro TSV → COCO-like JSON
+   - **3.1 Binary Classification** — AVEVOC vs. noise training with `ResNetClassifier`
+   - **3.2 Multiclass Classification** — top-4 species vs. noise, species analysis bar chart, trains separate model
+
+See [`demo/README.md`](demo/README.md) for setup instructions and expected runtimes.
 
 ## Module Structure
 
