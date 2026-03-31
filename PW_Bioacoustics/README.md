@@ -153,6 +153,7 @@ This module uses the following components from `PytorchWildlife`:
 ## Projects Using PytorchWildlife Bioacoustics
 
 - **[PteroSet](https://github.com/microsoft/PteroSet)** — A machine learning pipeline for detecting and classifying tropical bird vocalizations from passive acoustic monitoring recordings. Built on the PytorchWildlife bioacoustics core library, it demonstrates the full workflow: COCO annotation creation from Raven Pro labels, mel spectrogram preparation, binary ResNet training, and leave-one-project-out cross-validation.
+- **[CookInlet_Belugas](https://github.com/microsoft/CookInlet_Belugas)** — An end-to-end passive acoustic monitoring pipeline for endangered Cook Inlet beluga whales. Implements spectrogram generation, a two-stage deep learning architecture for cetacean signal detection and multi-species classification (beluga, humpback, killer whale), and an active-learning loop for domain adaptation to novel soundscapes.
 
 ## Training Arguments
 
