@@ -78,9 +78,9 @@ def save_detection_images(results, output_dir, input_dir=None, overwrite=False):
                 image=cv2.cvtColor(annotated_img, cv2.COLOR_RGB2BGR), image_name=os.path.basename(results["img_id"])
             )
 
-def save_detection_images_dots(results, output_dir, input_dir=None, overwrite=False):
+def save_detection_images_dots(results, output_dir, input_dir=None, overwrite=False, show_labels=True):
     """
-    Save detected images with bounding boxes and labels annotated.
+    Save detected images with dot annotations and optional labels.
 
     Args:
         results (list or dict):
@@ -91,9 +91,11 @@ def save_detection_images_dots(results, output_dir, input_dir=None, overwrite=Fa
             Directory containing the input images. Default to None.
         overwrite (bool):
             Whether overwriting existing image folders. Default to False.
+        show_labels (bool):
+            Whether to show text labels next to dots. Default to True.
     """
     dot_annotator = sv.DotAnnotator(radius=6)  
-    lab_annotator = sv.LabelAnnotator(text_position=sv.Position.BOTTOM_RIGHT)   
+    lab_annotator = sv.LabelAnnotator(text_position=sv.Position.BOTTOM_RIGHT) if show_labels else None
     os.makedirs(output_dir, exist_ok=True)
     
     with sv.ImageSink(target_dir_path=output_dir, overwrite=overwrite) as sink:
@@ -106,14 +108,16 @@ def save_detection_images_dots(results, output_dir, input_dir=None, overwrite=Fa
                     scene = entry["img"]
                     image_name = f"output_image_{i}.jpg" # default name if no image id is provided
 
-                annotated_img = lab_annotator.annotate(
-                    scene=dot_annotator.annotate(
-                        scene=scene,
-                        detections=entry["detections"],
-                    ),
+                annotated_img = dot_annotator.annotate(
+                    scene=scene,
                     detections=entry["detections"],
-                    labels=entry["labels"],
                 )
+                if lab_annotator:
+                    annotated_img = lab_annotator.annotate(
+                        scene=annotated_img,
+                        detections=entry["detections"],
+                        labels=entry["labels"],
+                    )
                 if input_dir:
                     relative_path = os.path.relpath(entry["img_id"], input_dir)
                     save_path = os.path.join(output_dir, relative_path)
@@ -130,14 +134,16 @@ def save_detection_images_dots(results, output_dir, input_dir=None, overwrite=Fa
                 scene = results["img"]
                 image_name = "output_image.jpg" # default name if no image id is provided
             
-            annotated_img = lab_annotator.annotate(
-                scene=dot_annotator.annotate(
-                    scene=scene,
-                    detections=results["detections"],
-                ),
+            annotated_img = dot_annotator.annotate(
+                scene=scene,
                 detections=results["detections"],
-                labels=results["labels"],
-            )   
+            )
+            if lab_annotator:
+                annotated_img = lab_annotator.annotate(
+                    scene=annotated_img,
+                    detections=results["detections"],
+                    labels=results["labels"],
+                )
             sink.save_image(
                 image=cv2.cvtColor(annotated_img, cv2.COLOR_RGB2BGR), image_name=image_name
             )

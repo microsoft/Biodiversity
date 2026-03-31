@@ -36,8 +36,8 @@ img_path = "/home/v-ichaconsil/azurefiles/CameraTraps/demo/demo_images_owl/S_11_
 results = detection_model.single_image_detection(img=img_path)
 
 #%% Output to annotated images
-# Saving the batch detection results as annotated images
-pw_utils.save_detection_images_dots(results, os.path.join(".","owl_demo_output"), overwrite=False)
+# Saving the batch detection results as annotated images (dots only, no labels)
+pw_utils.save_detection_images_dots(results, os.path.join(".","owl_demo_output"), overwrite=False, show_labels=False)
 
 #%% Batch image detection
 """ Batch-detection demo """
@@ -49,8 +49,8 @@ folder_path = "/home/v-ichaconsil/azurefiles/CameraTraps/demo/demo_images_owl"
 results = detection_model.batch_image_detection(folder_path, batch_size=1) # NOTE: Only use batch size 1 because each image is divided into patches and this batch is enough. 
 
 #%% Output to annotated images
-# Saving the batch detection results as annotated images
-pw_utils.save_detection_images_dots(results, "owl_demo_batch_output", folder_path, overwrite=False)
+# Saving the batch detection results as annotated images (dots only, no labels)
+pw_utils.save_detection_images_dots(results, "owl_demo_batch_output", folder_path, overwrite=False, show_labels=False)
 
 # Saving the detection results in JSON format
 pw_utils.save_detection_json_as_dots(results, os.path.join(".","owl_demo_batch_output.json"),
