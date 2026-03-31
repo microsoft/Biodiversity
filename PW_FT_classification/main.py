@@ -66,7 +66,7 @@ def main(
     os.environ["NUMEXPR_NUM_THREADS"] = str(np_threads)
     # Load and set configurations from the YAML file
     with open(config) as f:
-        conf = Munch(yaml.load(f, Loader=yaml.FullLoader))
+        conf = Munch(yaml.safe_load(f))
     conf.evaluate = evaluate
     conf.val = val
     conf.test = test
