@@ -56,7 +56,22 @@ def main(
 
     # GPU configuration: set up GPUs based on availability and user specification
     if torch.cuda.is_available():
-        gpus = [int(i) for i in gpus.split(',')]
+        # Sanitize and validate the GPU list provided via CLI
+        if gpus is None:
+            parsed_gpus = None
+        else:
+            tokens = [token.strip() for token in str(gpus).split(",") if token.strip()]
+            if not tokens:
+                # Empty or whitespace-only input: fall back to CPU
+                parsed_gpus = None
+            else:
+                try:
+                    parsed_gpus = [int(token) for token in tokens]
+                except ValueError as exc:
+                    raise typer.BadParameter(
+                        f"Invalid GPU list '{gpus}'. Expected a comma-separated list of integers, e.g. '0,1,2'."
+                    ) from exc
+        gpus = parsed_gpus
     else:
         # If no CUDA devices are available, set gpus to None to indicate CPU usage
         # PyTorch Lightning Trainer will default to CPU if devices is None
