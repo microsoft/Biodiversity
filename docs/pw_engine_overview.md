@@ -102,17 +102,21 @@ Reliability hardening for long-running GPU workloads is in progress.
 
 ## FAQ
 
-**Does this replace PyTorch-Wildlife?**
+- **Does this replace PyTorch-Wildlife?**
+
 No. The Python PyTorch-Wildlife package remains the user-facing interface for training, fine-tuning, and research workflows. PW-Engine is the inference backend — over time, PyTorch-Wildlife itself will sit on top of PW-Engine rather than running PyTorch inference directly.
 
-**When can I try it?**
+- **When can I try it?**
+
 Through the Sparrow Studio beta (Windows MSI) today.
 
-**Will my existing Python code break?**
+- **Will my existing Python code break?**
+
 No. PW-Engine is opt-in; the current PyTorch-Wildlife API is unchanged.
 
-**Why is it called "PyTorch-Wildlife Engine" if it doesn't use PyTorch at runtime?**
-PyTorch-Wildlife is the platform brand. PW-Engine uses ONNX Runtime; PyTorch is not in the inference path.
+- **Why is it called "PyTorch-Wildlife Engine" if it doesn't use PyTorch at runtime?**
+
+We are thinking about a new name for the engine. Now we are keeping the PW branding.
 
 ---
 
