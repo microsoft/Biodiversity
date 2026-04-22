@@ -34,7 +34,7 @@ So we built Sparrow Studio — a clean, unified UI built on top of PyTorchWildli
 - Pre- and post-inference data annotation (easy bounding-box and category editing)
 - Embedding visualization and feature retrieval tools
 
-We’re kicking things off with a beta test before the official release. If you’d like to try it, just reach out — we’ll send you the Windows MSI installer. We’re actively making it compatible to Mac and Linux right now. So Mac and Linux users, we got you covered too!
+We’re kicking things off with a beta test before the official release. The Windows MSI installer is available directly on Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress — reach out if you’d like to be on that list.
 
 We’ve also been expanding PyTorchWildlife itself into bioacoustics and overhead animal localization. Later this month we’ll release:
 
@@ -43,8 +43,13 @@ We’ve also been expanding PyTorchWildlife itself into bioacoustics and overhea
 
 Even better, Sparrow Studio already has dedicated support for both, so beta testers will be able to run inference and annotate bioacoustics recordings or overhead images directly in the UI.
 
+### A new inference engine under the hood
+Alongside the Sparrow Studio beta, we’ve been building **PW-Engine** (PyTorch-Wildlife Engine) — a new inference core written in Rust. It is model-agnostic and runs the same model set (MegaDetector, DeepFaune, HerdNet, OWL, SpeciesNet, and the new bioacoustics models) through four surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer is the next milestone. PW-Engine will be released under the MIT license, with a standalone public repository to follow the Sparrow Studio beta. A short overview — what it is, how it fits alongside the Python API and Sparrow Studio, and how to pilot it — is here: [PW-Engine Overview](<PW_ENGINE_2PAGER_LINK>).
+
+If you run an inference-heavy pipeline and want to pilot PW-Engine early, please get in touch.
+
 ### The future of PyTorchWildlife
-With Sparrow Studio stepping into the picture, PyTorchWildlife will gradually evolve into a clean, stable API + high‑quality model zoo, while Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend.
+With Sparrow Studio stepping into the picture, PyTorchWildlife will gradually evolve into a clean, stable API + high‑quality model zoo, Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend, and PW-Engine becomes the shared inference core behind both.
 
 If you’re interested in API or backend work, we’d love your help shaping the next chapter of PyTorchWildlife. We’ll update our public task board later this month.
 
