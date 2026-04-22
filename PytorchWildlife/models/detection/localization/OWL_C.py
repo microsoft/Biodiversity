@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 from ..base_detector import BaseDetector
 from ..localization.animaloc.eval import HerdNetStitcherLocBranch, HerdNetLMDSLocBranch
 from ....data import datasets as pw_data
