@@ -81,6 +81,7 @@ nav:
   - What's New?:
     - Latest Release: releases/release_notes.md
     - Past Releases: releases/past_releases.md
+    - PW-Engine Preview: pw_engine_overview.md
   - Model Zoo: 
     - MegaDetector: model_zoo/megadetector.md
     - Other Detectors: model_zoo/other_detectors.md
