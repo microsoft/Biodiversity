@@ -1,3 +1,3 @@
 # Patches
 
-::: PytorchWildlife.models.detection.herdnet.animaloc.data.patches
+::: PytorchWildlife.models.detection.localization.animaloc.data.patches

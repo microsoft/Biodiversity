@@ -70,10 +70,11 @@ theme:
     - navigation.footer
 
 nav:
-  - Pytorch Wildlife: 
+  - Pytorch Wildlife:
     - Overview: index.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
+    - Bioacoustics: bioacoustics.md
     - Installation: installation.md
     - Existing Collaborators: collaborators.md
     - Contributors: contributors.md
@@ -81,10 +82,12 @@ nav:
   - What's New?:
     - Latest Release: releases/release_notes.md
     - Past Releases: releases/past_releases.md
-  - Model Zoo: 
+    - PW-Engine Preview: pw_engine_overview.md
+  - Model Zoo:
     - MegaDetector: model_zoo/megadetector.md
     - Other Detectors: model_zoo/other_detectors.md
     - Classifiers: model_zoo/classifiers.md
+    - Bioacoustics: model_zoo/bioacoustics.md
   - Demo and UI:
     - Demo Data: demo_and_ui/demo_data.md
     - Noteboodk: demo_and_ui/notebook.md
