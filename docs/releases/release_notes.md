@@ -1,32 +1,21 @@
 # Main changes and additions
 
-### V 1.2.4
+### V 1.3.0
 
-The inference code for the MIT YOLO and Apache RT‑DETR models is now available! To use either one, just load it like any other PyTorch‑Wildlife model:
+This release has three parts plus a preview of what's next.
 
-```python
-from pw_detection import MegaDetectorV6MIT, MegaDetectorV6Apache
+#### Sparrow Studio beta
 
-# MIT YOLO
-detector = MegaDetectorV6MIT(
-    device=DEVICE,
-    pretrained=True,
-    version="MDV6-mit-yolov9-e"
-)
+Sparrow Studio is our new graphical frontend — data management, inference, analysis, and annotation in one UI. The Windows MSI installer is available from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress.
 
-# Apache RT‑DETR
-detector = MegaDetectorV6Apache(
-    device=DEVICE,
-    pretrained=True,
-    version="MDV6-apa-rtdetr-e"
-)
-```
-Valid versions:
-- MDV6-mit-yolov9-c
-- MDV6-mit-yolov9-e
-- MDV6-apa-rtdetr-c
-- MDV6-apa-rtdetr-e
+#### Bioacoustics module
 
-You can also try out the full pipeline using the `detection_classification_pipeline_demo.py` script in the demo folder.
+A dedicated bioacoustics module at [`PW_Bioacoustics/`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [bioacoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [`PW_Bioacoustics/demo/bioacoustics_demo.ipynb`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics/demo).
 
+#### OWL (Overhead Wildlife Locator)
 
+A new generalized, point-based detection model for overhead imagery. Two variants are released — OWL-T and OWL-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [`demo/image_detection_demo_owl.ipynb`](https://github.com/microsoft/CameraTraps/blob/main/demo/image_detection_demo_owl.ipynb).
+
+#### Looking ahead — PW-Engine
+
+The future of PyTorchWildlife is [**PW-Engine**](../pw_engine_overview.md), a Rust-based, model-agnostic inference core that powers Sparrow Studio and can also be consumed directly via HTTP, CLI, Python bindings, or a native C library. See the PW-Engine overview for what it is, how it fits alongside the current Python API, and how to pilot it.

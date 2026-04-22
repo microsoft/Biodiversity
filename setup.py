@@ -4,7 +4,7 @@ with open('README.md', encoding="utf8") as file:
         long_description = file.read()
 setup(
     name='PytorchWildlife',
-    version='1.2.4.2', 
+    version='1.3.0',
     packages=find_packages(),
     include_package_data=True,
     package_data={"": ["*.yml"]},
