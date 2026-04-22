@@ -108,7 +108,7 @@ No. The Python PyTorch-Wildlife package remains the user-facing interface for tr
 
 - **When can I try it?**
 
-Through the Sparrow Studio beta (Windows MSI) today.
+Through the Sparrow Studio beta (Windows MSI). We will update the beta in the next few weeks with PW-Engine as the core.
 
 - **Will my existing Python code break?**
 
