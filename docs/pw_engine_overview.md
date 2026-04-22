@@ -22,7 +22,7 @@ To let UI developers — Sparrow Studio and anyone else — get both production-
 | Hard to embed in UI / desktop | PyTorch process is the only runtime; no FFI | Rust core with HTTP / CLI / Python / C-FFI surfaces — UI devs integrate natively |
 | Adding a model needs code changes | Hardcoded PyTorch model adapters | Drop an ONNX file + a manifest entry into the model directory |
 
-Because PyTorch-Wildlife today does not use ONNX at runtime, moving inference to PW-Engine (Rust + ONNX Runtime) is an absolute speed gain on top of the deployment-shape improvements above — not a wash against an ONNX baseline.
+Because PyTorch-Wildlife today does not use ONNX at runtime, moving inference to PW-Engine (Rust + ONNX Runtime) is also a speed gain on top of the deployment-shape improvements above — not a wash against an ONNX baseline.
 
 ---
 
