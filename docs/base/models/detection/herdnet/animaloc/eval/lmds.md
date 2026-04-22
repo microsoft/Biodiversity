@@ -1,3 +1,3 @@
 # LMDS
 
-::: PytorchWildlife.models.detection.herdnet.animaloc.eval.lmds
+::: PytorchWildlife.models.detection.localization.animaloc.eval.lmds
