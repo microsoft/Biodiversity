@@ -2,7 +2,7 @@
 
 *A model-agnostic inference core for the PyTorch-Wildlife model zoo.*
 
-**Status:** Preview. Inference surfaces are feature-complete; a data-management layer is the next milestone. Released under the MIT license.
+**Status:** Preview. Inference surfaces are feature-complete; a data-management layer is the next milestone.
 
 **In one sentence:** PW-Engine (full name: PyTorch-Wildlife Engine) is a Rust-based inference engine and HTTP service that runs the PyTorch-Wildlife model set, powers Sparrow Studio, and can be embedded as the backend of any inference-heavy application.
 
@@ -10,17 +10,19 @@
 
 ## Why
 
-The Python PyTorch-Wildlife stack is well-suited for research and fine-tuning but has friction as a deployment target: multi-second cold starts, multi-GB Docker images, single-process concurrency limits, and no native-binding story for desktop applications. PW-Engine addresses the deployment shape, not raw inference speed.
+PyTorch-Wildlife today runs PyTorch end-to-end. That is right for research — it keeps model code, training, and fine-tuning in one place — but it pays real deployment costs: multi-second cold starts, multi-GB Docker images, single-process concurrency limits, and no practical path to integrate with serious UI or desktop applications. Anything non-Python has to shell out to a Python process.
+
+To let UI developers — Sparrow Studio and anyone else — get both production-level latency and model-agnostic compatibility, we're building PW-Engine as a separate inference layer.
 
 | Prior deployment shape | Cause | PW-Engine response |
 |---|---|---|
-| Multi-second cold start | Python interpreter + inference-server initialization | Sub-second cold start on GPU |
-| Multi-GB Docker images | Multi-process Python stack + CUDA bloat | CPU image ~163 MB; GPU image ~4 GB |
+| Multi-second cold start | Python interpreter + server initialization | Sub-second cold start on GPU |
+| Multi-GB Docker images | Python + CUDA bloat | CPU image ~163 MB; GPU image ~4 GB |
 | GIL-bound concurrency | Single-process Python worker | Async HTTP server (axum/tokio); per-model serialization, multi-model concurrent |
-| Adding a model needs code changes | Hardcoded model adapters | Drop an ONNX file + a manifest entry into the model directory |
-| No native desktop binding | No FFI in the Python stack | C header generated from Rust; consumed by Sparrow Studio Local via C# P/Invoke |
+| Hard to embed in UI / desktop | PyTorch process is the only runtime; no FFI | Rust core with HTTP / CLI / Python / C-FFI surfaces — UI devs integrate natively |
+| Adding a model needs code changes | Hardcoded PyTorch model adapters | Drop an ONNX file + a manifest entry into the model directory |
 
-**Honest caveat:** the rewrite does not target faster raw inference. Both stacks call the same ONNX Runtime C library. The measurable gains are cold-start, memory footprint, deployment size, and preprocessing throughput.
+Because PyTorch-Wildlife today does not use ONNX at runtime, moving inference to PW-Engine (Rust + ONNX Runtime) is an absolute speed gain on top of the deployment-shape improvements above — not a wash against an ONNX baseline.
 
 ---
 
@@ -55,11 +57,7 @@ PW-Engine is a Rust core library with four consumption surfaces:
 
 **Runtime:** ONNX Runtime (CPU or GPU). No PyTorch at inference time.
 
-**Phase-1 model set (6 models):** MegaDetector v6, DeepFaune, HerdNet, OWL-T, SpeciesNet, MD_AudioBirds_V1. Vision (detection and classification) and audio classification.
-
-**Model-agnostic:** adding a new model is a manifest change plus an ONNX file in the model directory. No engine code changes required.
-
-**Model coverage:** the Phase-1 set is a subset of the full PyTorch-Wildlife model zoo. Additional models (e.g., AI4G Amazon Rainforest variants, Deepfaune-NE) will be onboarded in later phases via the same manifest path.
+**Model zoo:** PW-Engine targets full compatibility with the PyTorch-Wildlife model zoo. Adding a model is a manifest change plus an ONNX file in the model directory — no engine code change required.
 
 ---
 
@@ -91,26 +89,27 @@ Pick the surface that matches your stack.
 | CLI + Python bindings | Complete |
 | Utilities + model catalog | Complete |
 | Data-management layer (SQLite-backed annotations and queries) | Planned |
+| MLOps (model and data versioning) | Planned |
 | Multi-GPU scale-out | Not yet benchmarked |
 
 Reliability hardening for long-running GPU workloads is in progress.
 
 **Next milestone:** data-management sidecar.
 
-**Release path:** preview today via the Sparrow Studio beta; a standalone release with a public source repository will follow. License: MIT.
+**Availability:** preview today via the Sparrow Studio beta.
 
 ---
 
 ## FAQ
 
 **Does this replace PyTorch-Wildlife?**
-No. The Python PyTorch-Wildlife package remains the user-facing API for training, fine-tuning, and research workflows. PW-Engine is the deployment and integration backend.
+No. The Python PyTorch-Wildlife package remains the user-facing interface for training, fine-tuning, and research workflows. PW-Engine is the inference backend — over time, PyTorch-Wildlife itself will sit on top of PW-Engine rather than running PyTorch inference directly.
 
 **When can I try it?**
-Through the Sparrow Studio beta (Windows MSI) today. A standalone release with the public source repository will follow.
+Through the Sparrow Studio beta (Windows MSI) today.
 
 **Will my existing Python code break?**
-No. PW-Engine is opt-in. The current PyTorch-Wildlife API is unchanged.
+No. PW-Engine is opt-in; the current PyTorch-Wildlife API is unchanged.
 
 **Why is it called "PyTorch-Wildlife Engine" if it doesn't use PyTorch at runtime?**
 PyTorch-Wildlife is the platform brand. PW-Engine uses ONNX Runtime; PyTorch is not in the inference path.
@@ -119,4 +118,4 @@ PyTorch-Wildlife is the platform brand. PW-Engine uses ONNX Runtime; PyTorch is 
 
 ## Pilot
 
-If you run an inference-heavy pipeline and want to pilot PW-Engine before the standalone release, reach out via the PyTorch-Wildlife Discord or email `zhongqimiao@microsoft.com`.
+If you run an inference-heavy pipeline and want to pilot PW-Engine, reach out via the PyTorch-Wildlife Discord or email `zhongqimiao@microsoft.com`.

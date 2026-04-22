@@ -36,22 +36,19 @@ So we built Sparrow Studio — a clean, unified UI built on top of PyTorchWildli
 
 We’re kicking things off with a beta test before the official release. The Windows MSI installer is available directly on Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress — reach out if you’d like to be on that list.
 
-We’ve also been expanding PyTorchWildlife itself into bioacoustics and overhead animal localization. Later this month we’ll release:
+We’ve also expanded PyTorchWildlife itself into bioacoustics and overhead animal localization — both are out in this release:
 
-- A dedicated bioacoustics module + several newly trained bioacoustics models
-- OWL (Overhead Wildlife Locator) — our new generalized, point-based detection model for overhead imagery
+- A dedicated [bioacoustics module](./PW_Bioacoustics) with several newly trained bioacoustics models
+- [OWL](./demo/image_detection_demo_owl.ipynb) (Overhead Wildlife Locator) — our new generalized, point-based detection model for overhead imagery
 
-Even better, Sparrow Studio already has dedicated support for both, so beta testers will be able to run inference and annotate bioacoustics recordings or overhead images directly in the UI.
-
-### A new inference engine under the hood
-Alongside the Sparrow Studio beta, we’ve been building **PW-Engine** (PyTorch-Wildlife Engine) — a new inference core written in Rust. It is model-agnostic and runs the same model set (MegaDetector, DeepFaune, HerdNet, OWL, SpeciesNet, and the new bioacoustics models) through four surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer is the next milestone. PW-Engine will be released under the MIT license, with a standalone public repository to follow the Sparrow Studio beta. A short overview — what it is, how it fits alongside the Python API and Sparrow Studio, and how to pilot it — is here: [PW-Engine Overview](https://microsoft.github.io/CameraTraps/pw_engine_overview/).
-
-If you run an inference-heavy pipeline and want to pilot PW-Engine early, please get in touch.
+Sparrow Studio already has dedicated support for both, so beta testers can run inference and annotate bioacoustics recordings or overhead images directly in the UI.
 
 ### The future of PyTorchWildlife
-With Sparrow Studio stepping into the picture, PyTorchWildlife will gradually evolve into a clean, stable API + high‑quality model zoo, Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend, and PW-Engine becomes the shared inference core behind both.
+The future of PyTorchWildlife is **PW-Engine** (PyTorch-Wildlife Engine) — a new inference core written in Rust. It is model-agnostic and targets the full PyTorch-Wildlife model zoo through four consumption surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer and MLOps functionality are the next milestones. PW-Engine also powers Sparrow Studio under the hood, and the same surfaces are open to anyone building their own frontend. A short overview — what it is, how it fits alongside the current Python API and Sparrow Studio, and how to pilot it — is here: [PW-Engine Overview](https://microsoft.github.io/CameraTraps/pw_engine_overview/).
 
-If you’re interested in API or backend work, we’d love your help shaping the next chapter of PyTorchWildlife. We’ll update our public task board later this month.
+With Sparrow Studio stepping into the picture, PyTorchWildlife itself will gradually evolve into a clean, stable API + high‑quality model zoo layered on top of PW-Engine, while Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend.
+
+If you’re interested in API or backend work, or you run an inference-heavy pipeline and want to pilot PW-Engine early, we’d love your help shaping the next chapter of PyTorchWildlife. We’ll update our public task board later this month.
 
 And one dream we’ve had for a long time: letting non‑coders fine‑tune their own models on their own data. Thanks to recent advances, we’re finally close — and this will be a major focus for both PyTorchWildlife and Sparrow Studio next.
 
