@@ -2,20 +2,32 @@
 
 ### V 1.3.0
 
-This release has three parts plus a preview of what's next.
+This release ships Sparrow Studio beta, a full bioacoustics module, OWL (overhead animal detection), and previews the next-generation **PW-Engine** inference core.
 
 #### Sparrow Studio beta
 
-Sparrow Studio is our new graphical frontend — data management, inference, analysis, and annotation in one UI. The Windows MSI installer is available from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress.
+A graphical frontend for data management, inference, analysis, and annotation in one UI. Signed Windows MSI available directly from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1). Mac and Linux builds are in progress.
 
 #### Bioacoustics module
 
-A dedicated bioacoustics module at [`PW_Bioacoustics/`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [bioacoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [`PW_Bioacoustics/demo/bioacoustics_demo.ipynb`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics/demo).
+A dedicated `PW_Bioacoustics/` module with CLI scripts for dataset preparation, training, and inference, plus a pre-trained bird classifier `MD_AudioBirds_V1` (ONNX). See the [bioacoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the [end-to-end demo](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics/demo).
 
 #### OWL (Overhead Wildlife Locator)
 
-A new generalized, point-based detection model for overhead imagery. Two variants are released — OWL-T and OWL-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [`demo/image_detection_demo_owl.ipynb`](https://github.com/microsoft/CameraTraps/blob/main/demo/image_detection_demo_owl.ipynb).
+A generalized, point-based detection model for overhead imagery. Two variants released — **OWL-T** and **OWL-C** — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Publication on the way. Demo: [`image_detection_demo_owl.ipynb`](https://github.com/microsoft/CameraTraps/blob/main/demo/image_detection_demo_owl.ipynb).
 
-#### Looking ahead — PW-Engine
+#### PW-Engine preview — the future of PyTorch-Wildlife
 
-The future of PyTorchWildlife is [**PW-Engine**](../pw_engine_overview.md), a Rust-based, model-agnostic inference core that powers Sparrow Studio and can also be consumed directly via HTTP, CLI, Python bindings, or a native C library. See the PW-Engine overview for what it is, how it fits alongside the current Python API, and how to pilot it.
+A Rust-based, model-agnostic inference core that will sit under both the Python API and Sparrow Studio. Four consumption surfaces: HTTP REST, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four are feature-complete today; a data-management layer and MLOps functionality are next. Read the [PW-Engine Overview](../pw_engine_overview.md).
+
+#### Install
+
+```bash
+pip install -U PytorchWildlife==1.3.0
+```
+
+#### Under the hood
+
+- `version.txt` is now the single source of truth for the package version
+- MIT license headers added to OWL model sources
+- MkDocs `mkdocstrings` paths refreshed after the `localization/` reorganisation; docs build cleanly again
