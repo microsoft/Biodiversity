@@ -26,13 +26,15 @@ Over the past couple of months we’ve been thinking hard about the future of Py
 
 After two years of community use, one thing has become super clear: most people prefer a nice graphical interface over writing code. People have been asking for a more seamless, unified experience that covers data management, processing, AI inference, analysis, and annotation all in one place.
 
-So we built Sparrow Studio — a clean, unified UI built on top of PyTorchWildlife that brings exactly those tools together:
+So we built **Sparrow Studio** — a clean, unified UI built on top of PyTorchWildlife that brings exactly those tools together and much more:
 
 - Local and cloud-based data storage & management
 - AI inference using the PyTorchWildlife model zoo
 - Post-inference statistics and analysis
 - Pre- and post-inference data annotation (easy bounding-box and category editing)
 - Embedding visualization and feature retrieval tools
+
+![image](https://zenodo.org/records/18870374/files/sparrow_studio.png)
 
 We’re kicking things off with a beta test before the official release. The Windows MSI installer is available directly on Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress — reach out if you’d like to be on that list.
 
@@ -54,11 +56,13 @@ If you’re interested in API or backend work, or you run an inference-heavy pip
 And one dream we’ve had for a long time: letting non‑coders fine‑tune their own models on their own data. Thanks to recent advances, we’re finally close — and this will be a major focus for both PyTorchWildlife and Sparrow Studio next.
 
 ### Why "Sparrow Studio"?
-Some of the UI features we needed for PyTorchWildlife also fit naturally as a frontend for Project Sparrow, another effort in our group focused on remote data-collection hardwares and edge computing. Since the name “Sparrow” already carried a warm, lively spirit — and the overlap between the projects made things simpler — we decided to call the UI Sparrow Studio. The name just reflects some shared roots and a bit of personality we liked.
+Some of the UI features we needed for PyTorchWildlife also fit naturally as a frontend for [Project SPARROW](https://github.com/microsoft/sparrow-client/), another effort in our group focused on remote data-collection, hardware and edge computing. Since the name “Sparrow” already carried a warm, lively spirit — and the overlap between the projects made things simpler — we decided to call the UI Sparrow Studio. The name just reflects some shared roots and a bit of personality we liked.
+
+[SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed).
 
 Stay tuned! These updates are dropping very soon, and we’d genuinely love to have you in the Sparrow Studio beta. Drop us a message anytime — the more feedback the better! 🐦
 
-![image](https://zenodo.org/records/18870374/files/sparrow_studio.png)
+
 
 
 #### Previous versions:
