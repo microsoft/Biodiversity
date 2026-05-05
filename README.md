@@ -1,4 +1,4 @@
-![image](https://zenodo.org/records/15376499/files/Pytorch_Banner_transparentbk.png)
+![A colorful banner illustrating various species of animals and plants in a natural environment, symbolizing biodiversity and the use of AI for conservation purposes.](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
 
 <div align="center"> 
 <font size="6"> A Collaborative Deep Learning Framework for Conservation </font>
