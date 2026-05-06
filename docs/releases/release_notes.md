@@ -10,11 +10,11 @@ Sparrow Studio is our new graphical frontend — data management, inference, ana
 
 #### Bioacoustics module
 
-A dedicated bioacoustics module at [`PW_Bioacoustics/`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [bioacoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [`PW_Bioacoustics/demo/bioacoustics_demo.ipynb`](https://github.com/microsoft/CameraTraps/tree/main/PW_Bioacoustics/demo).
+A dedicated bioacoustics module at [`PW_Bioacoustics/`](https://github.com/microsoft/biodiversity/tree/main/PW_Bioacoustics) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [bioacoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [`PW_Bioacoustics/demo/bioacoustics_demo.ipynb`](https://github.com/microsoft/biodiversity/tree/main/PW_Bioacoustics/demo).
 
 #### OWL (Overhead Wildlife Locator)
 
-A new generalized, point-based detection model for overhead imagery. Two variants are released — OWL-T and OWL-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [`demo/image_detection_demo_owl.ipynb`](https://github.com/microsoft/CameraTraps/blob/main/demo/image_detection_demo_owl.ipynb).
+A new generalized, point-based detection model for overhead imagery. Two variants are released — OWL-T and OWL-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [`demo/image_detection_demo_owl.ipynb`](https://github.com/microsoft/biodiversity/blob/main/demo/image_detection_demo_owl.ipynb).
 
 #### Looking ahead — PW-Engine
 

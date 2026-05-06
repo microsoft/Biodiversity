@@ -1,4 +1,4 @@
-![A colorful banner illustrating various species of animals and plants in a natural environment, symbolizing biodiversity and the use of AI for conservation purposes.](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
+![A colorful banner illustrating various species of animals and plants in a natural environment, symbolizing biodiversity and the use of AI for conservation purposes.][image](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
 
 <div align="center"> 
 <font size="6"> A Collaborative Deep Learning Framework for Conservation </font>
@@ -12,7 +12,7 @@
 <!-- <a href="https://colab.research.google.com/drive/16-OjFVQ6nopuP-gfqofYBBY00oIgbcr1?usp=sharing"><img src="https://img.shields.io/badge/Colab-Video detection-blue?logo=GoogleColab" /></a> -->
 <a href="https://github.com/microsoft/CameraTraps/blob/main/LICENSE"><img src="https://img.shields.io/pypi/l/PytorchWildlife" /></a>
 <a href="https://discord.gg/TeEVxzaYtm"><img src="https://img.shields.io/badge/any_text-Join_us!-blue?logo=discord&label=Discord" /></a>
-<a href="https://microsoft.github.io/CameraTraps/"><img src="https://img.shields.io/badge/Docs-526CFE?logo=MaterialForMkDocs&logoColor=white" /></a>
+<a href="https://microsoft.github.io/Biodiversity/"><img src="https://img.shields.io/badge/Docs-526CFE?logo=MaterialForMkDocs&logoColor=white" /></a>
 <br><br>
 </div>
 
@@ -49,7 +49,7 @@ Sparrow Studio already has dedicated support for both, so beta testers can run i
 
 With Sparrow Studio stepping into the picture, PyTorchWildlife itself will gradually evolve into a clean, stable API + high‑quality model zoo layered on top of a general model inference engine — called PW-Engine, while Sparrow Studio becomes the intuitive, everything‑in‑one-place frontend.
 
-**PW-Engine** (PyTorch-Wildlife Engine) is an inference core written in Rust. It is model-agnostic and targets the full PyTorch-Wildlife model zoo and future third party models (e.g. BioClip and Perch) through four consumption surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer and MLOps functionality are the next milestones. PW-Engine also powers Sparrow Studio under the hood, and the same surfaces are open to anyone building their own frontend. A short overview — what it is, how it fits alongside the current Python API and Sparrow Studio, and how to pilot it — is here: [PW-Engine Overview](https://microsoft.github.io/CameraTraps/pw_engine_overview/).
+**PW-Engine** (PyTorch-Wildlife Engine) is an inference core written in Rust. It is model-agnostic and targets the full PyTorch-Wildlife model zoo and future third party models (e.g. BioClip and Perch) through four consumption surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer and MLOps functionality are the next milestones. PW-Engine also powers Sparrow Studio under the hood, and the same surfaces are open to anyone building their own frontend. A short overview — what it is, how it fits alongside the current Python API and Sparrow Studio, and how to pilot it — is here: [PW-Engine Overview](https://microsoft.github.io/Biodiversity/pw_engine_overview/).
 
 If you’re interested in API or backend work, or you run an inference-heavy pipeline and want to pilot PW-Engine early, we’d love your help shaping the next chapter of PyTorchWildlife. We’ll update our public task board later.
 
@@ -66,14 +66,14 @@ Stay tuned! These updates are dropping very soon, and we’d genuinely love to h
 
 
 #### Previous versions:
-- [What's New](https://microsoft.github.io/CameraTraps/releases/release_notes/)
+- [What's New](https://microsoft.github.io/Biodiversity/releases/release_notes/)
 
 
 ## 👋 Welcome to Pytorch-Wildlife
 
-**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://microsoft.github.io/CameraTraps/megadetector/), [DeepFaune](https://microsoft.github.io/CameraTraps/megadetector/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](https://microsoft.github.io/CameraTraps/model_zoo/megadetector/) for both animal detection and classification. In the future, we will also include models that can be used for applications, including underwater images and bioacoustics. We want to provide a unified and straightforward experience for both practicioners and developers in the AI for conservation field. Your engagement with our work is greatly appreciated, and we eagerly await any feedback you may have.
+**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://microsoft.github.io/Biodiversity/megadetector/), [DeepFaune](https://microsoft.github.io/Biodiversity/megadetector/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](https://microsoft.github.io/Biodiversity/model_zoo/megadetector/) for both animal detection and classification. In the future, we will also include models that can be used for applications, including underwater images and bioacoustics. We want to provide a unified and straightforward experience for both practitioners and developers in the AI for conservation field. Your engagement with our work is greatly appreciated, and we eagerly await any feedback you may have.
 
-Explore the codebase, functionalities and user interfaces of **Pytorch-Wildlife** through our [documentation](https://microsoft.github.io/CameraTraps/), interactive [HuggingFace web app](https://huggingface.co/spaces/AndresHdzC/pytorch-wildlife) or local [demos and notebooks](./demo). 
+Explore the codebase, functionalities and user interfaces of **Pytorch-Wildlife** through our [documentation](https://microsoft.github.io/Biodiversity/), interactive [HuggingFace web app](https://huggingface.co/spaces/AndresHdzC/pytorch-wildlife) or local [demos and notebooks](./demo). 
 
 ## 🚀 Quick Start
 
@@ -93,16 +93,16 @@ detection_result = detection_model.single_image_detection(img)
 classification_model = pw_classification.AI4GAmazonRainforest() # Model weights are automatically downloaded.
 classification_results = classification_model.single_image_classification(img)
 ```
-More models can be found in our [model zoo](https://microsoft.github.io/CameraTraps/model_zoo/megadetector/)
+More models can be found in our [model zoo](https://microsoft.github.io/Biodiversity/model_zoo/megadetector/)
 
 ## ⚙️ Install Pytorch-Wildlife
 ```
 pip install PytorchWildlife
 ```
-Please refer to our [installation guide](https://microsoft.github.io/CameraTraps/installation/) for more installation information.
+Please refer to our [installation guide](https://microsoft.github.io/Biodiversity/installation/) for more installation information.
 
 ## 📃 Documentation
-Please also go to our newly made dofumentation page for more information: [![](https://img.shields.io/badge/Docs-526CFE?logo=MaterialForMkDocs&logoColor=white)](https://microsoft.github.io/CameraTraps/)
+Please also go to our newly made documentation page for more information: [![](https://img.shields.io/badge/Docs-526CFE?logo=MaterialForMkDocs&logoColor=white)](https://microsoft.github.io/Biodiversity/)
 
 ## 🖼️ Examples
 
@@ -151,7 +151,7 @@ If you’d like to get involved and help improve the project, we’d love to hav
 
 👉 **Check out our Contribution Guidelines:**  
 
-[📚 How to Participate](https://microsoft.github.io/CameraTraps/contribute/#how-to-participate)
+[📚 How to Participate](https://microsoft.github.io/Biodiversity/contribute/#how-to-participate)
 
 You’ll find everything you need there — from how to pick an issue, to submitting your first pull request.  
 Let’s build this together! 🐾🌱
