@@ -1,10 +1,10 @@
-site_name: Pytorch Wildlife
-site_url: https://microsoft.github.io/Biodiversity/ 
-site_description: Collaborative Deep Learning Framework for Conservation. 
+site_name: Microsoft Biodiversity
+site_url: https://microsoft.github.io/Biodiversity/
+site_description: "PyTorch-Wildlife — open-source AI for camera traps, bioacoustics, and wildlife monitoring. Includes MegaDetector, MegaDetector-Acoustics, MegaDetector-Overhead, and SPARROW Studio."
 docs_dir: docs
 site_dir: site
-repo_url: https://github.com/microsoft/CameraTraps 
-repo_name: microsoft/CameraTraps
+repo_url: https://github.com/microsoft/Biodiversity
+repo_name: microsoft/Biodiversity
 copyright: Copyright (c) 2023 Microsoft Corporation
 
 theme:
@@ -74,7 +74,7 @@ nav:
     - Overview: index.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
-    - Bioacoustics: bioacoustics.md
+    - MegaDetector-Acoustics: bioacoustics.md
     - Installation: installation.md
     - Existing Collaborators: collaborators.md
     - Contributors: contributors.md
@@ -90,7 +90,7 @@ nav:
     - Bioacoustics: model_zoo/bioacoustics.md
   - Demo and UI:
     - Demo Data: demo_and_ui/demo_data.md
-    - Noteboodk: demo_and_ui/notebook.md
+    - Notebook: demo_and_ui/notebook.md
     - Gradio App: demo_and_ui/gradio.md
     - AddaxAI (formerly known as EcoAssist): demo_and_ui/ecoassist.md
     - TimeLapse: demo_and_ui/timelapse.md
@@ -179,6 +179,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - meta
   - mkdocstrings:
       handlers:
         python:
