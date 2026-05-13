@@ -25,6 +25,7 @@ PytorchWildlife.egg-info/
 PW_FT_detection/runs/
 demo/runs/
 site/
+Brewfile
 demo/demo_data/
 PW_FT_detection/data/
 PW_FT_classification/data/

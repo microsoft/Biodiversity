@@ -1,3 +1,12 @@
+---
+description: "Contribute to PyTorch-Wildlife: guidelines for submitting issues, pull requests, and new models to the Microsoft Biodiversity open-source conservation AI platform."
+tags:
+  - contribute PyTorch-Wildlife
+  - open source conservation AI
+  - pull request guidelines
+  - Microsoft Biodiversity
+---
+
 # 🤝 Contribution Guidelines
 
 Thanks for your interest in collaborating on Pytorch-Wildlife! Here you can find the guidelines on how to contribute 🌱:

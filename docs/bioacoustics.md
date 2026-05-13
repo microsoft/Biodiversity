@@ -1,6 +1,16 @@
-# Bioacoustics
+---
+description: "MegaDetector-Acoustics: open-source bioacoustic AI for wildlife monitoring. Audio classification, bird detection, and species identification from passive acoustic recordings."
+tags:
+  - MegaDetector-Acoustics
+  - bioacoustics
+  - wildlife audio classification
+  - bird detection
+  - passive acoustic monitoring
+---
 
-PyTorchWildlife's bioacoustics module provides training, inference, and dataset preparation for audio classification. The module lives at [`PW_Bioacoustics/`](https://github.com/microsoft/biodiversity/tree/main/PW_Bioacoustics) and builds on core APIs in `PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`.
+# MegaDetector-Acoustics
+
+**MegaDetector-Acoustics** provides training, inference, and dataset preparation for audio classification in wildlife monitoring. The module is maintained at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) and builds on core APIs in `PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`.
 
 ## What's included
 
@@ -10,11 +20,11 @@ PyTorchWildlife's bioacoustics module provides training, inference, and dataset 
 - **Annotation readers** (COCO-like JSON), including support for the PteroSet / Raven Pro format
 - **`MD_AudioBirds_V1`** — a pre-trained bird classifier distributed as ONNX for direct inference
 
-See the [Bioacoustics model zoo](model_zoo/bioacoustics.md) for the released models.
+See the [MegaDetector-Acoustics model zoo](model_zoo/bioacoustics.md) for the released models.
 
 ## Demo
 
-The end-to-end notebook at [`PW_Bioacoustics/demo/bioacoustics_demo.ipynb`](https://github.com/microsoft/biodiversity/tree/main/PW_Bioacoustics/demo) walks through:
+The end-to-end notebook at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) walks through:
 
 1. **Data exploration** — annotation counts, species distribution
 2. **Inference** — run `MD_AudioBirds_V1` on real recordings, visualise predictions vs. ground truth
@@ -34,4 +44,4 @@ pip install PytorchWildlife
 pip install librosa soundfile pyyaml torchmetrics
 ```
 
-See the [PW_Bioacoustics README](https://github.com/microsoft/biodiversity/tree/main/PW_Bioacoustics) for full configuration options, training arguments, and output formats.
+See the [MegaDetector-Acoustics README](https://github.com/microsoft/MegaDetector-Acoustics) for full configuration options, training arguments, and output formats.

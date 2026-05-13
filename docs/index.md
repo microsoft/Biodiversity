@@ -1,7 +1,19 @@
-![image](https://zenodo.org/records/15376499/files/Pytorch_Banner_transparentbk.png)
+---
+description: "PyTorch-Wildlife: open-source AI platform for wildlife monitoring. MegaDetector, MegaDetector-Acoustics, MegaDetector-Overhead, SPARROW Studio. pip install PytorchWildlife."
+tags:
+  - MegaDetector
+  - camera trap AI
+  - wildlife detection
+  - PyTorch-Wildlife
+  - conservation AI
+  - bioacoustics
+  - overhead detection
+---
+
+![Biodiversity banner showing animals monitored by AI — camera traps, bioacoustics, and aerial detection — powered by PyTorch-Wildlife and MegaDetector](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
 
 <div align="center"> 
-<font size="6"> A Collaborative Deep Learning Framework for Conservation </font>
+<font size="6"> Open-source AI for camera traps, bioacoustics, and wildlife monitoring </font>
 <br>
 <hr>
 <a href="https://pypi.org/project/PytorchWildlife"><img src="https://img.shields.io/pypi/v/PytorchWildlife?color=limegreen" /></a> 
@@ -9,21 +21,23 @@
 <a href="https://pypi.org/project/PytorchWildlife"><img src="https://img.shields.io/pypi/pyversions/PytorchWildlife" /></a> 
 <a href="https://huggingface.co/spaces/ai-for-good-lab/pytorch-wildlife"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" /></a>
 <a href="https://colab.research.google.com/drive/1rjqHrTMzEHkMualr4vB55dQWCsCKMNXi?usp=sharing"><img src="https://img.shields.io/badge/Colab-Demo-blue?logo=GoogleColab" /></a>
-<!-- <a href="https://colab.research.google.com/drive/16-OjFVQ6nopuP-gfqofYBBY00oIgbcr1?usp=sharing"><img src="https://img.shields.io/badge/Colab-Video detection-blue?logo=GoogleColab" /></a> -->
-<a href="https://github.com/microsoft/biodiversity/blob/main/LICENSE"><img src="https://img.shields.io/pypi/l/PytorchWildlife" /></a>
-<a href="https://discord.gg/TeEVxzaYtm"><img src="https://img.shields.io/badge/any_text-Join_us!-blue?logo=discord&label=Discord" /></a>
-<a href="https://microsoft.github.io/biodiversity/"><img src="https://img.shields.io/badge/Docs-526CFE?logo=MaterialForMkDocs&logoColor=white" /></a>
+<a href="https://github.com/microsoft/Biodiversity/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" /></a>
+<a href="https://discord.gg/TeEVxzaYtm"><img src="https://img.shields.io/badge/Discord-Join_us-5865F2?logo=discord&logoColor=white" /></a>
 <br><br>
 </div>
 
 
-## 👋 Welcome to Pytorch-Wildlife
-**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://microsoft.github.io/biodiversity/megadetector/), [DeepFaune](https://microsoft.github.io/biodiversity/megadetector/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](model_zoo/megadetector.md) for both animal detection and classification. In the future, we will also include models that can be used for applications, including underwater images and bioacoustics. We want to provide a unified and straightforward experience for both practicioners and developers in the AI for conservation field. Your engagement with our work is greatly appreciated, and we eagerly await any feedback you may have.
+## 👋 Welcome to PyTorch-Wildlife
+**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://microsoft.github.io/Biodiversity/megadetector/), [DeepFaune](https://microsoft.github.io/Biodiversity/megadetector/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](model_zoo/megadetector.md) for both animal detection and classification.
+
+Our scope now spans well beyond camera-trap imagery — we have active work in [MegaDetector-Acoustics](bioacoustics.md) for bioacoustic species identification, [MegaDetector-Overhead](model_zoo/other_detectors.md) for aerial wildlife detection, edge computing for remote field deployments, and [SPARROW Studio](releases/release_notes.md) — a dedicated desktop UI that runs every model we produce.
+
+> **Coming from an older version?** OWL is now **MegaDetector-Overhead**, the bioacoustics module is now **MegaDetector-Acoustics**, and the repo has moved from `microsoft/CameraTraps` to `microsoft/Biodiversity` (old links redirect automatically). See the [full naming changes](releases/release_notes.md#naming-changes) in the v1.3.0 release notes.
 
 
 ## 🚀 Quick Start
 
-👇 Here is a brief example on how to perform detection and classification on a single image using `PyTorch-wildlife`
+👇 Here is a brief example on how to perform detection and classification on a single image using `PyTorch-Wildlife`
 ```python
 import numpy as np
 from PytorchWildlife.models import detection as pw_detection
@@ -40,7 +54,7 @@ classification_model = pw_classification.AI4GAmazonRainforest() # Model weights 
 classification_results = classification_model.single_image_classification(img)
 ```
 
-## ⚙️ Install Pytorch-Wildlife
+## ⚙️ Install PyTorch-Wildlife
 ```
 pip install PytorchWildlife
 ```
@@ -50,14 +64,13 @@ Please refer to our [installation guide](installation.md) for more installation 
 ## 🖼️ Examples
 
 ### Image detection using `MegaDetector`
-<img src="https://zenodo.org/records/15376499/files/animal_det_1.JPG" alt="animal_det_1" width="300"/><br>
+<img src="https://zenodo.org/records/15376499/files/animal_det_1.JPG" alt="Camera trap photo with MegaDetector bounding box detecting an animal" width="300"/><br>
 *Credits to Universidad de los Andes, Colombia.*
 
 ### Image classification with `MegaDetector` and `AI4GAmazonRainforest`
-<img src="https://zenodo.org/records/15376499/files/animal_clas_1.png" alt="animal_clas_1" width="300"/><br>
+<img src="https://zenodo.org/records/15376499/files/animal_clas_1.png" alt="MegaDetector detection with AI4GAmazonRainforest species classification overlay" width="300"/><br>
 *Credits to Universidad de los Andes, Colombia.*
 
 ### Opossum ID with `MegaDetector` and `AI4GOpossum`
-<img src="https://zenodo.org/records/15376499/files/opossum_det.png" alt="opossum_det" width="300"/><br>
+<img src="https://zenodo.org/records/15376499/files/opossum_det.png" alt="Opossum identified using MegaDetector and AI4GOpossum classification model" width="300"/><br>
 *Credits to the Agency for Regulation and Control of Biosecurity and Quarantine for Galápagos (ABG), Ecuador.*
-

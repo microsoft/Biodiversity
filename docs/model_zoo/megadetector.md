@@ -1,3 +1,14 @@
+---
+description: "MegaDetector model zoo: all MegaDetectorV5 and MegaDetectorV6 variants with version names, licenses, and performance metrics for camera-trap wildlife detection."
+tags:
+  - MegaDetector
+  - MegaDetectorV6
+  - MegaDetectorV5
+  - wildlife detection models
+  - camera trap AI
+  - model zoo
+---
+
 # :mag: Model Zoo and Release Schedules
 
 |Models|Version Names|Licence|Release|Parameters (M)|mAR (Animal Class)|mAP50 (All Classes)|
