@@ -1,5 +1,10 @@
 ![A colorful banner illustrating various species of animals and plants in a natural environment, symbolizing biodiversity and the use of AI for conservation purposes.](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
 
+# Microsoft Biodiversity
+
+**Open-source AI for biodiversity monitoring and conservation.**  
+Microsoft AI for Good Lab — camera-trap detection, bioacoustic analysis, species classification, field deployment.
+
 <div align="center">
 <font size="6"> Open-source AI for camera traps, bioacoustics, and wildlife monitoring </font>
 <br>
