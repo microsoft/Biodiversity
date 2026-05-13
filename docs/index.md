@@ -32,6 +32,8 @@ tags:
 
 Our scope now spans well beyond camera-trap imagery — we have active work in [MegaDetector-Acoustics](bioacoustics.md) for bioacoustic species identification, [MegaDetector-Overhead](model_zoo/other_detectors.md) for aerial wildlife detection, edge computing for remote field deployments, and [SPARROW Studio](releases/release_notes.md) — a dedicated desktop UI that runs every model we produce.
 
+> **Coming from an older version?** OWL is now **MegaDetector-Overhead**, the bioacoustics module is now **MegaDetector-Acoustics**, and the repo has moved from `microsoft/CameraTraps` to `microsoft/Biodiversity` (old links redirect automatically). See the [full naming changes](releases/release_notes.md#naming-changes) in the v1.3.0 release notes.
+
 
 ## 🚀 Quick Start
 

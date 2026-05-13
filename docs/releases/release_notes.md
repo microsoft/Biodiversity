@@ -15,6 +15,15 @@ tags:
 
 This release has three parts plus a preview of what's next.
 
+#### Naming changes
+
+| Previous name | New name | Notes |
+|---|---|---|
+| OWL / Overhead Wildlife Locator | MegaDetector-Overhead | Repo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) |
+| PW_Bioacoustics / bioacoustics module | MegaDetector-Acoustics | Repo: [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) |
+| microsoft/CameraTraps | microsoft/Biodiversity | GitHub repo rename — old URLs redirect automatically |
+| Sparrow Studio | SPARROW Studio | Capitalization standardized (SPARROW is an acronym) |
+
 #### SPARROW Studio beta
 
 SPARROW Studio is our new graphical frontend — data management, inference, analysis, and annotation in one UI. The Windows MSI installer is available from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress.
