@@ -1,3 +1,12 @@
+---
+description: "Cite PyTorch-Wildlife and MegaDetector in your research. BibTeX entries for Hernandez et al. 2024 (PyTorch-Wildlife) and Beery et al. 2019 (MegaDetector)."
+tags:
+  - cite PyTorch-Wildlife
+  - MegaDetector citation
+  - conservation AI research
+  - BibTeX
+---
+
 # :fountain_pen: Cite us!
 We have recently published a [summary paper on Pytorch-Wildlife](https://arxiv.org/abs/2405.12930). The paper has been accepted as an oral presentation at the [CV4Animals workshop](https://www.cv4animals.com/) at this CVPR 2024. Please feel free to cite us!
 

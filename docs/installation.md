@@ -1,3 +1,13 @@
+---
+description: "Install PyTorch-Wildlife for camera trap AI and wildlife detection. Supports conda, pip, and Docker on Windows, macOS, and Linux with optional CUDA GPU acceleration."
+tags:
+  - PyTorch-Wildlife installation
+  - pip install PytorchWildlife
+  - conda environment
+  - wildlife AI setup
+  - MegaDetector install
+---
+
 ## Prerequisites
 1. Python 
 2. NVIDIA GPU for CUDA support (Optional, the code and demo also supports cpu calculation).

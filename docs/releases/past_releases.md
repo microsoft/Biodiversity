@@ -1,3 +1,13 @@
+---
+description: "PyTorch-Wildlife past release notes: version history including SpeciesNet, Deepfaune, detection fine-tuning, and classification model updates."
+tags:
+  - PyTorch-Wildlife releases
+  - release history
+  - MegaDetector versions
+  - SpeciesNet
+  - Deepfaune
+---
+
 ### Pytorch-Wildlife Version 1.2.4
 
 The inference code for the MIT YOLO and Apache RT‑DETR models is now available! To use either one, just load it like any other PyTorch‑Wildlife model:

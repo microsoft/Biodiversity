@@ -1,3 +1,13 @@
+---
+description: "PyTorch-Wildlife species classification models: AI4G-Opossum, AI4GAmazonRainforest, Serengeti, and Deepfaune classifiers for wildlife species identification."
+tags:
+  - wildlife species classification
+  - PyTorch-Wildlife classifiers
+  - AI4GAmazonRainforest
+  - Deepfaune classifier
+  - species identification AI
+---
+
 # Classifiers
 
 |Models|Version Names|Licence|Release|
