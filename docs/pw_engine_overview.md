@@ -1,10 +1,21 @@
+---
+description: "PW-Engine: Rust-based inference core for PyTorch-Wildlife. Powers SPARROW Studio with sub-second cold starts, ONNX Runtime, and HTTP/CLI/Python/C-FFI surfaces."
+tags:
+  - PW-Engine
+  - PyTorch-Wildlife
+  - SPARROW Studio
+  - ONNX Runtime
+  - wildlife AI inference
+  - conservation technology
+---
+
 # PW-Engine Overview
 
 *A model-agnostic inference core for the PyTorch-Wildlife model zoo.*
 
 **Status:** Preview. Inference surfaces are feature-complete; a data-management layer is the next milestone.
 
-**In one sentence:** PW-Engine (full name: PyTorch-Wildlife Engine) is a Rust-based inference engine and HTTP service that runs the PyTorch-Wildlife model set, powers Sparrow Studio, and can be embedded as the backend of any inference-heavy application.
+**In one sentence:** PW-Engine (full name: PyTorch-Wildlife Engine) is a Rust-based inference engine and HTTP service that runs the PyTorch-Wildlife model set, powers SPARROW Studio, and can be embedded as the backend of any inference-heavy application.
 
 ---
 
@@ -12,7 +23,7 @@
 
 PyTorch-Wildlife today runs PyTorch end-to-end. That is right for research — it keeps model code, training, and fine-tuning in one place — but it pays real deployment costs: multi-second cold starts, multi-GB Docker images, single-process concurrency limits, and no practical path to integrate with serious UI or desktop applications. Anything non-Python has to shell out to a Python process.
 
-To let UI developers — Sparrow Studio and anyone else — get both production-level latency and model-agnostic compatibility, we're building PW-Engine as a separate inference layer.
+To let UI developers — SPARROW Studio and anyone else — get both production-level latency and model-agnostic compatibility, we're building PW-Engine as a separate inference layer.
 
 | Prior deployment shape | Cause | PW-Engine response |
 |---|---|---|
@@ -51,7 +62,7 @@ PW-Engine is a Rust core library with four consumption surfaces:
 
              +---- C FFI (generated header) ----+
              v                                  v
-        Sparrow Studio                      Other native
+        SPARROW Studio                      Other native
         Local (C#/P-Invoke)                 integrators
 ```
 
@@ -67,11 +78,11 @@ Pick the surface that matches your stack.
 
 | You are a… | Surface you use | Notes |
 |---|---|---|
-| Conservation user | No direct use — you interact via Sparrow Studio | Install the MSI; PW-Engine runs underneath |
+| Conservation user | No direct use — you interact via SPARROW Studio | Install the MSI; PW-Engine runs underneath |
 | Existing Python user (`import PytorchWildlife`) | PyO3 bindings | Same API shape; drop-in |
 | Web/cloud deployer running an inference server | Docker HTTP container | `docker run`; call `/v1/detect` |
 | Laptop researcher | CLI — single static binary, ~35 MB | Invoke the CLI against a local image/audio file |
-| Desktop app developer (Windows/.NET first; Mac/Linux ports in progress) | C FFI / C# bindings | Same integration path Sparrow Studio Local uses |
+| Desktop app developer (Windows/.NET first; Mac/Linux ports in progress) | C FFI / C# bindings | Same integration path SPARROW Studio Local uses |
 | Institutional / platform owner | Any combination | One inference implementation across desktop, server, and embedded |
 
 **Custom models:** drop an ONNX file plus a manifest entry into the model directory. No engine code change.
@@ -96,7 +107,7 @@ Reliability hardening for long-running GPU workloads is in progress.
 
 **Next milestone:** data-management sidecar.
 
-**Availability:** preview today via the Sparrow Studio beta.
+**Availability:** preview today via the SPARROW Studio beta.
 
 ---
 
@@ -108,7 +119,7 @@ No. The Python PyTorch-Wildlife package remains the user-facing interface for tr
 
 - **When can I try it?**
 
-Through the Sparrow Studio beta (Windows MSI). We will update the beta in the next few weeks with PW-Engine as the core.
+Through the SPARROW Studio beta (Windows MSI). We will update the beta in the next few weeks with PW-Engine as the core.
 
 - **Will my existing Python code break?**
 
