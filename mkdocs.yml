@@ -3,8 +3,8 @@ site_url: https://microsoft.github.io/Biodiversity/
 site_description: Collaborative Deep Learning Framework for Conservation. 
 docs_dir: docs
 site_dir: site
-repo_url: https://github.com/microsoft/CameraTraps 
-repo_name: microsoft/CameraTraps
+repo_url: https://github.com/microsoft/Biodiversity
+repo_name: microsoft/Biodiversity
 copyright: Copyright (c) 2023 Microsoft Corporation
 
 theme:

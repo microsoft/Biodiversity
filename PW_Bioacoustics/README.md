@@ -11,7 +11,7 @@ This module provides CLI scripts for training, inference, and dataset preparatio
 ### 1. Installation
 
 ```bash
-# Install CameraTraps with bioacoustics dependencies
+# Install PyTorch-Wildlife with bioacoustics dependencies
 pip install -e .
 pip install librosa soundfile pyyaml torchmetrics
 ```
