@@ -22,6 +22,7 @@ PytorchWildlife.egg-info/
 *.pth
 *.cache
 *.pem
+PW_FT_detection/
 PW_FT_detection/runs/
 demo/runs/
 site/
