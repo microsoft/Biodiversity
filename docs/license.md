@@ -21,5 +21,5 @@ In addition, since the **PyTorch-Wildlife** package is under MIT, all the utilit
 
 
 ```
---8<-- "LICENSE.md"
+--8<-- "LICENSE"
 ```
