@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+title: MegaDetector
+message: "If you use MegaDetector, please cite it using the metadata from this file."
+type: software
+authors:
+  - given-names: Sara
+    family-names: Beery
+  - given-names: Dan
+    family-names: Morris
+  - given-names: Siyu
+    family-names: Yang
+  - given-names: Andres
+    family-names: Hernandez
+  - given-names: Zhongqi
+    family-names: Miao
+  - given-names: Luisa
+    family-names: Vargas
+  - given-names: Rahul
+    family-names: Dodhia
+  - given-names: Juan
+    family-names: Lavista
+  - name: "Microsoft AI for Good Lab"
+identifiers:
+  - type: url
+    value: "https://arxiv.org/abs/1907.06772"
+    description: "Efficient Pipeline for Camera Trap Image Review"
+  - type: url
+    value: "https://arxiv.org/abs/2405.12930"
+    description: "Pytorch-Wildlife: A Collaborative Deep Learning Framework for Conservation"
+repository-code: "https://github.com/microsoft/MegaDetector"
+keywords:
+  - MegaDetector
+  - camera traps
+  - wildlife detection
+  - animal detection
+  - conservation
+  - computer vision
+  - object detection
+  - PyTorch Wildlife
+license: MIT
