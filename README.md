@@ -17,46 +17,11 @@
 
 ### What we've been up to
 
-Hey everyone! It's been a while since our last update — we hope you haven't forgotten about us! 😊
+Our journey started with **MegaDetector** — a camera-trap animal detection model that became a widely adopted tool in the conservation community. Building on that foundation, we created **PyTorch-Wildlife** as a unified platform to host all of our AI for biodiversity work, bringing together detection, classification, and eventually much more.
 
-Over the past couple of months we've been thinking hard about the future of our biodiversity AI ecosystem and cooking up some exciting new features just for you.
+Over time, our scope grew well beyond camera-trap imagery. We now have active work in bioacoustics, overhead animal detection, edge computing for remote field deployments, and a dedicated desktop UI — **SPARROW Studio** — that runs every model we produce. As the ecosystem expanded, it became clear that keeping everything inside a single repository was working against us. Code was harder to find, harder to maintain, and harder to extend.
 
-After two years of community use, one thing has become super clear: most people prefer a nice graphical interface over writing code. People have been asking for a more seamless, unified experience that covers data management, processing, AI inference, analysis, and annotation all in one place.
-
-So we built **SPARROW Studio** — a clean, unified UI built on top of PyTorch-Wildlife that brings exactly those tools together and much more:
-
-- Local and cloud-based data storage & management
-- AI inference using the PyTorch-Wildlife model zoo
-- Post-inference statistics and analysis
-- Pre- and post-inference data annotation (easy bounding-box and category editing)
-- Embedding visualization and feature retrieval tools
-
-![image](https://zenodo.org/records/18870374/files/sparrow_studio.png)
-
-We're kicking things off with a beta test before the official release. The Windows MSI installer is available directly on Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress — reach out if you'd like to be on that list.
-
-We've also expanded PyTorch-Wildlife itself into bioacoustics and overhead animal localization — both are out in this release:
-
-- A dedicated [MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) repository with several newly trained bioacoustic models
-- [MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) — our generalized, point-based detection model for overhead imagery.
-
-SPARROW Studio already has dedicated support for both, so beta testers can run inference and annotate acoustic recordings or overhead images directly in the UI.
-
-### The future of PyTorch-Wildlife
-
-With SPARROW Studio stepping into the picture, PyTorch-Wildlife itself will gradually evolve into a clean, stable API + high‑quality model zoo layered on top of a general model inference engine — called PW-Engine, while SPARROW Studio becomes the intuitive, everything‑in‑one-place frontend.
-
-**PW-Engine** (PyTorch-Wildlife Engine) is an inference core written in Rust. It is model-agnostic and targets the full PyTorch-Wildlife model zoo and future third party models (e.g. BioClip and Perch) through four consumption surfaces: an HTTP REST API, a single-binary CLI, Python bindings, and a native C library for desktop integration. All four surfaces are feature-complete today; a data-management layer and MLOps functionality are the next milestones. PW-Engine also powers SPARROW Studio under the hood, and the same surfaces are open to anyone building their own frontend. A short overview — what it is, how it fits alongside the current Python API and SPARROW Studio, and how to pilot it — is here: [PW-Engine Overview](https://microsoft.github.io/Biodiversity/pw_engine_overview/).
-
-If you're interested in API or backend work, or you run an inference-heavy pipeline and want to pilot PW-Engine early, we'd love your help shaping the next chapter of PyTorch-Wildlife.
-
-And one dream we've had for a long time: letting non‑coders fine‑tune their own models on their own data. Thanks to recent advances, we're finally close — and this will be a major focus for both PyTorch-Wildlife and SPARROW Studio next.
-
-### Why "SPARROW Studio"?
-
-Some of the UI features we needed for PyTorch-Wildlife also fit naturally as a frontend for [SPARROW](https://github.com/microsoft/SPARROW), our edge device for remote data collection and biodiversity monitoring. Since the name "Sparrow" already carried a warm, lively spirit — and the overlap between the projects made things simpler — we decided to call the UI SPARROW Studio. The name reflects shared roots and a bit of personality we liked.
-
-We'd genuinely love to have you in the SPARROW Studio beta. Drop us a message anytime — the more feedback the better! 🐦
+So we made a deliberate decision: break the work into focused, dedicated repositories — one per project — where the code in each repo is concentrated, the ownership is clear, and future contributors know exactly where to go. This repository is the hub that ties them together. PyTorch-Wildlife now lives at [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife), MegaDetector at [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector), and everything else is linked in the table below.
 
 #### Previous versions:
 - [Release notes](https://microsoft.github.io/Biodiversity/releases/release_notes/)
