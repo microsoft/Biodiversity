@@ -70,12 +70,13 @@ theme:
     - navigation.footer
 
 nav:
-  - Pytorch Wildlife:
+  - PyTorch-Wildlife:
     - Overview: index.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
     - MegaDetector-Acoustics: bioacoustics.md
     - Installation: installation.md
+    - Tags: tags.md
     - Existing Collaborators: collaborators.md
     - Contributors: contributors.md
     - Cite Us: cite.md
@@ -180,6 +181,8 @@ markdown_extensions:
 plugins:
   - search
   - meta
+  - tags:
+      tags_file: tags.md
   - mkdocstrings:
       handlers:
         python:
