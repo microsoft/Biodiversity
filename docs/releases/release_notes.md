@@ -1,10 +1,10 @@
 ---
-description: "PyTorch-Wildlife v1.3.0 release notes: SPARROW Studio beta, MegaDetector-Acoustics, MegaDetector-Overhead, and PW-Engine preview."
+description: "PyTorch-Wildlife v1.3.0 release notes: SPARROW Studio beta, MegaDetector-Acoustic, MegaDetector-Overhead, and PW-Engine preview."
 tags:
   - PyTorch-Wildlife
   - release notes
   - SPARROW Studio
-  - MegaDetector-Acoustics
+  - MegaDetector-Acoustic
   - MegaDetector-Overhead
   - PW-Engine
 ---
@@ -20,7 +20,7 @@ This release has three parts plus a preview of what's next.
 | Previous name | New name | Notes |
 |---|---|---|
 | OWL / Overhead Wildlife Locator | MegaDetector-Overhead | Repo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) |
-| PW_Bioacoustics / bioacoustics module | MegaDetector-Acoustics | Repo: [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) |
+| PW_Bioacoustics / bioacoustics module | MegaDetector-Acoustic | Repo: [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) |
 | microsoft/CameraTraps | microsoft/Biodiversity | GitHub repo rename — old URLs redirect automatically |
 | Sparrow Studio | SPARROW Studio | Capitalization standardized (SPARROW is an acronym) |
 
@@ -28,9 +28,9 @@ This release has three parts plus a preview of what's next.
 
 SPARROW Studio is our new graphical frontend — data management, inference, analysis, and annotation in one UI. The Windows MSI installer is available from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress.
 
-#### MegaDetector-Acoustics
+#### MegaDetector-Acoustic
 
-MegaDetector-Acoustics is available at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [MegaDetector-Acoustics overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics).
+MegaDetector-Acoustic is available at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [MegaDetector-Acoustic overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic).
 
 #### MegaDetector-Overhead
 

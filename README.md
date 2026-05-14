@@ -36,13 +36,14 @@ So we made a deliberate decision: break the work into focused, dedicated reposit
 | Repo | What it is |
 |---|---|
 | [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector) | AI model for detecting animals, people, and vehicles in camera-trap imagery — where it all started |
-| [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) | Bioacoustic AI for biodiversity monitoring — audio classification and species identification from sound |
+| [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) | Bioacoustic AI for biodiversity monitoring — audio classification and species identification from sound |
 | [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) | Overhead imagery detection — point-based wildlife localization from aerial views |
+| [microsoft/MegaDetector-Sonar](https://github.com/microsoft/MegaDetector-Sonar) | Sonar-based wildlife detection — processing and feature detection in sidescan sonar imagery |
 | [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife) | The collaborative deep learning framework and model zoo for conservation AI |
 | [microsoft/WildlifeClassification](https://github.com/microsoft/WildlifeClassification) | Species classification models, running downstream of MegaDetector detection |
 | [microsoft/Bongo](https://github.com/microsoft/Bongo) | *(Owner-populated)* |
 | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) | Solar-Powered Acoustic and Remote Recording Observation Watch — AI edge device for remote field deployments |
-| [/SPARROW-Studio](./SPARROW-Studio) | The all-in-one desktop UI for running every model in this ecosystem |
+| [microsoft/SPARROW-Studio](https://github.com/microsoft/SPARROW-Studio) | The all-in-one desktop UI for running every model in this ecosystem |
 
 ## Cite us
 
@@ -64,7 +65,7 @@ Have questions or want to connect with the team? Join us on Discord: [![Discord]
 A list of organizations using MegaDetector across global conservation work — six years of partnerships, from national parks to research universities to NGOs — is maintained on the [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector) repository.
 
 >[!IMPORTANT]
->If you would like to be added to this list or have any questions regarding MegaDetector and Pytorch-Wildlife, please [email us](zhongqimiao@microsoft.com) or join us in our Discord channel: [![](https://img.shields.io/badge/any_text-Join_us!-blue?logo=discord&label=PytorchWildife)](https://discord.gg/TeEVxzaYtm)
+>If you would like to be added to this list or have any questions regarding MegaDetector and PyTorch-Wildlife, please [email us](zhongqimiao@microsoft.com) or join us in our Discord channel: [![](https://img.shields.io/badge/any_text-Join_us!-blue?logo=discord&label=PytorchWildife)](https://discord.gg/TeEVxzaYtm)
 
 ## About
 

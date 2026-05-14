@@ -88,8 +88,8 @@ classification_results = classification_model.single_image_classification(img)
 If you want to use our Gradio demo for a user-friendly interface. Please run the following code inside the current repo. You can also find Jupyter Notebooks with an image and video tutorial:
 
 ```bash
-git clone https://github.com/microsoft/biodiversity.git
-cd biodiversity
+git clone https://github.com/microsoft/Biodiversity.git
+cd Biodiversity
 cd demo
 # For the image demo
 python image_demo.py

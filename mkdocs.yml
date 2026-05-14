@@ -1,6 +1,6 @@
 site_name: Microsoft Biodiversity
 site_url: https://microsoft.github.io/Biodiversity/
-site_description: "PyTorch-Wildlife — open-source AI for camera traps, bioacoustics, and wildlife monitoring. Includes MegaDetector, MegaDetector-Acoustics, MegaDetector-Overhead, and SPARROW Studio."
+site_description: "PyTorch-Wildlife — open-source AI for camera traps, bioacoustics, and wildlife monitoring. Includes MegaDetector, MegaDetector-Acoustic, MegaDetector-Overhead, and SPARROW Studio."
 docs_dir: docs
 site_dir: site
 repo_url: https://github.com/microsoft/Biodiversity
@@ -74,7 +74,7 @@ nav:
     - Overview: index.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
-    - MegaDetector-Acoustics: bioacoustics.md
+    - MegaDetector-Acoustic: bioacoustics.md
     - Installation: installation.md
     - Tags: tags.md
     - Existing Collaborators: collaborators.md
@@ -181,8 +181,7 @@ markdown_extensions:
 plugins:
   - search
   - meta
-  - tags:
-      tags_file: tags.md
+  - tags
   - mkdocstrings:
       handlers:
         python:

@@ -1,16 +1,16 @@
 ---
-description: "MegaDetector-Acoustics: open-source bioacoustic AI for wildlife monitoring. Audio classification, bird detection, and species identification from passive acoustic recordings."
+description: "MegaDetector-Acoustic: open-source bioacoustic AI for wildlife monitoring. Audio classification, bird detection, and species identification from passive acoustic recordings."
 tags:
-  - MegaDetector-Acoustics
+  - MegaDetector-Acoustic
   - bioacoustics
   - wildlife audio classification
   - bird detection
   - passive acoustic monitoring
 ---
 
-# MegaDetector-Acoustics
+# MegaDetector-Acoustic
 
-**MegaDetector-Acoustics** provides training, inference, and dataset preparation for audio classification in wildlife monitoring. The module is maintained at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) and builds on core APIs in `PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`.
+**MegaDetector-Acoustic** provides training, inference, and dataset preparation for audio classification in wildlife monitoring. The module is maintained at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) and builds on core APIs in `PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`.
 
 ## What's included
 
@@ -20,11 +20,11 @@ tags:
 - **Annotation readers** (COCO-like JSON), including support for the PteroSet / Raven Pro format
 - **`MD_AudioBirds_V1`** — a pre-trained bird classifier distributed as ONNX for direct inference
 
-See the [MegaDetector-Acoustics model zoo](model_zoo/bioacoustics.md) for the released models.
+See the [MegaDetector-Acoustic model zoo](model_zoo/bioacoustics.md) for the released models.
 
 ## Demo
 
-The end-to-end notebook at [microsoft/MegaDetector-Acoustics](https://github.com/microsoft/MegaDetector-Acoustics) walks through:
+The end-to-end notebook at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) walks through:
 
 1. **Data exploration** — annotation counts, species distribution
 2. **Inference** — run `MD_AudioBirds_V1` on real recordings, visualise predictions vs. ground truth
@@ -44,4 +44,4 @@ pip install PytorchWildlife
 pip install librosa soundfile pyyaml torchmetrics
 ```
 
-See the [MegaDetector-Acoustics README](https://github.com/microsoft/MegaDetector-Acoustics) for full configuration options, training arguments, and output formats.
+See the [MegaDetector-Acoustic README](https://github.com/microsoft/MegaDetector-Acoustic) for full configuration options, training arguments, and output formats.

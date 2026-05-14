@@ -13,7 +13,7 @@ tags:
 
 
 ### 🌐 Unified Framework:
-Pytorch-Wildlife integrates **four pivotal elements:**
+PyTorch-Wildlife integrates **four pivotal elements:**
 
 ▪ Machine Learning Models<br>
 ▪ Pre-trained Weights<br>

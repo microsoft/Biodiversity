@@ -1,7 +1,7 @@
 
-## 🕵️ Explore Pytorch-Wildlife and MegaDetector with our Demo User Interface
+## 🕵️ Explore PyTorch-Wildlife and MegaDetector with our Demo User Interface
 
-If you want to directly try **Pytorch-Wildlife** and the models in our [model zoo](../model_zoo/megadetector.md), you can use our **Gradio interface**. 
+If you want to directly try **PyTorch-Wildlife** and the models in our [model zoo](../model_zoo/megadetector.md), you can use our **Gradio interface**. 
 
 To start using the app locally:
 
