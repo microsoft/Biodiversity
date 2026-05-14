@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={"": ["*.yml"]},
-    url='https://github.com/microsoft/CameraTraps/',  
+    url='https://github.com/microsoft/Biodiversity/',
     license='MIT',
     author='Andres Hernandez, Zhongqi Miao, Daniela Ruiz Lopez, Isai Daniel Chacon Silva',
     author_email='v-hernandres@microsoft.com, zhongqimiao@microsoft.com, v-druizlopez@microsoft.com, v-ichaconsil@microsoft.com',  

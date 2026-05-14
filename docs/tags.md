@@ -3,3 +3,5 @@ description: "Browse all topics across the PyTorch-Wildlife and MegaDetector doc
 ---
 
 # Tags
+
+<!-- material/tags -->

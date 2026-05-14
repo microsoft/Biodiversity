@@ -9,11 +9,11 @@ tags:
 
 # 🤝 Contribution Guidelines
 
-Thanks for your interest in collaborating on Pytorch-Wildlife! Here you can find the guidelines on how to contribute 🌱:
+Thanks for your interest in collaborating on PyTorch-Wildlife! Here you can find the guidelines on how to contribute 🌱:
 
 ## How to participate
 
-1. 💡 Browse our project board: [Pytorch-Wildlife](https://github.com/orgs/microsoft/projects/1833)! 
+1. 💡 Browse our project board: [PyTorch-Wildlife](https://github.com/orgs/microsoft/projects/1833)! 
 2. 📋 Look under the **“Ready”** column for issues/tasks open to contributors.  
 3. 💬 Pick an issue from the **“Ready”** column and add a comment expressing your interest!
 4. 🤝 Once we get your comments, we’ll move the issue to **“In progress”** and assign you as the collaborator.  

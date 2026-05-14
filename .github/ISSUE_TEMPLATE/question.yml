@@ -12,10 +12,10 @@ body:
     attributes:
       label: Search before asking
       description: >
-        Please search the [issues](https://github.com/microsoft/CameraTraps/issues) to see if a similar bug report already exists.
+        Please search the [issues](https://github.com/microsoft/Biodiversity/issues) to see if a similar bug report already exists.
       options:
         - label: >
-            I have searched the Pytorch-Wildlife [issues](https://github.com/microsoft/CameraTraps/issues) and found no similar bug report.
+            I have searched the Pytorch-Wildlife [issues](https://github.com/microsoft/Biodiversity/issues) and found no similar bug report.
           required: true
 
   - type: textarea

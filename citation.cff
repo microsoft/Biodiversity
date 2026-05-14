@@ -1,20 +1,18 @@
 cff-version: 1.2.0
-title: MegaDetector
-message: "If you use MegaDetector, please cite it using the metadata from this file."
+title: Microsoft Biodiversity
+message: "If you use PyTorch-Wildlife, please cite it using the metadata from this file."
 type: software
+version: "1.3.0"
+date-released: "2026-05-14"
 authors:
-  - given-names: Sara
-    family-names: Beery
-  - given-names: Dan
-    family-names: Morris
-  - given-names: Siyu
-    family-names: Yang
   - given-names: Andres
     family-names: Hernandez
   - given-names: Zhongqi
     family-names: Miao
   - given-names: Luisa
     family-names: Vargas
+  - given-names: Sara
+    family-names: Beery
   - given-names: Rahul
     family-names: Dodhia
   - given-names: Juan
@@ -22,19 +20,21 @@ authors:
   - name: "Microsoft AI for Good Lab"
 identifiers:
   - type: url
-    value: "https://arxiv.org/abs/1907.06772"
-    description: "Efficient Pipeline for Camera Trap Image Review"
-  - type: url
     value: "https://arxiv.org/abs/2405.12930"
     description: "Pytorch-Wildlife: A Collaborative Deep Learning Framework for Conservation"
-repository-code: "https://github.com/microsoft/MegaDetector"
+  - type: url
+    value: "https://arxiv.org/abs/1907.06772"
+    description: "Efficient Pipeline for Camera Trap Image Review"
+repository-code: "https://github.com/microsoft/Biodiversity"
+url: "https://microsoft.github.io/Biodiversity/"
 keywords:
+  - PyTorch-Wildlife
   - MegaDetector
   - camera traps
   - wildlife detection
   - animal detection
   - conservation
   - computer vision
-  - object detection
-  - PyTorch Wildlife
+  - bioacoustics
+  - ai-for-good
 license: MIT
