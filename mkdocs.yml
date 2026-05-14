@@ -98,6 +98,7 @@ nav:
   - Contribute:
     - Contribute Guidelines: contribute.md
     - License: license.md
+    - Developer Guide: build_mkdocs.md
   - Reference - Code API:
       - Base Module:
         - Overview: base/overview.md
