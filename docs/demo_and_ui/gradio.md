@@ -1,3 +1,11 @@
+---
+description: "Explore PyTorch-Wildlife and MegaDetector through the Gradio web interface — single image detection, batch processing, and video analysis."
+tags:
+  - PyTorch-Wildlife demo
+  - Gradio
+  - MegaDetector
+  - wildlife detection UI
+---
 
 ## 🕵️ Explore PyTorch-Wildlife and MegaDetector with our Demo User Interface
 
