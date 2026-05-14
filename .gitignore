@@ -38,3 +38,5 @@ PW_Bioacoustics/demo/.ipynb_checkpoints/
 PW_Bioacoustics/demo/config/
 PW_Bioacoustics/RELEASE_PLAN.md
 archive/
+.DS_Store
+*.code-workspace
