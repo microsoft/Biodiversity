@@ -1,3 +1,12 @@
+---
+description: "How to build and deploy the PyTorch-Wildlife MkDocs documentation site locally and to GitHub Pages."
+tags:
+  - PyTorch-Wildlife
+  - documentation
+  - MkDocs
+  - developer guide
+---
+
 # Building the MkDocs Site
 
 To build the MkDocs site locally, follow these steps:
