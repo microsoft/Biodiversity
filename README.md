@@ -41,8 +41,6 @@ So we made a deliberate decision: break the work into focused, dedicated reposit
 | [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) | Overhead imagery detection — point-based wildlife localization from aerial views |
 | [microsoft/MegaDetector-Sonar](https://github.com/microsoft/MegaDetector-Sonar) | Sonar-based wildlife detection — processing and feature detection in sidescan sonar imagery |
 | [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife) | The collaborative deep learning framework and model zoo for conservation AI |
-| [microsoft/WildlifeClassification](https://github.com/microsoft/WildlifeClassification) | Species classification models, running downstream of MegaDetector detection |
-| [microsoft/Bongo](https://github.com/microsoft/Bongo) | *(Owner-populated)* |
 | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) | Solar-Powered Acoustic and Remote Recording Observation Watch — AI edge device for remote field deployments |
 | [microsoft/SPARROW-Studio](https://github.com/microsoft/SPARROW-Studio) | The all-in-one desktop UI for running every model in this ecosystem |
 
