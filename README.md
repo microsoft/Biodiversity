@@ -24,7 +24,7 @@ Microsoft AI for Good Lab — camera-trap detection, bioacoustic analysis, speci
 
 Our journey started with **MegaDetector** — a camera-trap animal detection model that became a widely adopted tool in the conservation community. Building on that foundation, we created **PyTorch-Wildlife** as a unified platform to host all of our AI for biodiversity work, bringing together detection, classification, and eventually much more.
 
-Over time, our scope grew well beyond camera-trap imagery. We now have active work in bioacoustics, overhead animal detection, edge computing for remote field deployments, and a dedicated desktop UI — **SPARROW Studio** — that runs every model we produce. As the ecosystem expanded, it became clear that keeping everything inside a single repository was working against us. Code was harder to find, harder to maintain, and harder to extend.
+Over time, our scope grew well beyond camera-trap imagery. We now have active work in bioacoustics, overhead animal detection, and edge computing for remote field deployments. As the ecosystem expanded, it became clear that keeping everything inside a single repository was working against us. Code was harder to find, harder to maintain, and harder to extend.
 
 So we made a deliberate decision: break the work into focused, dedicated repositories — one per project — where the code in each repo is concentrated, the ownership is clear, and future contributors know exactly where to go. This repository is the hub that ties them together. PyTorch-Wildlife now lives at [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife), MegaDetector at [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector), and everything else is linked in the table below.
 
@@ -42,7 +42,6 @@ So we made a deliberate decision: break the work into focused, dedicated reposit
 | [microsoft/MegaDetector-Sonar](https://github.com/microsoft/MegaDetector-Sonar) | Sonar-based wildlife detection — processing and feature detection in sidescan sonar imagery |
 | [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife) | The collaborative deep learning framework and model zoo for conservation AI |
 | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) | Solar-Powered Acoustic and Remote Recording Observation Watch — AI edge device for remote field deployments |
-| [microsoft/SPARROW-Studio](https://github.com/microsoft/SPARROW-Studio) | The all-in-one desktop UI for running every model in this ecosystem |
 
 ## Cite us
 
