@@ -28,7 +28,7 @@ tags:
 
 
 ## 👋 Welcome to PyTorch-Wildlife
-**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://microsoft.github.io/Biodiversity/megadetector/), [DeepFaune](https://microsoft.github.io/Biodiversity/megadetector/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](model_zoo/megadetector.md) for both animal detection and classification.
+**PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://github.com/microsoft/MegaDetector), [DeepFaune](https://www.deepfaune.cnrs.fr/en/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](model_zoo/megadetector.md) for both animal detection and classification.
 
 Our scope now spans well beyond camera-trap imagery — we have active work in [MegaDetector-Acoustic](bioacoustics.md) for bioacoustic species identification, [MegaDetector-Overhead](model_zoo/other_detectors.md) for aerial wildlife detection, and edge computing for remote field deployments.
 
