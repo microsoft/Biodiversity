@@ -11,7 +11,7 @@
 | You want… | Go to |
 |---|---|
 | MegaDetector source, releases, issues, V1–V6 history, benchmarks | **[microsoft/MegaDetector](https://github.com/microsoft/MegaDetector)** |
-| The PyTorch-Wildlife framework that hosts MegaDetector and classifiers | [microsoft/PytorchWildlife](https://github.com/microsoft/PytorchWildlife) |
+| The PyTorch-Wildlife framework that hosts MegaDetector and classifiers | [microsoft/Pytorch-Wildlife](https://github.com/microsoft/Pytorch-Wildlife) |
 | The biodiversity ecosystem umbrella (all repos, one hub) | [microsoft/Biodiversity](https://github.com/microsoft/Biodiversity) |
 | The AI-enabled edge device that runs MegaDetector in the field | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) |
 
