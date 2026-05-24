@@ -158,10 +158,9 @@ class PlainResNetInference(BaseClassifierInference):
         """
 
         if data_path:
-            dataset = pw_data.ImageFolder(
+            dataset = pw_data.ClassificationImageFolder(
                 data_path,
                 transform=self.transform,
-                path_head='.'
             )
         elif det_results:
             dataset = pw_data.DetectionCrops(

@@ -14,6 +14,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # Making the DetectionImageFolder class available for import from this module
 __all__ = [
+    "ClassificationImageFolder",
     "DetectionImageFolder",
     ]
 
