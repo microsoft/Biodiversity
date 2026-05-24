@@ -1,3 +1,12 @@
+---
+description: "PyTorch-Wildlife demo scripts and Jupyter notebooks for image detection, video processing, and classification with MegaDetector."
+tags:
+  - PyTorch-Wildlife demo
+  - Jupyter notebooks
+  - MegaDetector demo
+  - camera trap demo
+---
+
 # Demo Scripts and Notebooks
 
 ### Local notebooks

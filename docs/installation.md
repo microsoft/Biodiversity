@@ -1,3 +1,13 @@
+---
+description: "Install PyTorch-Wildlife for camera trap AI and wildlife detection. Supports conda, pip, and Docker on Windows, macOS, and Linux with optional CUDA GPU acceleration."
+tags:
+  - PyTorch-Wildlife installation
+  - pip install PytorchWildlife
+  - conda environment
+  - wildlife AI setup
+  - MegaDetector install
+---
+
 ## Prerequisites
 1. Python 
 2. NVIDIA GPU for CUDA support (Optional, the code and demo also supports cpu calculation).
@@ -78,8 +88,8 @@ classification_results = classification_model.single_image_classification(img)
 If you want to use our Gradio demo for a user-friendly interface. Please run the following code inside the current repo. You can also find Jupyter Notebooks with an image and video tutorial:
 
 ```bash
-git clone https://github.com/microsoft/CameraTraps.git
-cd CameraTraps
+git clone https://github.com/microsoft/Biodiversity.git
+cd Biodiversity
 cd demo
 # For the image demo
 python image_demo.py

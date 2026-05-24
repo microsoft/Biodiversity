@@ -1,3 +1,3 @@
 # Stitchers
 
-::: PytorchWildlife.models.detection.herdnet.animaloc.eval.stitchers
+::: PytorchWildlife.models.detection.localization.animaloc.eval.stitchers

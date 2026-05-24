@@ -1,0 +1,59 @@
+# Template configuration file for bioacoustics experiments
+# Copy this file and customize for your specific dataset
+
+name: "my_domain"
+
+datasets:
+  - "dataset_name_1"
+  - "dataset_name_2"
+
+class_names:
+  0: "noise"
+  1: "target_class"
+
+paths:
+  data_root: "${DATA_ROOT}"
+  output_root: "${OUTPUT_ROOT}"
+  spectrograms_dir: "${OUTPUT_ROOT}/mel_spectrograms"
+  annotations_file: "annotations.json"
+
+audio:
+  sample_rate: 48000
+  window_size_sec: 5.0
+  overlap_sec: 4.0
+  window_strategy: "sliding"  # or "balanced"
+  negative_proportion: 0.5
+
+spectrogram:
+  n_fft: 2048
+  hop_length: 512
+  n_mels: 224
+  top_db: 80.0
+  fill_highfreq: true
+  noise_db_std: 3.0
+  storage_dtype: "float32"
+
+training:
+  batch_size: 32
+  num_workers: 4
+  lr: 0.0001
+  weight_decay: 0.0001
+  epochs: 50
+  backbone: "resnet18"
+  num_classes: 2
+  label_smoothing: 0.0
+  target_size: [224, 469]
+  x_col: "spec_name"
+  y_col: "label"
+  normalize: true
+  use_specaug: false
+  pos_weight: 1.0
+  conf_threshold: 0.5
+  freeze_backbone: "none"
+  backbone_lr_ratio: 1.0
+
+splits:
+  test_size: 0.15
+  val_size: 0.15
+  n_splits: 5
+  random_state: 42

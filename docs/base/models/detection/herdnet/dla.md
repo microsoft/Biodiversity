@@ -1,3 +1,3 @@
 # DLA
 
-::: PytorchWildlife.models.detection.herdnet.dla
+::: PytorchWildlife.models.detection.localization.dla

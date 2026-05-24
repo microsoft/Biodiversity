@@ -1,21 +1,41 @@
+---
+description: "PyTorch-Wildlife v1.3.0 release notes: SPARROW Studio beta, MegaDetector-Acoustic, MegaDetector-Overhead, and PW-Engine preview."
+tags:
+  - PyTorch-Wildlife
+  - release notes
+  - SPARROW Studio
+  - MegaDetector-Acoustic
+  - MegaDetector-Overhead
+  - PW-Engine
+---
+
 # Main changes and additions
 
-### Pytorch-Wildlife Version 1.2.1
+### V 1.3.0
 
-#### SpeciesNet is available in Pytorch-Wildlife for testing! 
-- We have added SpeciesNet into our model zoo, which is compatible with all detection models provided by Pytorch-Wildlife. Please refer to [this document](https://github.com/microsoft/CameraTraps/blob/SppNet_TF/PytorchWildlife/models/classification/speciesnet_base/sppnet_readme.md) for more details!
+This release has three parts plus a preview of what's next.
 
-#### Deepfaune in Our Model Zoo!! 
-- We are excited to announce the release of the Deepfaune models—both the detector and classifier—in PyTorch-Wildlife, adding to our growing model zoo. A huge thank you to the Deepfaune team for your support! Deepfaune is one of the most comprehensive models focused on the European ecosystem for both detection and classification. It serves as a great complement to MegaDetector, which has primarily been trained on datasets from North America, South America, and Africa. The Deepfaune detector is also our first third-party camera trap detection model integrated into PyTorch-Wildlife!
-- To use the model, you just need to load them as any other Pytorch-Wildife models: 
-```
-detection_model = pw_detection.DeepfauneDetector(device=DEVICE)
-classification_model = pw_classification.DeepfauneClassifier(device=DEVICE)
-```
-- You can also use the `detection_classification_pipeline_demo.py` script in the demo folder to test the whole detection + classification pipeline. 
-- Please also take a look at the original [Deepfaune website](https://www.deepfaune.cnrs.fr/en/) and give them a star! 
+#### Naming changes
 
-#### Deepfaune-New-England in Our Model Zoo Too!!
-- Besides the original Deepfaune mode, there is another fine-tuned Deepfaune model developed by USGS for the Northeastern NA area called Deepfaune-New-England (DFNE). It can also be loaded with `classification_model = pw_classification.DFNE(device=DEVICE)`
-- Please take a look at the orignal [DFNE repo](https://code.usgs.gov/vtcfwru/deepfaune-new-england/-/tree/main?ref_type=heads) and give them a star! 
+| Previous name | New name | Notes |
+|---|---|---|
+| OWL / Overhead Wildlife Locator | MegaDetector-Overhead | Repo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) |
+| PW_Bioacoustics / bioacoustics module | MegaDetector-Acoustic | Repo: [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) |
+| microsoft/CameraTraps | microsoft/Biodiversity | GitHub repo rename — old URLs redirect automatically |
+| Sparrow Studio | SPARROW Studio | Capitalization standardized (SPARROW is an acronym) |
 
+#### SPARROW Studio beta
+
+SPARROW Studio is our new graphical frontend — data management, inference, analysis, and annotation in one UI. The Windows MSI installer is available from Zenodo: [SPARROW Studio Installer](https://zenodo.org/records/19687738/files/SPARROW%20Studio%20Installer.msi?download=1) (signed). Mac and Linux builds are in progress.
+
+#### MegaDetector-Acoustic
+
+MegaDetector-Acoustic is available at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [MegaDetector-Acoustic overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic).
+
+#### MegaDetector-Overhead
+
+A new generalized, point-based detection model for overhead imagery. Two variants are released — MegaDetector-Overhead-T and MegaDetector-Overhead-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead).
+
+#### Looking ahead — PW-Engine
+
+The future of PyTorchWildlife is [**PW-Engine**](../pw_engine_overview.md), a Rust-based, model-agnostic inference core that powers SPARROW Studio and can also be consumed directly via HTTP, CLI, Python bindings, or a native C library. See the PW-Engine overview for what it is, how it fits alongside the current Python API, and how to pilot it.

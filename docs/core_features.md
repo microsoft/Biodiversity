@@ -1,9 +1,19 @@
+---
+description: "PyTorch-Wildlife core features: unified framework for wildlife AI combining detection models, pre-trained weights, datasets, and utilities for conservation research."
+tags:
+  - PyTorch-Wildlife features
+  - MegaDetector
+  - wildlife AI framework
+  - camera trap detection
+  - conservation deep learning
+---
+
 ## 🛠️ Core Features
 ![Pytorch-core-diagram](https://zenodo.org/records/15376499/files/Pytorch_Wildlife_core_figure.jpg)
 
 
 ### 🌐 Unified Framework:
-Pytorch-Wildlife integrates **four pivotal elements:**
+PyTorch-Wildlife integrates **four pivotal elements:**
 
 ▪ Machine Learning Models<br>
 ▪ Pre-trained Weights<br>

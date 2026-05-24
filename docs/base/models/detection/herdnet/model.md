@@ -1,3 +1,3 @@
 # Model
 
-::: PytorchWildlife.models.detection.herdnet.model
+::: PytorchWildlife.models.detection.localization.model

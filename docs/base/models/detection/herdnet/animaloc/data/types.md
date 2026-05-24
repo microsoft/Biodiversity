@@ -1,3 +1,3 @@
 # Types
 
-::: PytorchWildlife.models.detection.herdnet.animaloc.data.types
+::: PytorchWildlife.models.detection.localization.animaloc.data.types

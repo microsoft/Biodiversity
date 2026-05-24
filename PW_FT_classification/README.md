@@ -1,6 +1,6 @@
 # Classification fine-tuning
 
-This repository focuses on training classification models for Pytorch-Wildlife. This module is designed to help both programmers and biologists train a classification model for animal identification. The output weights of this training codebase can be easily integrated in our [Pytorch-Wildlife](https://github.com/microsoft/CameraTraps/) framework. Our goal is to make this tool accessible and easy to use, regardless of your background in machine learning or programming.
+This repository focuses on training classification models for Pytorch-Wildlife. This module is designed to help both programmers and biologists train a classification model for animal identification. The output weights of this training codebase can be easily integrated in our [Pytorch-Wildlife](https://github.com/microsoft/Biodiversity/) framework. Our goal is to make this tool accessible and easy to use, regardless of your background in machine learning or programming.
 
 ## Installation
 
@@ -120,7 +120,7 @@ This command will initiate the training process based on the parameters specifie
 
 ## Output
 
-Once training is complete, the output weights will be saved in the `weights` directory. These weights can be used to classify new images using the [Pytorch-Wildlife](https://github.com/microsoft/CameraTraps/)
+Once training is complete, the output weights will be saved in the `weights` directory. These weights can be used to classify new images using the [Pytorch-Wildlife](https://github.com/microsoft/Biodiversity/)
 
 We are working on adding a feature in a future release to directly integrate the output weights with the Pytorch-Wildlife framework and the Gradio App.
 
