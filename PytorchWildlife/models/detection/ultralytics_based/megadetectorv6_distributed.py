@@ -20,7 +20,7 @@ class MegaDetectorV6_Distributed(YOLOV8_Distributed):
         2: "vehicle"
     }
 
-    def __init__(self, weights=None, device="cpu", pretrained=True, version='yolov9c'):
+    def __init__(self, weights=None, device="cpu", pretrained=True, version='MDV6-yolov9-c'):
         """
         Initializes the MegaDetectorV5 model with the option to load pretrained weights.
         
@@ -28,7 +28,7 @@ class MegaDetectorV6_Distributed(YOLOV8_Distributed):
             weights (str, optional): Path to the weights file.
             device (str, optional): Device to load the model on (e.g., "cpu" or "cuda"). Default is "cpu".
             pretrained (bool, optional): Whether to load the pretrained model. Default is True.
-            version (str, optional): Version of the model to load. Default is 'yolov9c'.
+            version (str, optional): Version of the model to load. Default is 'MDV6-yolov9-c'.
         """
         self.IMAGE_SIZE = 1280
 
