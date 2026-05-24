@@ -8,7 +8,7 @@ def main(config:str='./config.yaml'):
 
     # Load and set configurations from the YAML file
     with open(config) as f:
-        cfg = Munch(yaml.load(f, Loader=yaml.FullLoader))
+        cfg = Munch(yaml.safe_load(f))
 
     if cfg.resume:  
         model_path = cfg.weights  
