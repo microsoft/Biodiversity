@@ -34,8 +34,9 @@ setup(
         'setuptools',
         'scikit-learn',
         'timm',
-        'lightning',
         'omegaconf',
+        'lightning',
+        'setuptools==68.2.2'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',  
