@@ -95,6 +95,7 @@ nav:
     - Gradio App: demo_and_ui/gradio.md
     - AddaxAI (formerly known as EcoAssist): demo_and_ui/ecoassist.md
     - TimeLapse: demo_and_ui/timelapse.md
+    - BoquilaHUB: demo_and_ui/boquilahub.md
   - Contribute:
     - Contribute Guidelines: contribute.md
     - License: license.md
