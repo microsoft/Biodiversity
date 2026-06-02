@@ -35,7 +35,7 @@ So we made a deliberate decision: break the work into focused, dedicated reposit
 
 | Repo | What it is |
 |---|---|
-| [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector) | AI model for detecting animals, people, and vehicles in camera-trap imagery — where it all started |
+| [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector) | AI model for detecting animals, people, and vehicles in camera-trap imagery — where it all started ([documentation](https://microsoft.github.io/MegaDetector/)) |
 | [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) | Bioacoustic AI for biodiversity monitoring — audio classification and species identification from sound |
 | [microsoft/MegaDetector-Classifier](https://github.com/microsoft/MegaDetector-Classifier) | Camera-trap species classification fine-tuning — adapt classifiers to your own datasets and geographic regions |
 | [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) | Overhead imagery detection — point-based wildlife localization from aerial views |
