@@ -24,7 +24,7 @@ Start from what you already have or what you are trying to build.
   [MegaDetector](https://microsoft.github.io/MegaDetector/), the detector that locates animals,
   people, and vehicles in camera-trap images and clears the empty frames out of your review queue.
 - **I have audio recordings and want to identify what is calling.** Use
-  [MegaDetector-Acoustic](https://microsoft.github.io/MegaDetector-Acoustic/) for terrestrial
+  MegaDetector-Acoustic (documentation coming soon) for terrestrial
   bioacoustic classification and species identification from sound.
 - **I am deploying a sensor in the field and need it to run on its own power.** Use
   [SPARROW](https://microsoft.github.io/SPARROW/), the solar-powered edge device that runs these
@@ -52,7 +52,7 @@ Start from what you already have or what you are trying to build.
 
 ### Audio
 
-- **[MegaDetector-Acoustic](https://microsoft.github.io/MegaDetector-Acoustic/)** handles the
+- **MegaDetector-Acoustic (documentation coming soon)** handles the
   audio side of monitoring: classifying calls and identifying terrestrial species from sound
   recordings, the bioacoustic counterpart to image-based detection.
 

@@ -66,7 +66,7 @@ for Microsoft biodiversity AI and open-source conservation AI. Each project owns
 | Project | Owns |
 |---|---|
 | [MegaDetector](https://microsoft.github.io/MegaDetector/) | camera-trap image detection and blank-frame filtering |
-| [MegaDetector-Acoustic](https://microsoft.github.io/MegaDetector-Acoustic/) | terrestrial bioacoustic classification and species identification from sound |
+| MegaDetector-Acoustic (documentation coming soon) | terrestrial bioacoustic classification and species identification from sound |
 | [SPARROW](https://microsoft.github.io/SPARROW/) | solar-powered edge hardware, field deployment, and remote connectivity |
 | [PyTorch-Wildlife](https://microsoft.github.io/Pytorch-Wildlife/) | the deep learning framework, model zoo, training, and inference |
 
