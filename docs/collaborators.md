@@ -1,4 +1,5 @@
 ---
+title: "Existing Collaborators"
 description: "Organizations worldwide using MegaDetector and PyTorch-Wildlife for conservation AI — national parks, research universities, NGOs, and wildlife agencies."
 tags:
   - MegaDetector collaborators
@@ -21,17 +22,16 @@ Here we list a few of the organizations that have used MegaDetector. We're only 
   <li><a href="https://blackbirdenv.com/">Blackbird Environmental</a></li>
   <li><a href="https://camelotproject.org/">Camelot</a></li>
   <li><a href="https://cpawsnab.org/">Canadian Parks and Wilderness Society (CPAWS) Northern Alberta Chapter</a></li>
-  <li><a href="https://conservationxlabs.com/">Conservation X Labs</a></li>
+  <li><a href="https://conservationxlabs.com/">Conservation X Labs</a> (<a href="https://news.mongabay.com/2025/09/turning-camera-traps-into-real-time-sentinels-interview-with-conservation-x-labs-dante-wasmuht/">story</a>)</li>
   <li><a href="https://www.czu.cz/en">Czech University of Life Sciences Prague</a></li>
   <li><a href="https://www.consult-ecologic.com/">EcoLogic Consultants Ltd.</a></li>
   <li><a href="http://www.ebd.csic.es/inicio">Estación Biológica de Doñana</a></li>
-  <li><a href="https://idfg.idaho.gov/">Idaho Department of Fish and Game</a></li>
-  <li><a href="https://www.islandconservation.org/">Island Conservation</a></li>
+  <li><a href="https://idfg.idaho.gov/">Idaho Department of Fish and Game</a> (<a href="https://www.youtube.com/watch?v=uEsL8EZKpbA&t=261s&ab_channel=OutdoorIdaho">video</a>)</li>
+  <li><a href="https://www.islandconservation.org/">Island Conservation</a> (blog posts <a href="https://www.islandconservation.org/conservation-machine-learning/">1</a>, <a href="https://news.lenovo.com/island-conservation-machine-learning-solutions-nvidia-island-ecosystems/">2</a>, <a href="https://www.islandconservation.org/remote-sensing-on-islands">3</a>)</li>
   <li><a href="https://carnivorecoexistence.info/myall-lakes-dingo-project/">Myall Lakes Dingo Project</a></li>
   <li><a href="https://pnptc.org/">Point No Point Treaty Council</a></li>
   <li><a href="https://www.ramat-hanadiv.org.il/en/">Ramat Hanadiv Nature Park</a></li>
   <li><a href="https://spea.pt/en/">SPEA (Portuguese Society for the Study of Birds)</a></li>
-  <li><a href="https://www.synthetaic.com/">Synthetaic</a></li>
   <li><a href="https://taronga.org.au/">Taronga Conservation Society</a></li>
   <li><a href="https://www.nature.org/en-us/about-us/where-we-work/united-states/wyoming/">The Nature Conservancy in Wyoming</a></li>
   <li><a href="https://wildeyeconservation.org/trap-tagger-about/">TrapTagger</a></li>
@@ -59,7 +59,7 @@ Here we list a few of the organizations that have used MegaDetector. We're only 
   <li><a href="https://nationalzoo.si.edu/news/restoring-americas-prairie">Northern Great Plains Program</a>, Smithsonian</li>
   <li><a href="https://depts.washington.edu/sefsqel/">Quantitative Ecology Lab</a>, University of Washington</li>
   <li><a href="https://www.nps.gov/samo/index.htm">Santa Monica Mountains Recreation Area</a>, National Park Service</li>
-  <li><a href="https://www.zoo.org/seattlecarnivores">Seattle Urban Carnivore Project</a>, Woodland Park Zoo</li>
+  <li><a href="https://www.zoo.org/seattlecarnivores">Seattle Urban Carnivore Project</a>, Woodland Park Zoo (<a href="https://news.microsoft.com/source/features/ai/could-ai-help-save-one-of-the-pacific-northwests-most-vulnerable-animals/">story</a>)</li>
   <li><a href="https://www.icmbio.gov.br/parnaserradosorgaos/">Serra dos Órgãos National Park</a>, ICMBio</li>
   <li><a href="https://emammal.si.edu/snapshot-usa">Snapshot USA</a>, Smithsonian</li>
   <li><a href="https://wildlife.forestry.ubc.ca/">Wildlife Coexistence Lab</a>, University of British Columbia</li>
@@ -72,12 +72,12 @@ Here we list a few of the organizations that have used MegaDetector. We're only 
   <li><a href="https://www.fws.gov/refuge/kenai">Kenai National Wildlife Refuge</a>, U.S. Fish & Wildlife Service (<a href="https://www.peninsulaclarion.com/sports/refuge-notebook-new-technology-increases-efficiency-of-refuge-cameras/">story</a>)</li>
   <li><a href="https://www.australianwildlife.org/">Australian Wildlife Conservancy</a> (<a href="https://www.australianwildlife.org/cutting-edge-technology-delivering-efficiency-gains-in-conservation/">blog</a>, <a href="https://www.australianwildlife.org/efficiency-gains-at-the-cutting-edge-of-technology/">blog</a>)</li>
   <li><a href="https://felidaefund.org/">Felidae Conservation Fund</a> (<a href="https://wildepod.org/">WildePod platform</a>) (<a href="https://abhaykashyap.com/blog/ai-powered-camera-trap-image-annotation-system/">blog post</a>)</li>
-  <li><a href="https://www.abmi.ca/home.html">Alberta Biodiversity Monitoring Institute (ABMI)</a> (<a href="https://www.wildtrax.ca/">WildTrax platform</a>) (<a href="https://wildcams.ca/blog/the-abmi-visits-the-zoo/">blog post</a>)</li>
+  <li><a href="https://www.abmi.ca/home.html">Alberta Biodiversity Monitoring Institute (ABMI)</a> (<a href="https://www.wildtrax.ca/">WildTrax platform</a>) (blog posts <a href="https://wildcams.ca/blog/the-abmi-visits-the-zoo/">1</a>, <a href="http://blog.abmi.ca/2023/06/14/making-wildtrax-its-not-a-kind-of-magic-behind-the-screen/">2</a>)</li>
   <li><a href="http://en.shanshui.org/">Shan Shui Conservation Center</a> (<a href="https://mp.weixin.qq.com/s/iOIQF3ckj0-rEG4yJgerYw?fbclid=IwAR0alwiWbe3udIcFvqqwm7y5qgr9hZpjr871FZIa-ErGUukZ7yJ3ZhgCevs">blog post</a>) (<a href="https://mp-weixin-qq-com.translate.goog/s/iOIQF3ckj0-rEG4yJgerYw?fbclid=IwAR0alwiWbe3udIcFvqqwm7y5qgr9hZpjr871FZIa-ErGUukZ7yJ3ZhgCevs&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp">translated blog post</a>)</li>
   <li><a href="http://www.irconservancy.org/">Irvine Ranch Conservancy</a> (<a href="https://www.ocregister.com/2022/03/30/ai-software-is-helping-researchers-focus-on-learning-about-ocs-wild-animals/">story</a>)</li>
   <li><a href="https://wildlifeprotectionsolutions.org/">Wildlife Protection Solutions</a> (<a href="https://customers.microsoft.com/en-us/story/1384184517929343083-wildlife-protection-solutions-nonprofit-ai-for-earth">story</a>, <a href="https://www.enterpriseai.news/2023/02/20/ai-helps-wildlife-protection-solutions-safeguard-endangered-species/">story</a>)</li>
   <li><a href="https://roadecology.ucdavis.edu/">Road Ecology Center</a>, University of California, Davis (<a href="https://wildlifeobserver.net/">Wildlife Observer Network platform</a>)</li>
-  <li><a href="https://www.nature.org/en-us/about-us/where-we-work/united-states/california/">The Nature Conservancy in California</a> (<a href="https://github.com/tnc-ca-geo/animl-frontend">Animl platform</a>)</li>
+  <li><a href="https://www.nature.org/en-us/about-us/where-we-work/united-states/california/">The Nature Conservancy in California</a> (<a href="https://github.com/tnc-ca-geo/animl-frontend">Animl platform</a>) (<a href="https://www.vision-systems.com/non-factory/environment-agriculture/article/14304433/the-nature-conservancy-brings-cameras-ai-to-invasive-species-prevention">story</a>)</li>
   <li><a href="https://science.sandiegozoo.org/">San Diego Zoo Wildlife Alliance</a> (<a href="https://github.com/conservationtechlab/animl">Animl R package</a>)</li>
 </ul>
 
