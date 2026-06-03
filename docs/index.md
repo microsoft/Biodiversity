@@ -31,7 +31,9 @@ tags:
 ## 👋 Welcome to PyTorch-Wildlife
 **PyTorch-Wildlife** is an AI platform designed for the AI for Conservation community to create, modify, and share powerful AI conservation models. It allows users to directly load a variety of models including [MegaDetector](https://github.com/microsoft/MegaDetector), [DeepFaune](https://www.deepfaune.cnrs.fr/en/), and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) from our ever expanding [model zoo](model_zoo/megadetector.md) for both animal detection and classification.
 
-Our scope now spans well beyond camera-trap imagery — we have active work in [MegaDetector-Acoustic](bioacoustics.md) for bioacoustic species identification, [MegaDetector-Overhead](model_zoo/other_detectors.md) for aerial wildlife detection, and edge computing for remote field deployments.
+Our scope now spans well beyond camera-trap imagery, with active work in [MegaDetector-Acoustic](bioacoustics.md) for bioacoustic species identification, [MegaDetector-Overhead](model_zoo/other_detectors.md) for aerial wildlife detection, and edge computing for remote field deployments.
+
+**New here?** The [Microsoft Biodiversity ecosystem guide](ecosystem.md) walks through every open-source project in the family and helps you pick the right one for camera-trap images, audio, field hardware, or model development. See who is already using these tools on the [collaborators page](collaborators.md).
 
 > **Coming from an older version?** OWL is now **MegaDetector-Overhead**, the bioacoustics module is now **MegaDetector-Acoustic**, and the repo has moved from `microsoft/CameraTraps` to `microsoft/Biodiversity` (old links redirect automatically). See the [full naming changes](releases/release_notes.md#naming-changes) in the v1.3.0 release notes.
 

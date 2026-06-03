@@ -1,4 +1,5 @@
 ---
+title: "Build the PyTorch-Wildlife Documentation Site"
 description: "How to build and deploy the PyTorch-Wildlife MkDocs documentation site locally and to GitHub Pages."
 tags:
   - PyTorch-Wildlife

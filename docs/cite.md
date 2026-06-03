@@ -1,4 +1,5 @@
 ---
+title: "Cite PyTorch-Wildlife and MegaDetector"
 description: "Cite PyTorch-Wildlife and MegaDetector in your research. BibTeX entries for Hernandez et al. 2024 (PyTorch-Wildlife) and Beery et al. 2019 (MegaDetector)."
 tags:
   - cite PyTorch-Wildlife

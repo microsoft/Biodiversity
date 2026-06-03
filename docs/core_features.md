@@ -1,4 +1,5 @@
 ---
+title: "PyTorch-Wildlife Core Features: Detection, Classification, and Model Zoo"
 description: "PyTorch-Wildlife core features: unified framework for wildlife AI combining detection models, pre-trained weights, datasets, and utilities for conservation research."
 tags:
   - PyTorch-Wildlife features
