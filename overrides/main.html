@@ -32,42 +32,57 @@
   <meta property="og:description" content="{{ social_desc | striptags }}">
   <meta property="og:url" content="{{ page.canonical_url if page and page.canonical_url else config.site_url }}">
   <meta property="og:image" content="{{ config.site_url }}assets/biodiversity-banner.png">
+  <meta property="og:image:alt" content="Microsoft Biodiversity: open-source conservation AI from the AI for Good Lab">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ social_title | striptags }}">
   <meta name="twitter:description" content="{{ social_desc | striptags }}">
   <meta name="twitter:image" content="{{ config.site_url }}assets/biodiversity-banner.png">
+  {#- TODO(design): swap in a 1200x630 banner + add og:image:width/height when delivered -#}
 
   {%- if page and page.file and page.file.src_path == "index.md" %}
-  {#- Homepage: Organization (the AI for Good Lab Biodiversity initiative) -#}
+  {#- Homepage: a connected @graph. The page's main entity is the project
+     collection (CollectionPage -> ItemList), not the Lab itself; the Lab is
+     the publisher Organization. -#}
   <script type="application/ld+json">
   {{- {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": config.site_url ~ "#org",
-    "name": "Microsoft AI for Good Lab — Biodiversity",
-    "alternateName": "Microsoft Biodiversity",
-    "description": config.site_description,
-    "url": config.site_url,
-    "parentOrganization": {
-      "@type": "Organization",
-      "name": "Microsoft AI for Good Lab",
-      "url": "https://www.microsoft.com/en-us/ai/ai-for-good"
-    },
-    "keywords": ["Microsoft biodiversity AI", "open source conservation AI", "wildlife monitoring AI tools", "AI for Good biodiversity", "conservation AI", "wildlife AI"]
-  } | tojson -}}
-  </script>
-  {#- Homepage: ItemList of the cluster's documentation sites (the entity anchor) -#}
-  <script type="application/ld+json">
-  {{- {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "@id": config.site_url ~ "#projects",
-    "name": "Microsoft Biodiversity ecosystem projects",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "MegaDetector",            "url": "https://microsoft.github.io/MegaDetector/" },
-      { "@type": "ListItem", "position": 2, "name": "PyTorch-Wildlife",         "url": "https://microsoft.github.io/Pytorch-Wildlife/" },
-      { "@type": "ListItem", "position": 3, "name": "SPARROW",                  "url": "https://microsoft.github.io/SPARROW/" },
-      { "@type": "ListItem", "position": 4, "name": "MegaDetector-Acoustic",    "url": "https://microsoft.github.io/MegaDetector-Acoustic/" }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": config.site_url ~ "#website",
+        "url": config.site_url,
+        "name": config.site_name,
+        "description": config.site_description,
+        "publisher": { "@id": config.site_url ~ "#publisher" },
+        "sameAs": ["https://github.com/microsoft/Biodiversity"]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": config.site_url ~ "#webpage",
+        "url": config.site_url,
+        "name": "Microsoft Biodiversity: Open-Source Conservation AI Hub",
+        "description": config.site_description,
+        "isPartOf": { "@id": config.site_url ~ "#website" },
+        "about": { "@id": config.site_url ~ "#publisher" },
+        "mainEntity": { "@id": config.site_url ~ "#projects" }
+      },
+      {
+        "@type": "Organization",
+        "@id": config.site_url ~ "#publisher",
+        "name": "Microsoft AI for Good Lab",
+        "url": "https://www.microsoft.com/en-us/ai/ai-for-good"
+      },
+      {
+        "@type": "ItemList",
+        "@id": config.site_url ~ "#projects",
+        "name": "Microsoft Biodiversity ecosystem projects",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "MegaDetector",         "url": "https://microsoft.github.io/MegaDetector/" },
+          { "@type": "ListItem", "position": 2, "name": "PyTorch-Wildlife",      "url": "https://microsoft.github.io/Pytorch-Wildlife/" },
+          { "@type": "ListItem", "position": 3, "name": "SPARROW",               "url": "https://microsoft.github.io/SPARROW/" },
+          { "@type": "ListItem", "position": 4, "name": "MegaDetector-Acoustic", "url": "https://microsoft.github.io/MegaDetector-Acoustic/" }
+        ]
+      }
     ]
   } | tojson -}}
   </script>
