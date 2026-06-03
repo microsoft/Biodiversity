@@ -36,7 +36,7 @@ what you already have (camera-trap images, audio recordings, a field device) or 
 
 - **[MegaDetector](https://microsoft.github.io/MegaDetector/)** detects animals, people, and vehicles in
   camera-trap images and filters out the blank frames.
-- **[MegaDetector-Acoustic](https://microsoft.github.io/MegaDetector-Acoustic/)** classifies and identifies
+- **MegaDetector-Acoustic** (documentation coming soon) classifies and identifies
   terrestrial species from audio recordings.
 - **[SPARROW](https://microsoft.github.io/SPARROW/)** is the solar-powered edge device that runs these
   models on site in remote field deployments.
