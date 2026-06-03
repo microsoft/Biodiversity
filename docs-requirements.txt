@@ -5,5 +5,3 @@ mkdocs-material-extensions
 mkdocs-callouts
 mkdocs-git-revision-date-localized-plugin
 pymdown-extensions
-mkdocstrings
-mkdocstrings-python

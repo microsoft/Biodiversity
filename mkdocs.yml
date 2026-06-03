@@ -71,7 +71,7 @@ theme:
     - navigation.footer
 
 nav:
-  - PyTorch-Wildlife:
+  - Microsoft Biodiversity:
     - Overview: index.md
     - The Ecosystem: ecosystem.md
     - Core Features: core_features.md
@@ -103,64 +103,6 @@ nav:
     - Documentation Standards: ecosystem-standards.md
     - License: license.md
     - Developer Guide: build_mkdocs.md
-  - Reference - Code API:
-      - Base Module:
-        - Overview: base/overview.md
-        - Data:
-          - Datasets: base/data/datasets.md
-          - Transforms: base/data/transforms.md
-        - Models:
-          - Classification:
-              - Base Classifier:
-                  - base/models/classification/base_classifier.md
-              - ResNet Base:
-                  - base/models/classification/resnet_base/base_classifier.md
-                  - base/models/classification/resnet_base/amazon.md
-                  - base/models/classification/resnet_base/custom_weights.md
-                  - base/models/classification/resnet_base/opossum.md
-                  - base/models/classification/resnet_base/serengeti.md
-              - TIMM Base:
-                  - base/models/classification/timm_base/base_classifier.md
-                  - base/models/classification/timm_base/DFNE.md
-                  - base/models/classification/timm_base/Deepfaune.md
-          - Detection:
-              - Base Detector:
-                  - base/models/detection/base_detector.md
-              - HerdNet:
-                  - base/models/detection/herdnet.md
-                  - base/models/detection/herdnet/dla.md
-                  - base/models/detection/herdnet/model.md
-                  - Animaloc:
-                      - Data:
-                          - base/models/detection/herdnet/animaloc/data/patches.md
-                          - base/models/detection/herdnet/animaloc/data/types.md
-                      - Eval:
-                          - base/models/detection/herdnet/animaloc/eval/lmds.md
-                          - base/models/detection/herdnet/animaloc/eval/stitchers.md
-              - Ultralytics Based:
-                  - base/models/detection/ultralytics_based/Deepfaune.md
-                  - MegaDetector v5:
-                      - base/models/detection/ultralytics_based/megadetectorv5.md
-                  - MegaDetector v6:
-                      - base/models/detection/ultralytics_based/megadetectorv6.md
-                      - base/models/detection/ultralytics_based/megadetectorv6_distributed.md
-                  - YOLOv5 Base:
-                      - base/models/detection/ultralytics_based/yolov5_base.md
-                  - YOLOv8 Base:
-                      - base/models/detection/ultralytics_based/yolov8_base.md
-                  - YOLOv8 Distributed:
-                      - base/models/detection/ultralytics_based/yolov8_distributed.md
-        - Utils:
-            - base/utils/misc.md
-            - base/utils/post_process.md
-
-      - Model Fine-tuning: 
-        - Overview: fine_tuning_modules/overview.md
-        - Classification Fine-tuning:
-            - Overview: fine_tuning_modules/classification/overview.md
-        - Detection Fine-tuning:
-            - Overview: fine_tuning_modules/detection/overview.md
-    
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -192,9 +134,3 @@ plugins:
       type: date
       enable_creation_date: true
       fallback_to_build_date: true
-  - mkdocstrings:
-      handlers:
-        python:
-          options:
-            docstring_style: google
-
