@@ -1,16 +1,17 @@
 ---
-description: "PyTorch-Wildlife: open-source AI platform for wildlife monitoring. MegaDetector, MegaDetector-Acoustic, MegaDetector-Overhead, SPARROW Studio. pip install PytorchWildlife."
+title: "Microsoft Biodiversity: Open-Source Conservation AI Hub"
+description: "Microsoft AI for Good Lab's open-source conservation AI hub for biodiversity and wildlife monitoring: MegaDetector, PyTorch-Wildlife, SPARROW, and more."
 tags:
+  - Microsoft biodiversity AI
+  - open source conservation AI
+  - wildlife monitoring AI tools
+  - AI for Good biodiversity
   - MegaDetector
-  - camera trap AI
-  - wildlife detection
   - PyTorch-Wildlife
   - conservation AI
-  - bioacoustics
-  - overhead detection
 ---
 
-![Biodiversity banner showing animals monitored by AI — camera traps, bioacoustics, and aerial detection — powered by PyTorch-Wildlife and MegaDetector](https://zenodo.org/records/20044680/files/Biodiversity_Banner.png)
+![Microsoft Biodiversity banner showing wildlife monitored by AI across camera traps, bioacoustics, and aerial detection, powered by PyTorch-Wildlife and MegaDetector](assets/biodiversity-banner.png)
 
 <div align="center"> 
 <font size="6"> Open-source AI for camera traps, bioacoustics, and wildlife monitoring </font>

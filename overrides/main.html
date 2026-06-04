@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{#
+  Theme override for SEO structured data and a clean homepage <title>.
+  Schema is gated on page.file.src_path (unique per page, cannot be copied
+  between pages by accident) rather than a front-matter flag.
+
+  This is the cluster hub, so the homepage carries an Organization entity for
+  the Microsoft AI for Good Lab Biodiversity initiative plus an ItemList that
+  enumerates the sub-projects — the entity anchor that ties the cluster's five
+  documentation sites together for search engines. Interior pages carry a
+  BreadcrumbList. The pattern mirrors microsoft/MegaDetector/overrides/main.html.
+#}
+
+{% block htmltitle %}
+  {%- if page and page.file and page.file.src_path == "index.md" -%}
+  <title>Microsoft Biodiversity: Open-Source AI for Conservation | AI for Good Lab</title>
+  {%- else -%}
+  {{ super() }}
+  {%- endif -%}
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+
+  {#- Open Graph / Twitter Card social metadata (per-page title/description, local share image) -#}
+  {%- set social_title = page.meta.title if page and page.meta and page.meta.title else (page.title if page and page.title else config.site_name) -%}
+  {%- set social_desc = page.meta.description if page and page.meta and page.meta.description else config.site_description -%}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ social_title | striptags }}">
+  <meta property="og:description" content="{{ social_desc | striptags }}">
+  <meta property="og:url" content="{{ page.canonical_url if page and page.canonical_url else config.site_url }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/biodiversity-banner.png">
+  <meta property="og:image:alt" content="Microsoft Biodiversity: open-source conservation AI from the AI for Good Lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ social_title | striptags }}">
+  <meta name="twitter:description" content="{{ social_desc | striptags }}">
+  <meta name="twitter:image" content="{{ config.site_url }}assets/biodiversity-banner.png">
+  <meta name="twitter:image:alt" content="Microsoft Biodiversity: open-source conservation AI from the AI for Good Lab">
+  {#- TODO(design): swap in a 1200x630 banner + add og:image:width/height when delivered -#}
+
+  {%- if page and page.file and page.file.src_path == "index.md" %}
+  {#- Homepage: a connected @graph. The page's main entity is the project
+     collection (CollectionPage -> ItemList), not the Lab itself; the Lab is
+     the publisher Organization. -#}
+  <script type="application/ld+json">
+  {{- {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": config.site_url ~ "#website",
+        "url": config.site_url,
+        "name": config.site_name,
+        "inLanguage": "en",
+        "description": config.site_description,
+        "publisher": { "@id": "https://www.microsoft.com/en-us/ai/ai-for-good#organization" },
+        "sameAs": ["https://github.com/microsoft/Biodiversity"]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": config.site_url ~ "#webpage",
+        "url": config.site_url,
+        "name": "Microsoft Biodiversity: Open-Source Conservation AI Hub",
+        "inLanguage": "en",
+        "description": config.site_description,
+        "isPartOf": { "@id": config.site_url ~ "#website" },
+        "about": { "@id": "https://www.microsoft.com/en-us/ai/ai-for-good#organization" },
+        "mainEntity": { "@id": config.site_url ~ "#projects" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.microsoft.com/en-us/ai/ai-for-good#organization",
+        "name": "Microsoft AI for Good Lab",
+        "url": "https://www.microsoft.com/en-us/ai/ai-for-good"
+      },
+      {
+        "@type": "ItemList",
+        "@id": config.site_url ~ "#projects",
+        "name": "Microsoft Biodiversity ecosystem projects",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "MegaDetector",         "url": "https://microsoft.github.io/MegaDetector/" },
+          { "@type": "ListItem", "position": 2, "name": "PyTorch-Wildlife",      "url": "https://microsoft.github.io/Pytorch-Wildlife/" },
+          { "@type": "ListItem", "position": 3, "name": "SPARROW",               "url": "https://microsoft.github.io/SPARROW/" }
+        ]
+      }
+    ]
+  } | tojson -}}
+  </script>
+  {%- endif %}
+
+  {%- if page and page.file and page.file.src_path != "index.md" and page.canonical_url %}
+  {#- Interior pages only: BreadcrumbList (no breadcrumb on the homepage) -#}
+  <script type="application/ld+json">
+  {{- {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Microsoft Biodiversity", "item": config.site_url },
+      { "@type": "ListItem", "position": 2, "name": page.title | striptags, "item": page.canonical_url }
+    ]
+  } | tojson -}}
+  </script>
+  {%- endif %}
+{% endblock %}

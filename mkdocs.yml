@@ -1,6 +1,6 @@
 site_name: Microsoft Biodiversity
 site_url: https://microsoft.github.io/Biodiversity/
-site_description: "PyTorch-Wildlife — open-source AI for camera traps, bioacoustics, and wildlife monitoring. Includes MegaDetector, MegaDetector-Acoustic, MegaDetector-Overhead, and SPARROW Studio."
+site_description: "Microsoft AI for Good Lab Biodiversity hub: open-source conservation AI for wildlife monitoring. Home of MegaDetector, PyTorch-Wildlife, SPARROW, and MegaDetector-Acoustic."
 docs_dir: docs
 site_dir: site
 repo_url: https://github.com/microsoft/Biodiversity
@@ -9,8 +9,9 @@ copyright: Copyright (c) 2023 Microsoft Corporation
 
 theme:
   name: material
-  favicon: https://zenodo.org/records/15376499/files/cat.png
-  logo: https://zenodo.org/records/15376499/files/cat.png
+  custom_dir: overrides
+  favicon: assets/cat.png
+  logo: assets/cat.png
   icon:
     menu: material/menu
     alternate: material/translate
@@ -181,9 +182,14 @@ markdown_extensions:
 
 
 plugins:
+  - callouts
   - search
   - meta
   - tags
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+      fallback_to_build_date: true
   - mkdocstrings:
       handlers:
         python:
