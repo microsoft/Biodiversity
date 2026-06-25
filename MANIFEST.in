@@ -1,3 +1,0 @@
-global-include *.yml
-include version.txt
-include README.md

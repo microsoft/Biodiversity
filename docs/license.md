@@ -1,4 +1,5 @@
 ---
+title: "PyTorch-Wildlife License"
 description: "PyTorch-Wildlife license information: MIT for the core package and utilities. Model-specific licenses (AGPL-3.0, CC BY-SA) are listed in the model zoo."
 tags:
   - PyTorch-Wildlife license

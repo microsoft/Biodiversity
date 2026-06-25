@@ -1,4 +1,5 @@
 ---
+title: "MegaDetector in PyTorch-Wildlife: Camera-Trap Animal Detection"
 description: "MegaDetector: AI model for detecting animals, people, and vehicles in camera-trap images. MegaDetectorV5 and MegaDetectorV6 available via PyTorch-Wildlife."
 tags:
   - MegaDetector
