@@ -1,9 +1,10 @@
 ---
-description: "PW-Engine: Rust-based inference core for PyTorch-Wildlife. Powers SPARROW Studio with sub-second cold starts, ONNX Runtime, and HTTP/CLI/Python/C-FFI surfaces."
+title: "PW-Engine: Rust Inference Core for PyTorch-Wildlife"
+description: "PW-Engine: Rust-based inference core for PyTorch-Wildlife. Powers SPARROW with sub-second cold starts, ONNX Runtime, and HTTP/CLI/Python/C-FFI surfaces."
 tags:
   - PW-Engine
   - PyTorch-Wildlife
-  - SPARROW Studio
+  - SPARROW
   - ONNX Runtime
   - wildlife AI inference
   - conservation technology
@@ -15,25 +16,25 @@ tags:
 
 **Status:** Preview. Inference surfaces are feature-complete; a data-management layer is the next milestone.
 
-**In one sentence:** PW-Engine (full name: PyTorch-Wildlife Engine) is a Rust-based inference engine and HTTP service that runs the PyTorch-Wildlife model set, powers SPARROW Studio, and can be embedded as the backend of any inference-heavy application.
+**In one sentence:** PW-Engine (full name: PyTorch-Wildlife Engine) is a Rust-based inference engine and HTTP service that runs the PyTorch-Wildlife model set, powers SPARROW, and can be embedded as the backend of any inference-heavy application.
 
 ---
 
 ## Why
 
-PyTorch-Wildlife today runs PyTorch end-to-end. That is right for research — it keeps model code, training, and fine-tuning in one place — but it pays real deployment costs: multi-second cold starts, multi-GB Docker images, single-process concurrency limits, and no practical path to integrate with serious UI or desktop applications. Anything non-Python has to shell out to a Python process.
+PyTorch-Wildlife today runs PyTorch end-to-end. That is right for research, since it keeps model code, training, and fine-tuning in one place, but it pays real deployment costs: multi-second cold starts, multi-GB Docker images, single-process concurrency limits, and no practical path to integrate with serious UI or desktop applications. Anything non-Python has to shell out to a Python process.
 
-To let UI developers — SPARROW Studio and anyone else — get both production-level latency and model-agnostic compatibility, we're building PW-Engine as a separate inference layer.
+To let UI developers (SPARROW and anyone else) get both production-level latency and model-agnostic compatibility, we're building PW-Engine as a separate inference layer.
 
 | Prior deployment shape | Cause | PW-Engine response |
 |---|---|---|
 | Multi-second cold start | Python interpreter + server initialization | Sub-second cold start on GPU |
 | Multi-GB Docker images | Python + CUDA bloat | CPU image ~163 MB; GPU image ~4 GB |
 | GIL-bound concurrency | Single-process Python worker | Async HTTP server (axum/tokio); per-model serialization, multi-model concurrent |
-| Hard to embed in UI / desktop | PyTorch process is the only runtime; no FFI | Rust core with HTTP / CLI / Python / C-FFI surfaces — UI devs integrate natively |
+| Hard to embed in UI / desktop | PyTorch process is the only runtime; no FFI | Rust core with HTTP / CLI / Python / C-FFI surfaces, so UI devs integrate natively |
 | Adding a model needs code changes | Hardcoded PyTorch model adapters | Drop an ONNX file + a manifest entry into the model directory |
 
-Because PyTorch-Wildlife today does not use ONNX at runtime, moving inference to PW-Engine (Rust + ONNX Runtime) is also a speed gain on top of the deployment-shape improvements above — not a wash against an ONNX baseline.
+Because PyTorch-Wildlife today does not use ONNX at runtime, moving inference to PW-Engine (Rust + ONNX Runtime) is also a speed gain on top of the deployment-shape improvements above, not a wash against an ONNX baseline.
 
 ---
 
@@ -62,13 +63,13 @@ PW-Engine is a Rust core library with four consumption surfaces:
 
              +---- C FFI (generated header) ----+
              v                                  v
-        SPARROW Studio                      Other native
+        SPARROW                      Other native
         Local (C#/P-Invoke)                 integrators
 ```
 
 **Runtime:** ONNX Runtime (CPU or GPU). No PyTorch at inference time.
 
-**Model zoo:** PW-Engine targets full compatibility with the PyTorch-Wildlife model zoo. Adding a model is a manifest change plus an ONNX file in the model directory — no engine code change required.
+**Model zoo:** PW-Engine targets full compatibility with the PyTorch-Wildlife model zoo. Adding a model is a manifest change plus an ONNX file in the model directory, with no engine code change required.
 
 ---
 
@@ -78,11 +79,11 @@ Pick the surface that matches your stack.
 
 | You are a… | Surface you use | Notes |
 |---|---|---|
-| Conservation user | No direct use — you interact via SPARROW Studio | Install the MSI; PW-Engine runs underneath |
+| Conservation user | No direct use; you interact via SPARROW | Install the MSI; PW-Engine runs underneath |
 | Existing Python user (`import PytorchWildlife`) | PyO3 bindings | Same API shape; drop-in |
 | Web/cloud deployer running an inference server | Docker HTTP container | `docker run`; call `/v1/detect` |
-| Laptop researcher | CLI — single static binary, ~35 MB | Invoke the CLI against a local image/audio file |
-| Desktop app developer (Windows/.NET first; Mac/Linux ports in progress) | C FFI / C# bindings | Same integration path SPARROW Studio Local uses |
+| Laptop researcher | CLI: single static binary, ~35 MB | Invoke the CLI against a local image/audio file |
+| Desktop app developer (Windows/.NET first; Mac/Linux ports in progress) | C FFI / C# bindings | Same integration path SPARROW Local uses |
 | Institutional / platform owner | Any combination | One inference implementation across desktop, server, and embedded |
 
 **Custom models:** drop an ONNX file plus a manifest entry into the model directory. No engine code change.
@@ -107,7 +108,7 @@ Reliability hardening for long-running GPU workloads is in progress.
 
 **Next milestone:** data-management sidecar.
 
-**Availability:** preview today via the SPARROW Studio beta.
+**Availability:** preview today via the SPARROW beta.
 
 ---
 
@@ -115,11 +116,11 @@ Reliability hardening for long-running GPU workloads is in progress.
 
 - **Does this replace PyTorch-Wildlife?**
 
-No. The Python PyTorch-Wildlife package remains the user-facing interface for training, fine-tuning, and research workflows. PW-Engine is the inference backend — over time, PyTorch-Wildlife itself will sit on top of PW-Engine rather than running PyTorch inference directly.
+No. The Python PyTorch-Wildlife package remains the user-facing interface for training, fine-tuning, and research workflows. PW-Engine is the inference backend. Over time, PyTorch-Wildlife itself will sit on top of PW-Engine rather than running PyTorch inference directly.
 
 - **When can I try it?**
 
-Through the SPARROW Studio beta (Windows MSI). We will update the beta in the next few weeks with PW-Engine as the core.
+Through the SPARROW beta (Windows MSI). We will update the beta in the next few weeks with PW-Engine as the core.
 
 - **Will my existing Python code break?**
 

@@ -1,4 +1,5 @@
 ---
+title: "Contributing to PyTorch-Wildlife"
 description: "Contribute to PyTorch-Wildlife: guidelines for submitting issues, pull requests, and new models to the Microsoft Biodiversity open-source conservation AI platform."
 tags:
   - contribute PyTorch-Wildlife
@@ -19,7 +20,7 @@ Thanks for your interest in collaborating on PyTorch-Wildlife! Here you can find
 4. 🤝 Once we get your comments, we’ll move the issue to **“In progress”** and assign you as the collaborator.  
 5. 🛠 Work on it at your own pace, and when it’s ready, submit a pull request to the **`Collaborations`** branch. 
 6. 🔍 We’ll review your PR, run tests, and merge it into our **pre‑release** branch ahead of the next version.
-7. 🎉 After merging, we’ll mark the issue/task as **“Done”** and credit your contribution in the release notes—thank you!
+7. 🎉 After merging, we’ll mark the issue/task as **“Done”** and credit your contribution in the release notes. Thank you!
 
 ---
 

@@ -73,6 +73,7 @@ theme:
 nav:
   - PyTorch-Wildlife:
     - Overview: index.md
+    - The Ecosystem: ecosystem.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
     - MegaDetector-Acoustic: bioacoustics.md
@@ -99,6 +100,7 @@ nav:
     - BoquilaHUB: demo_and_ui/boquilahub.md
   - Contribute:
     - Contribute Guidelines: contribute.md
+    - Documentation Standards: ecosystem-standards.md
     - License: license.md
     - Developer Guide: build_mkdocs.md
   - Reference - Code API:

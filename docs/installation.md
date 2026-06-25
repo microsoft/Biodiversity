@@ -1,4 +1,5 @@
 ---
+title: "Install PyTorch-Wildlife: pip, conda, and Docker Setup"
 description: "Install PyTorch-Wildlife for camera trap AI and wildlife detection. Supports conda, pip, and Docker on Windows, macOS, and Linux with optional CUDA GPU acceleration."
 tags:
   - PyTorch-Wildlife installation
