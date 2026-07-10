@@ -4,7 +4,9 @@ torchaudio
 tqdm
 Pillow
 supervision==0.23.0
-gradio
+# SECURITY: gradio<4.44.1 contains arbitrary-file-read CVEs
+# (e.g. CVE-2024-1561, CVE-2024-4941) exploitable via demo/gradio_demo.py.
+gradio>=4.44.1,<5
 chardet
 wget
 ultralytics

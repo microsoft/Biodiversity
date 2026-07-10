@@ -15,7 +15,7 @@ setup(
     url='https://github.com/microsoft/Biodiversity/',
     license='MIT',
     author='Andres Hernandez, Zhongqi Miao, Daniela Ruiz Lopez, Isai Daniel Chacon Silva',
-    author_email='v-hernandres@microsoft.com, zhongqimiao@microsoft.com, v-druizlopez@microsoft.com, v-ichaconsil@microsoft.com',  
+    author_email='v-hernandres@microsoft.com, zhongqimiao@microsoft.com, v-druizlopez@microsoft.com, v-ichaconsil@microsoft.com',
     description='a PyTorch Collaborative Deep Learning Framework for Conservation.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -24,9 +24,12 @@ setup(
         'torchvision',
         'torchaudio',
         'tqdm',
-        'Pillow', 
+        'Pillow',
         'supervision==0.23.0',
-        'gradio',
+        # SECURITY: gradio<4.44.1 contains multiple arbitrary-file-read CVEs
+        # (e.g. CVE-2024-1561, CVE-2024-4941) exploitable via the demo in
+        # demo/gradio_demo.py. Pin to the 4.x line with the fixes applied.
+        'gradio>=4.44.1,<5',
         'ultralytics',
         'chardet',
         'wget',
@@ -39,11 +42,11 @@ setup(
         'setuptools==68.2.2'
     ],
     classifiers=[
-        'Development Status :: 3 - Alpha',  
-        'Intended Audience :: Developers', 
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
     ],
     keywords='pytorch_wildlife, pytorch, wildlife, megadetector, conservation, animal, detection, classification',
-    python_requires='>=3.8',
+    python_requires='>=3.10',
 )
