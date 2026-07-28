@@ -5,6 +5,7 @@
 
 # Importing basic libraries
 import os
+import numpy as np
 import supervision as sv
 import wget
 import torch
@@ -173,18 +174,18 @@ class RTDETRApacheBase(BaseDetector):
         
         return self.results_generation([lab, box, scrs], img_path, id_strip)
 
-    def batch_image_detection(self, data_path, batch_size=16, det_conf_thres=0.2, id_strip=None):
+    def batch_image_detection(self, data_source, batch_size=16, det_conf_thres=0.2, id_strip=None):
         """
         Perform detection on a batch of images.
-        
+
         Args:
-            data_path (str): 
-                Path containing all images for inference.
+            data_source (str or List[np.ndarray]):
+                Either path containing images for inference or list of numpy arrays (RGB format, shape: H×W×3).
             batch_size (int, optional):
                 Batch size for inference. Defaults to 16.
-            det_conf_thres (float, optional): 
+            det_conf_thres (float, optional):
                 Confidence threshold for predictions. Defaults to 0.2.
-            id_strip (str, optional): 
+            id_strip (str, optional):
                 Characters to strip from img_id. Defaults to None.
             extension (str, optional):
                 Image extension to search for. Defaults to "JPG"
@@ -192,14 +193,20 @@ class RTDETRApacheBase(BaseDetector):
         Returns:
             list: List of detection results for all images.
         """
-        dataset = pw_data.DetectionImageFolder(
-            data_path,
-            transform=self.transform,
-        )
-        
+        # Handle numpy array input
+        if isinstance(data_source, (list, np.ndarray)):
+            image_source = ((Image.fromarray(np.asarray(img)).convert('RGB'), str(i))
+                            for i, img in enumerate(data_source))
+        # Handle image directory input
+        else:
+            dataset = pw_data.DetectionImageFolder(
+                data_source,
+                transform=self.transform,
+            )
+            image_source = ((Image.open(img_path).convert('RGB'), img_path) for img_path in dataset.images)
+
         results = []
-        for i in range(len(dataset)):
-            im_pil = Image.open(dataset.images[i]).convert('RGB')
+        for im_pil, img_id in image_source:
             w, h = im_pil.size
             orig_size = torch.tensor([w, h])[None].to(self.device)
             im_data = self.transform(im_pil)[None].to(self.device)
@@ -210,8 +217,8 @@ class RTDETRApacheBase(BaseDetector):
             lab = labels[0][scr > det_conf_thres]
             box = boxes[0][scr > det_conf_thres]
             scrs = scores[0][scr > det_conf_thres]
-            
-            res = self.results_generation([lab, box, scrs], dataset.images[i], id_strip)
+
+            res = self.results_generation([lab, box, scrs], img_id, id_strip)
 
             # Normalize the coordinates for timelapse compatibility
             size = orig_size[0].cpu().numpy()

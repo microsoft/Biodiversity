@@ -133,12 +133,12 @@ class YOLOV5Base(BaseDetector):
 
         return res
 
-    def batch_image_detection(self, data_path, batch_size: int = 16, det_conf_thres: float = 0.2, id_strip: str = None) -> list[dict]:
+    def batch_image_detection(self, data_source, batch_size: int = 16, det_conf_thres: float = 0.2, id_strip: str = None) -> list[dict]:
         """
         Perform detection on a batch of images.
 
         Args:
-            data_path (str): Path containing all images for inference.
+            data_source (str or List[np.ndarray]): Either path containing images for inference or list of numpy arrays (RGB format, shape: H×W×3).
             batch_size (int, optional): Batch size for inference. Defaults to 16.
             det_conf_thres (float, optional): Confidence threshold for predictions. Defaults to 0.2.
             id_strip (str, optional): Characters to strip from img_id. Defaults to None.
@@ -147,8 +147,33 @@ class YOLOV5Base(BaseDetector):
             list[dict]: List of detection results for all images.
         """
 
+        # Handle numpy array input
+        if isinstance(data_source, (list, np.ndarray)):
+            results = []
+            num_batches = (len(data_source) + batch_size - 1) // batch_size  # Calculate total batches
+
+            with tqdm(total=num_batches) as pbar:
+                for start_idx in range(0, len(data_source), batch_size):
+                    batch_arrays = data_source[start_idx:start_idx + batch_size]
+                    imgs = torch.stack([self.transform(img) for img in batch_arrays]).to(self.device)
+                    predictions = self.model(imgs)[0].detach().cpu()
+                    predictions = non_max_suppression(predictions, conf_thres=det_conf_thres)
+
+                    for idx, pred in enumerate(predictions):
+                        pred = pred.numpy()
+                        # Get size directly from numpy array
+                        size = batch_arrays[idx].shape[:2]
+                        pred[:, :4] = scale_boxes([self.IMAGE_SIZE] * 2, pred[:, :4], size).round()
+                        res = self.results_generation(pred, f"{start_idx + idx}", id_strip)
+                        # Normalize the coordinates for timelapse compatibility
+                        res["normalized_coords"] = [[x1 / size[1], y1 / size[0], x2 / size[1], y2 / size[0]] for x1, y1, x2, y2 in pred[:, :4]]
+                        results.append(res)
+                    pbar.update(1)
+            return results
+
+        # Handle image directory input
         dataset = pw_data.DetectionImageFolder(
-            data_path,
+            data_source,
             transform=self.transform,
         )
 
