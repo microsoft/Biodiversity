@@ -17,6 +17,7 @@ Here we list a few of the organizations that have used MegaDetector. We're only 
 <details>
 <summary><font size="3">👉 Full list of organizations</font></summary>
 <ul>
+  <li>(Newly Added) <a href="https://www.jocotoco.org.ec/web2#/EN/home2">Jocotoco</a>
   <li>(Newly Added) <a href="https://www.terroiko.fr/">TerrOïko</a> (<a href="https://www.terroiko.fr/ocapi">OCAPI platform</a>)</li>
   <li><a href="http://azdeq.gov/">Arizona Department of Environmental Quality</a></li>
   <li><a href="https://blackbirdenv.com/">Blackbird Environmental</a></li>
