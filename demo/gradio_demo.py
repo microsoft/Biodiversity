@@ -279,7 +279,7 @@ with gr.Blocks() as demo:
 
     def update_ui_elements(det_model):
         if det_model == "MegaDetectorV6":
-            return gr.Dropdown(choices=["MDV6-yolov9-c", "MDV6-yolov9-e", "MDV6-yolov10-c", "MDV6-yolov10-e", "MDV6-rtdetr-c", "MDV6-yolov9-c-mit", "MDV6-yolov9-e-mit", "MDV6-rtdetr-c-apache", "MDV6-rtdetr-e-apache"], interactive=True, label="Model version", value="MDV6-yolov9e"), gr.update(visible=True)
+            return gr.Dropdown(choices=["MDV6-yolov9-c", "MDV6-yolov9-e", "MDV6-yolov10-c", "MDV6-yolov10-e", "MDV6-rtdetr-c", "MDV6-yolov9-c-mit", "MDV6-yolov9-e-mit", "MDV6-rtdetr-c-apache", "MDV6-rtdetr-e-apache"], interactive=True, label="Model version", value="MDV6-yolov9-e"), gr.update(visible=True)
         elif det_model == "MegaDetectorV5":
             return gr.Dropdown(choices=["a", "b"], interactive=True, label="Model version", value="a"), gr.update(visible=True)
         else:
@@ -369,7 +369,7 @@ if __name__ == "__main__":
     # - allowed_paths restricts the /file= endpoint to the demo's scratch dir.
     # - blocked_paths is defense-in-depth against known arbitrary-file-read
     #   CVEs in older Gradio 4.x releases (e.g. CVE-2024-1561, CVE-2024-4941).
-    #   Requires gradio>=4.44.1 for the underlying fixes.
+    #   The gradio>=6.15.1 dependency floor includes these and later fixes.
     demo.launch(
         share=False,
         allowed_paths=[TEMP_DIR],

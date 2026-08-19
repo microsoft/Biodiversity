@@ -26,20 +26,18 @@ setup(
         'tqdm',
         'Pillow',
         'supervision==0.23.0',
-        # SECURITY: gradio<4.44.1 contains multiple arbitrary-file-read CVEs
-        # (e.g. CVE-2024-1561, CVE-2024-4941) exploitable via the demo in
-        # demo/gradio_demo.py. Pin to the 4.x line with the fixes applied.
-        'gradio>=4.44.1,<5',
+        # SECURITY: Require the patched Gradio 6.x line, including the fix for
+        # GHSA-6655-8ph2-63j3 and the earlier arbitrary-file-read advisories.
+        'gradio>=6.15.1,<7',
         'ultralytics',
         'chardet',
         'wget',
         'yolov5',
-        'setuptools',
+        'setuptools>=83.0.0',
         'scikit-learn',
         'timm',
         'omegaconf',
-        'lightning',
-        'setuptools==68.2.2'
+        'lightning'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
