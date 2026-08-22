@@ -196,15 +196,15 @@ class TIMM_BaseClassifierInference(BaseClassifierInference):
         total_logits = []
         total_paths = []
 
-        with tqdm(total=len(dataloader)) as pbar: 
+        with torch.no_grad(), tqdm(total=len(dataloader)) as pbar:
             for batch in dataloader:
                 imgs, paths = batch
                 imgs = imgs.to(self.device)
-                total_logits.append(self.predictor(imgs))
+                total_logits.append(self.predictor(imgs).cpu())
                 total_paths.append(paths)
                 pbar.update(1)
 
-        total_logits = torch.cat(total_logits, dim=0).cpu()
+        total_logits = torch.cat(total_logits, dim=0)
         total_paths = np.concatenate(total_paths, axis=0)
 
         return self.results_generation(total_logits, total_paths, id_strip=id_strip)
