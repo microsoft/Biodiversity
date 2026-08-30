@@ -51,13 +51,13 @@ PW_FT_detection/
    └── your_data.yaml
 
 ```
-`./data/data_example` folder shows an example of the structure.
+The `./data/data_example` folder in the [demo data](https://zenodo.org/records/15376499/files/demo_data_det.zip?download=1) shows an example of the structure.
 
 ### Data configuration file structure
 
 To ensure the code works correctly, your_data.yaml file should be structured as follows. The path field should contain the relative path to your_data/ folder. The train, val, and test fields should point to the subdirectories within the images/ folder where the training, validation, and test images are stored, respectively. For the classes, the names field should be a list where each class is assigned to a unique identifier number. 
 
-The `.data/data_example.yaml` file shows an example of the structure.
+The `./data/data_example.yaml` file in the [demo data](https://zenodo.org/records/15376499/files/demo_data_det.zip?download=1) shows an example of the structure.
 
 ### Annotations structure
 
@@ -120,7 +120,7 @@ python main.py
 
 This command will initiate the training process based on the parameters specified in `config.yaml`. Make sure to monitor the output for any errors or important information regarding the training progress.
 
-**We have provided example images and annotation files in the `data/data_example` directory for code testing without needing to provide your own data.**
+**Example images and annotation files for code testing without needing to provide your own data are available in the [demo data](https://zenodo.org/records/15376499/files/demo_data_det.zip?download=1) (unzips to `data/data_example/` and `data/data_example.yaml`).**
 
 ## Output
 
@@ -130,7 +130,7 @@ We are working on adding a feature in a future release to directly integrate the
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
 ## Support
 
