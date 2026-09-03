@@ -2,8 +2,9 @@
 # Licensed under the MIT License.
 
 import os
+import warnings
 from glob import glob
-from PIL import Image, ImageFile
+from PIL import Image, ImageFile, UnidentifiedImageError
 import numpy as np
 import supervision as sv
 import torch
@@ -29,6 +30,27 @@ def is_image_file(filename: str) -> bool:
     """Checks if a file is an allowed image extension."""  
     return has_file_allowed_extension(filename, IMG_EXTENSIONS) 
 
+def is_valid_image(path: str) -> bool:
+    """
+    Checks whether an image file can be opened and is not corrupted.
+
+    Uses PIL's ``Image.verify()``, which inspects the file headers to confirm
+    the image can be decoded, without fully loading it into memory.
+
+    Parameters:
+        path (str): Path to the image file.
+
+    Returns:
+        bool: True if the image is readable, False if it is corrupted or unreadable.
+    """
+    try:
+        with Image.open(path) as img:
+            img.verify()
+        return True
+    except (UnidentifiedImageError, OSError):
+        return False
+
+
 class ImageFolder(Dataset):
     """
     A PyTorch Dataset for loading images from a specified directory.
@@ -48,6 +70,22 @@ class ImageFolder(Dataset):
         self.image_dir = image_dir
         self.transform = transform
         self.images = [os.path.join(dp, f) for dp, dn, filenames in os.walk(image_dir) for f in filenames if is_image_file(f)] # dp: directory path, dn: directory name, f: filename
+
+        # Skip corrupted or unreadable images so a single bad file does not abort
+        # the whole batch during data loading (see issue #575).
+        valid_images = []
+        skipped_images = []
+        for path in self.images:
+            if is_valid_image(path):
+                valid_images.append(path)
+            else:
+                skipped_images.append(path)
+        if skipped_images:
+            warnings.warn(
+                f"Skipped {len(skipped_images)} corrupted or unreadable image(s) "
+                f"while loading '{image_dir}': {skipped_images}"
+            )
+        self.images = valid_images
 
     def __getitem__(self, idx) -> tuple:
         """
