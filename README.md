@@ -26,7 +26,16 @@ Our journey started with **MegaDetector** — a camera-trap animal detection mod
 
 Over time, our scope grew well beyond camera-trap imagery. We now have active work in bioacoustics, overhead animal detection, and edge computing for remote field deployments. As the ecosystem expanded, it became clear that keeping everything inside a single repository was working against us. Code was harder to find, harder to maintain, and harder to extend.
 
-So we made a deliberate decision: break the work into focused, dedicated repositories — one per project — where the code in each repo is concentrated, the ownership is clear, and future contributors know exactly where to go. This repository is the hub that ties them together. PyTorch-Wildlife now lives at [microsoft/Pytorch-Wildlife](https://github.com/microsoft/Pytorch-Wildlife), MegaDetector at [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector), and everything else is linked in the table below.
+So we made a deliberate decision: break the work into focused, dedicated repositories — one per project — where the code in each repo is concentrated, the ownership is clear, and future contributors know exactly where to go. This repository is the hub that ties them together. PyTorch-Wildlife has become [microsoft/SPARROW-Playground](https://github.com/microsoft/SPARROW-Playground) (see below), MegaDetector at [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector), and everything else is linked in the table below.
+
+### PyTorch-Wildlife is now SPARROW Playground
+
+We can no longer use the word "PyTorch" in our project names, and our inference now runs on [SPARROW Engine](https://github.com/microsoft/SPARROW-Engine), a framework-free inference engine with its own Python package (`pip install sparrow-engine`) and access to our full model zoo. So the PyTorch-Wildlife repository has been renamed and rebuilt as **[SPARROW Playground](https://github.com/microsoft/SPARROW-Playground)**: notebooks and small scripts for trying out the SPARROW and AI for Good biodiversity tools on your own images, videos and audio, and reusing the code in your own projects. Notebooks for live data from SPARROW devices, 4G cameras and FTPS cameras are next.
+
+- Old `microsoft/Pytorch-Wildlife` links, issues and clones redirect to SPARROW Playground automatically.
+- The old PyTorch-Wildlife code is kept, unmaintained, in the [`archive/pytorch-wildlife`](https://github.com/microsoft/SPARROW-Playground/tree/archive/pytorch-wildlife) branch and tag [`v1.3.1`](https://github.com/microsoft/SPARROW-Playground/tree/v1.3.1).
+- The `PytorchWildlife` PyPI package ends at 1.3.1. It still installs and works, but it will get no further updates; we suggest switching to `sparrow-engine`.
+- Fine-tuning has moved to dedicated repositories, starting with [microsoft/MegaDetector-Classifier](https://github.com/microsoft/MegaDetector-Classifier).
 
 #### Previous versions:
 - [Release notes](https://microsoft.github.io/Biodiversity/releases/release_notes/)
@@ -40,7 +49,8 @@ So we made a deliberate decision: break the work into focused, dedicated reposit
 | [microsoft/MegaDetector-Classifier](https://github.com/microsoft/MegaDetector-Classifier) | Camera-trap species classification fine-tuning — adapt classifiers to your own datasets and geographic regions |
 | [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead) | Overhead imagery detection — point-based wildlife localization from aerial views |
 | [microsoft/MegaDetector-Sonar](https://github.com/microsoft/MegaDetector-Sonar) | Sonar-based wildlife detection — processing and feature detection in sidescan sonar imagery |
-| [microsoft/Pytorch-Wildlife](https://github.com/microsoft/Pytorch-Wildlife) | The collaborative deep learning framework and model zoo for conservation AI |
+| [microsoft/SPARROW-Engine](https://github.com/microsoft/SPARROW-Engine) | Framework-free inference engine and Python package (`sparrow-engine`) with the full conservation model zoo |
+| [microsoft/SPARROW-Playground](https://github.com/microsoft/SPARROW-Playground) | Notebooks and scripts for trying the SPARROW and biodiversity tools — formerly PyTorch-Wildlife |
 | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) | Solar-Powered Acoustic and Remote Recording Observation Watch — AI edge device for remote field deployments |
 
 ## Cite us
