@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../../assets/cat.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -4297,189 +4297,189 @@ loading the model, generating results, and performing single and batch image det
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>PytorchWildlife/models/detection/base_detector.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-9">  9</a></span>
-<span class="normal"><a href="#__codelineno-0-10"> 10</a></span>
-<span class="normal"><a href="#__codelineno-0-11"> 11</a></span>
-<span class="normal"><a href="#__codelineno-0-12"> 12</a></span>
-<span class="normal"><a href="#__codelineno-0-13"> 13</a></span>
-<span class="normal"><a href="#__codelineno-0-14"> 14</a></span>
-<span class="normal"><a href="#__codelineno-0-15"> 15</a></span>
-<span class="normal"><a href="#__codelineno-0-16"> 16</a></span>
-<span class="normal"><a href="#__codelineno-0-17"> 17</a></span>
-<span class="normal"><a href="#__codelineno-0-18"> 18</a></span>
-<span class="normal"><a href="#__codelineno-0-19"> 19</a></span>
-<span class="normal"><a href="#__codelineno-0-20"> 20</a></span>
-<span class="normal"><a href="#__codelineno-0-21"> 21</a></span>
-<span class="normal"><a href="#__codelineno-0-22"> 22</a></span>
-<span class="normal"><a href="#__codelineno-0-23"> 23</a></span>
-<span class="normal"><a href="#__codelineno-0-24"> 24</a></span>
-<span class="normal"><a href="#__codelineno-0-25"> 25</a></span>
-<span class="normal"><a href="#__codelineno-0-26"> 26</a></span>
-<span class="normal"><a href="#__codelineno-0-27"> 27</a></span>
-<span class="normal"><a href="#__codelineno-0-28"> 28</a></span>
-<span class="normal"><a href="#__codelineno-0-29"> 29</a></span>
-<span class="normal"><a href="#__codelineno-0-30"> 30</a></span>
-<span class="normal"><a href="#__codelineno-0-31"> 31</a></span>
-<span class="normal"><a href="#__codelineno-0-32"> 32</a></span>
-<span class="normal"><a href="#__codelineno-0-33"> 33</a></span>
-<span class="normal"><a href="#__codelineno-0-34"> 34</a></span>
-<span class="normal"><a href="#__codelineno-0-35"> 35</a></span>
-<span class="normal"><a href="#__codelineno-0-36"> 36</a></span>
-<span class="normal"><a href="#__codelineno-0-37"> 37</a></span>
-<span class="normal"><a href="#__codelineno-0-38"> 38</a></span>
-<span class="normal"><a href="#__codelineno-0-39"> 39</a></span>
-<span class="normal"><a href="#__codelineno-0-40"> 40</a></span>
-<span class="normal"><a href="#__codelineno-0-41"> 41</a></span>
-<span class="normal"><a href="#__codelineno-0-42"> 42</a></span>
-<span class="normal"><a href="#__codelineno-0-43"> 43</a></span>
-<span class="normal"><a href="#__codelineno-0-44"> 44</a></span>
-<span class="normal"><a href="#__codelineno-0-45"> 45</a></span>
-<span class="normal"><a href="#__codelineno-0-46"> 46</a></span>
-<span class="normal"><a href="#__codelineno-0-47"> 47</a></span>
-<span class="normal"><a href="#__codelineno-0-48"> 48</a></span>
-<span class="normal"><a href="#__codelineno-0-49"> 49</a></span>
-<span class="normal"><a href="#__codelineno-0-50"> 50</a></span>
-<span class="normal"><a href="#__codelineno-0-51"> 51</a></span>
-<span class="normal"><a href="#__codelineno-0-52"> 52</a></span>
-<span class="normal"><a href="#__codelineno-0-53"> 53</a></span>
-<span class="normal"><a href="#__codelineno-0-54"> 54</a></span>
-<span class="normal"><a href="#__codelineno-0-55"> 55</a></span>
-<span class="normal"><a href="#__codelineno-0-56"> 56</a></span>
-<span class="normal"><a href="#__codelineno-0-57"> 57</a></span>
-<span class="normal"><a href="#__codelineno-0-58"> 58</a></span>
-<span class="normal"><a href="#__codelineno-0-59"> 59</a></span>
-<span class="normal"><a href="#__codelineno-0-60"> 60</a></span>
-<span class="normal"><a href="#__codelineno-0-61"> 61</a></span>
-<span class="normal"><a href="#__codelineno-0-62"> 62</a></span>
-<span class="normal"><a href="#__codelineno-0-63"> 63</a></span>
-<span class="normal"><a href="#__codelineno-0-64"> 64</a></span>
-<span class="normal"><a href="#__codelineno-0-65"> 65</a></span>
-<span class="normal"><a href="#__codelineno-0-66"> 66</a></span>
-<span class="normal"><a href="#__codelineno-0-67"> 67</a></span>
-<span class="normal"><a href="#__codelineno-0-68"> 68</a></span>
-<span class="normal"><a href="#__codelineno-0-69"> 69</a></span>
-<span class="normal"><a href="#__codelineno-0-70"> 70</a></span>
-<span class="normal"><a href="#__codelineno-0-71"> 71</a></span>
-<span class="normal"><a href="#__codelineno-0-72"> 72</a></span>
-<span class="normal"><a href="#__codelineno-0-73"> 73</a></span>
-<span class="normal"><a href="#__codelineno-0-74"> 74</a></span>
-<span class="normal"><a href="#__codelineno-0-75"> 75</a></span>
-<span class="normal"><a href="#__codelineno-0-76"> 76</a></span>
-<span class="normal"><a href="#__codelineno-0-77"> 77</a></span>
-<span class="normal"><a href="#__codelineno-0-78"> 78</a></span>
-<span class="normal"><a href="#__codelineno-0-79"> 79</a></span>
-<span class="normal"><a href="#__codelineno-0-80"> 80</a></span>
-<span class="normal"><a href="#__codelineno-0-81"> 81</a></span>
-<span class="normal"><a href="#__codelineno-0-82"> 82</a></span>
-<span class="normal"><a href="#__codelineno-0-83"> 83</a></span>
-<span class="normal"><a href="#__codelineno-0-84"> 84</a></span>
-<span class="normal"><a href="#__codelineno-0-85"> 85</a></span>
-<span class="normal"><a href="#__codelineno-0-86"> 86</a></span>
-<span class="normal"><a href="#__codelineno-0-87"> 87</a></span>
-<span class="normal"><a href="#__codelineno-0-88"> 88</a></span>
-<span class="normal"><a href="#__codelineno-0-89"> 89</a></span>
-<span class="normal"><a href="#__codelineno-0-90"> 90</a></span>
-<span class="normal"><a href="#__codelineno-0-91"> 91</a></span>
-<span class="normal"><a href="#__codelineno-0-92"> 92</a></span>
-<span class="normal"><a href="#__codelineno-0-93"> 93</a></span>
-<span class="normal"><a href="#__codelineno-0-94"> 94</a></span>
-<span class="normal"><a href="#__codelineno-0-95"> 95</a></span>
-<span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
-<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
-<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
-<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
-<span class="normal"><a href="#__codelineno-0-100">100</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">BaseDetector</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    Base detector class. This class provides utility methods for</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">    loading the model, generating results, and performing single and batch image detections.</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="c1"># Placeholder class-level attributes to be defined in derived classes</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">STRIDE</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">TRANSFORM</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">        Initialize the base detector.</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            weights (str, optional): </span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">                Path to the model weights. Defaults to None.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">            device (str, optional): </span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">                Device for model inference. Defaults to &quot;cpu&quot;.</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">            url (str, optional): </span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">                URL to fetch the model weights. Defaults to None.</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">BaseDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="sd">        Load model weights.</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">            weights (str, optional): </span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="sd">                Path to the model weights. Defaults to None.</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">            device (str, optional): </span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">                Device for model inference. Defaults to &quot;cpu&quot;.</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">            url (str, optional): </span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">                URL to fetch the model weights. Defaults to None.</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">        Raises:</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">            Exception: If weights are not provided.</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="k">pass</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">results_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">img_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="sd">        Generate results for detection based on model predictions.</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">            preds (numpy.ndarray): Model predictions.</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">            img_id (str): Image identifier.</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">            id_strip (str, optional): Strip specific characters from img_id. Defaults to None.</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a><span class="sd">            dict: Dictionary containing image ID, detections, and labels.</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>        <span class="k">pass</span>
-</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66"></a>
-</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">single_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_thres</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="sd">        Perform detection on a single image.</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70"></a>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="sd">            img (str or ndarray): </span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">                Image path or ndarray of images.</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">            img_size (tuple): </span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">                Original image size.</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">            img_path (str): </span>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">                Image path or identifier.</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">            conf_thres (float, optional): </span>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79"></a><span class="sd">                Confidence threshold for predictions. Defaults to 0.2.</span>
-</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="sd">            id_strip (str, optional): </span>
-</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="sd">                Characters to strip from img_id. Defaults to None.</span>
-</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82"></a>
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="sd">            dict: Detection results.</span>
-</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86"></a>        <span class="k">pass</span>
-</span><span id="__span-0-87"><a id="__codelineno-0-87" name="__codelineno-0-87"></a>
-</span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">batch_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">conf_thres</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">        Perform detection on a batch of images.</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>
-</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">            dataloader (DataLoader): DataLoader containing image batches.</span>
-</span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">            conf_thres (float, optional): Confidence threshold for predictions. Defaults to 0.2.</span>
-</span><span id="__span-0-95"><a id="__codelineno-0-95" name="__codelineno-0-95"></a><span class="sd">            id_strip (str, optional): Characters to strip from img_id. Defaults to None.</span>
-</span><span id="__span-0-96"><a id="__codelineno-0-96" name="__codelineno-0-96"></a>
-</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98"></a><span class="sd">            list[dict]: List of detection results for all images.</span>
-</span><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100"></a>        <span class="k">pass</span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-9">  9</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-10"> 10</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-11"> 11</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-12"> 12</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-13"> 13</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-14"> 14</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-15"> 15</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-16"> 16</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-17"> 17</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-18"> 18</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-19"> 19</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-20"> 20</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-21"> 21</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-22"> 22</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-23"> 23</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-24"> 24</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-25"> 25</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-26"> 26</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-27"> 27</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-28"> 28</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-29"> 29</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-30"> 30</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-31"> 31</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-32"> 32</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-33"> 33</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-34"> 34</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-35"> 35</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-36"> 36</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-37"> 37</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-38"> 38</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-39"> 39</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-40"> 40</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-41"> 41</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-42"> 42</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-43"> 43</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-44"> 44</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-45"> 45</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-46"> 46</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-47"> 47</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-48"> 48</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-49"> 49</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-50"> 50</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-51"> 51</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-52"> 52</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-53"> 53</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-54"> 54</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-55"> 55</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-56"> 56</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-57"> 57</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-58"> 58</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-59"> 59</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-60"> 60</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-61"> 61</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-62"> 62</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-63"> 63</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-64"> 64</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-65"> 65</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-66"> 66</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-67"> 67</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-68"> 68</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-69"> 69</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-70"> 70</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-71"> 71</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-72"> 72</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-73"> 73</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-74"> 74</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-75"> 75</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-76"> 76</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-77"> 77</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-78"> 78</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-79"> 79</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-80"> 80</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-81"> 81</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-82"> 82</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-83"> 83</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-84"> 84</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-85"> 85</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-86"> 86</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-87"> 87</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-88"> 88</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-89"> 89</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-90"> 90</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-91"> 91</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-92"> 92</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-93"> 93</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-94"> 94</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-95"> 95</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-100">100</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-9"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-9" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">BaseDetector</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-10"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-10" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-10"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-11"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-11" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-11"></a><span class="sd">    Base detector class. This class provides utility methods for</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-12"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-12" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-12"></a><span class="sd">    loading the model, generating results, and performing single and batch image detections.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-13"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-13" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-13"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-14"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-14" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-14"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-15"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-15" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-15"></a>    <span class="c1"># Placeholder class-level attributes to be defined in derived classes</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-16"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-16" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-16"></a>    <span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-17"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-17" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-17"></a>    <span class="n">STRIDE</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-18"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-18" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-18"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-19"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-19" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-19"></a>    <span class="n">TRANSFORM</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-20"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-20" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-20"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-21"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-21" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-21"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-22"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-22" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-22"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-23"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-23" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-23"></a><span class="sd">        Initialize the base detector.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-24"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-24" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-24"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-25"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-25" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-25"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-26"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-26" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-26"></a><span class="sd">            weights (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-27"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-27" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-27"></a><span class="sd">                Path to the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-28"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-28" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-28"></a><span class="sd">            device (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-29"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-29" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-29"></a><span class="sd">                Device for model inference. Defaults to "cpu".</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-30"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-30" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-30"></a><span class="sd">            url (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-31"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-31" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-31"></a><span class="sd">                URL to fetch the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-32"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-32" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-32"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-33"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-33" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-33"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">BaseDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-34"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-34" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-35"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-35" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-35"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-36"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-36" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-36"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-37"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-37" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-38"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-38" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-38"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-39"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-39" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-39"></a><span class="sd">        Load model weights.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-40"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-40" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-40"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-41"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-41" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-41"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-42"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-42" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-42"></a><span class="sd">            weights (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-43"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-43" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-43"></a><span class="sd">                Path to the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-44"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-44" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-44"></a><span class="sd">            device (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-45"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-45" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-45"></a><span class="sd">                Device for model inference. Defaults to "cpu".</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-46"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-46" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-46"></a><span class="sd">            url (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-47"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-47" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-47"></a><span class="sd">                URL to fetch the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-48"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-48" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-48"></a><span class="sd">        Raises:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-49"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-49" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-49"></a><span class="sd">            Exception: If weights are not provided.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-50"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-50" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-50"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-51"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-51" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-51"></a>        <span class="k">pass</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-52"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-52" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-52"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-53"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-53" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-53"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">results_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">img_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-54"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-54" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-54"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-55"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-55" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-55"></a><span class="sd">        Generate results for detection based on model predictions.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-56"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-56" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-56"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-57"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-57" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-57"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-58"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-58" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-58"></a><span class="sd">            preds (numpy.ndarray): Model predictions.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-59"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-59" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-59"></a><span class="sd">            img_id (str): Image identifier.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-60"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-60" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-60"></a><span class="sd">            id_strip (str, optional): Strip specific characters from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-61"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-61" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-61"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-62"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-62" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-62"></a><span class="sd">        Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-63"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-63" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-63"></a><span class="sd">            dict: Dictionary containing image ID, detections, and labels.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-64"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-64" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-64"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-65"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-65" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-65"></a>        <span class="k">pass</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-66"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-66" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-66"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-67"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-67" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-67"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">single_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_thres</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-68"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-68" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-68"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-69"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-69" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-69"></a><span class="sd">        Perform detection on a single image.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-70"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-70" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-70"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-71"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-71" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-71"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-72"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-72" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-72"></a><span class="sd">            img (str or ndarray): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-73"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-73" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-73"></a><span class="sd">                Image path or ndarray of images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-74"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-74" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-74"></a><span class="sd">            img_size (tuple): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-75"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-75" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-75"></a><span class="sd">                Original image size.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-76"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-76" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-76"></a><span class="sd">            img_path (str): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-77"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-77" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-77"></a><span class="sd">                Image path or identifier.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-78"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-78" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-78"></a><span class="sd">            conf_thres (float, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-79"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-79" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-79"></a><span class="sd">                Confidence threshold for predictions. Defaults to 0.2.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-80"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-80" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-80"></a><span class="sd">            id_strip (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-81"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-81" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-81"></a><span class="sd">                Characters to strip from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-82"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-82" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-82"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-83"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-83" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-83"></a><span class="sd">        Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-84"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-84" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-84"></a><span class="sd">            dict: Detection results.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-85"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-85" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-85"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-86"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-86" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-86"></a>        <span class="k">pass</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-87"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-87" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-87"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-88"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-88" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-88"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">batch_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">conf_thres</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-89"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-89" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-89"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-90"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-90" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-90"></a><span class="sd">        Perform detection on a batch of images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-91"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-91" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-91"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-92"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-92" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-92"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-93"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-93" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-93"></a><span class="sd">            dataloader (DataLoader): DataLoader containing image batches.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-94"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-94" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-94"></a><span class="sd">            conf_thres (float, optional): Confidence threshold for predictions. Defaults to 0.2.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-95"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-95" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-95"></a><span class="sd">            id_strip (str, optional): Characters to strip from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-96"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-96" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-96"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-97"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-97" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-97"></a><span class="sd">        Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-98"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-98" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-98"></a><span class="sd">            list[dict]: List of detection results for all images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-99"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-99" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-99"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__span-0-100"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-100" name="PytorchWildlife.models.detection.base_detector.BaseDetector--source--__codelineno-0-100"></a>        <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -4500,7 +4500,7 @@ loading the model, generating results, and performing single and batch image det
 
 
 <h3 id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__" class="doc doc-heading">
-            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">'cpu'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -4575,33 +4575,33 @@ loading the model, generating results, and performing single and batch image det
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/base_detector.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    Initialize the base detector.</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">        weights (str, optional): </span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">            Path to the model weights. Defaults to None.</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">        device (str, optional): </span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">            Device for model inference. Defaults to &quot;cpu&quot;.</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">        url (str, optional): </span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">            URL to fetch the model weights. Defaults to None.</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="nb">super</span><span class="p">(</span><span class="n">BaseDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-21"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-21" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-21"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-22"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-22" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-22"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-23"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-23" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-23"></a><span class="sd">    Initialize the base detector.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-24"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-24" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-24"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-25"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-25" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-25"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-26"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-26" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-26"></a><span class="sd">        weights (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-27"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-27" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-27"></a><span class="sd">            Path to the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-28"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-28" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-28"></a><span class="sd">        device (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-29"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-29" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-29"></a><span class="sd">            Device for model inference. Defaults to "cpu".</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-30"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-30" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-30"></a><span class="sd">        url (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-31"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-31" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-31"></a><span class="sd">            URL to fetch the model weights. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-32"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-32" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-32"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-33"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-33" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-33"></a>    <span class="nb">super</span><span class="p">(</span><span class="n">BaseDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__span-0-34"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-34" name="PytorchWildlife.models.detection.base_detector.BaseDetector.__init__--source--__codelineno-0-34"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4710,31 +4710,31 @@ loading the model, generating results, and performing single and batch image det
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/base_detector.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-88"> 88</a></span>
-<span class="normal"><a href="#__codelineno-0-89"> 89</a></span>
-<span class="normal"><a href="#__codelineno-0-90"> 90</a></span>
-<span class="normal"><a href="#__codelineno-0-91"> 91</a></span>
-<span class="normal"><a href="#__codelineno-0-92"> 92</a></span>
-<span class="normal"><a href="#__codelineno-0-93"> 93</a></span>
-<span class="normal"><a href="#__codelineno-0-94"> 94</a></span>
-<span class="normal"><a href="#__codelineno-0-95"> 95</a></span>
-<span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
-<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
-<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
-<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
-<span class="normal"><a href="#__codelineno-0-100">100</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="k">def</span><span class="w"> </span><span class="nf">batch_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">conf_thres</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">    Perform detection on a batch of images.</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>
-</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">        dataloader (DataLoader): DataLoader containing image batches.</span>
-</span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">        conf_thres (float, optional): Confidence threshold for predictions. Defaults to 0.2.</span>
-</span><span id="__span-0-95"><a id="__codelineno-0-95" name="__codelineno-0-95"></a><span class="sd">        id_strip (str, optional): Characters to strip from img_id. Defaults to None.</span>
-</span><span id="__span-0-96"><a id="__codelineno-0-96" name="__codelineno-0-96"></a>
-</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98"></a><span class="sd">        list[dict]: List of detection results for all images.</span>
-</span><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="k">pass</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-88"> 88</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-89"> 89</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-90"> 90</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-91"> 91</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-92"> 92</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-93"> 93</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-94"> 94</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-95"> 95</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-100">100</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-88"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-88" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-88"></a><span class="k">def</span><span class="w"> </span><span class="nf">batch_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">conf_thres</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-89"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-89" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-89"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-90"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-90" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-90"></a><span class="sd">    Perform detection on a batch of images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-91"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-91" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-91"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-92"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-92" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-92"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-93"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-93" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-93"></a><span class="sd">        dataloader (DataLoader): DataLoader containing image batches.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-94"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-94" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-94"></a><span class="sd">        conf_thres (float, optional): Confidence threshold for predictions. Defaults to 0.2.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-95"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-95" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-95"></a><span class="sd">        id_strip (str, optional): Characters to strip from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-96"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-96" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-96"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-97"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-97" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-97"></a><span class="sd">    Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-98"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-98" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-98"></a><span class="sd">        list[dict]: List of detection results for all images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-99"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-99" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-99"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__span-0-100"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-100" name="PytorchWildlife.models.detection.base_detector.BaseDetector.batch_image_detection--source--__codelineno-0-100"></a>    <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4771,7 +4771,7 @@ loading the model, generating results, and performing single and batch image det
                 <code>preds</code>
             </td>
             <td>
-                  <code><span title="numpy.ndarray">ndarray</span></code>
+                  <code>ndarray</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4843,31 +4843,31 @@ loading the model, generating results, and performing single and batch image det
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/base_detector.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span>
-<span class="normal"><a href="#__codelineno-0-56">56</a></span>
-<span class="normal"><a href="#__codelineno-0-57">57</a></span>
-<span class="normal"><a href="#__codelineno-0-58">58</a></span>
-<span class="normal"><a href="#__codelineno-0-59">59</a></span>
-<span class="normal"><a href="#__codelineno-0-60">60</a></span>
-<span class="normal"><a href="#__codelineno-0-61">61</a></span>
-<span class="normal"><a href="#__codelineno-0-62">62</a></span>
-<span class="normal"><a href="#__codelineno-0-63">63</a></span>
-<span class="normal"><a href="#__codelineno-0-64">64</a></span>
-<span class="normal"><a href="#__codelineno-0-65">65</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="k">def</span><span class="w"> </span><span class="nf">results_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">img_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="sd">    Generate results for detection based on model predictions.</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">        preds (numpy.ndarray): Model predictions.</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">        img_id (str): Image identifier.</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">        id_strip (str, optional): Strip specific characters from img_id. Defaults to None.</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a><span class="sd">        dict: Dictionary containing image ID, detections, and labels.</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="k">pass</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-65">65</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-53"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-53" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-53"></a><span class="k">def</span><span class="w"> </span><span class="nf">results_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">img_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">id_strip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-54"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-54" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-54"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-55"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-55" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-55"></a><span class="sd">    Generate results for detection based on model predictions.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-56"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-56" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-56"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-57"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-57" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-57"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-58"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-58" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-58"></a><span class="sd">        preds (numpy.ndarray): Model predictions.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-59"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-59" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-59"></a><span class="sd">        img_id (str): Image identifier.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-60"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-60" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-60"></a><span class="sd">        id_strip (str, optional): Strip specific characters from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-61"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-61" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-61"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-62"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-62" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-62"></a><span class="sd">    Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-63"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-63" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-63"></a><span class="sd">        dict: Dictionary containing image ID, detections, and labels.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-64"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-64" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-64"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__span-0-65"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-65" name="PytorchWildlife.models.detection.base_detector.BaseDetector.results_generation--source--__codelineno-0-65"></a>    <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4904,7 +4904,7 @@ loading the model, generating results, and performing single and batch image det
                 <code>img</code>
             </td>
             <td>
-                  <code><span title="str">str</span> or <span title="ndarray">ndarray</span></code>
+                  <code><span title="str">str</span> or ndarray</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -5008,45 +5008,45 @@ loading the model, generating results, and performing single and batch image det
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/base_detector.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-67">67</a></span>
-<span class="normal"><a href="#__codelineno-0-68">68</a></span>
-<span class="normal"><a href="#__codelineno-0-69">69</a></span>
-<span class="normal"><a href="#__codelineno-0-70">70</a></span>
-<span class="normal"><a href="#__codelineno-0-71">71</a></span>
-<span class="normal"><a href="#__codelineno-0-72">72</a></span>
-<span class="normal"><a href="#__codelineno-0-73">73</a></span>
-<span class="normal"><a href="#__codelineno-0-74">74</a></span>
-<span class="normal"><a href="#__codelineno-0-75">75</a></span>
-<span class="normal"><a href="#__codelineno-0-76">76</a></span>
-<span class="normal"><a href="#__codelineno-0-77">77</a></span>
-<span class="normal"><a href="#__codelineno-0-78">78</a></span>
-<span class="normal"><a href="#__codelineno-0-79">79</a></span>
-<span class="normal"><a href="#__codelineno-0-80">80</a></span>
-<span class="normal"><a href="#__codelineno-0-81">81</a></span>
-<span class="normal"><a href="#__codelineno-0-82">82</a></span>
-<span class="normal"><a href="#__codelineno-0-83">83</a></span>
-<span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_thres</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="sd">    Perform detection on a single image.</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70"></a>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="sd">        img (str or ndarray): </span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">            Image path or ndarray of images.</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">        img_size (tuple): </span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">            Original image size.</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">        img_path (str): </span>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">            Image path or identifier.</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">        conf_thres (float, optional): </span>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79"></a><span class="sd">            Confidence threshold for predictions. Defaults to 0.2.</span>
-</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="sd">        id_strip (str, optional): </span>
-</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="sd">            Characters to strip from img_id. Defaults to None.</span>
-</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82"></a>
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="sd">        dict: Detection results.</span>
-</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">pass</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-86">86</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-67"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-67" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-67"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_image_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_thres</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">id_strip</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-68"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-68" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-68"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-69"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-69" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-69"></a><span class="sd">    Perform detection on a single image.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-70"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-70" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-70"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-71"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-71" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-71"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-72"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-72" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-72"></a><span class="sd">        img (str or ndarray): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-73"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-73" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-73"></a><span class="sd">            Image path or ndarray of images.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-74"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-74" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-74"></a><span class="sd">        img_size (tuple): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-75"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-75" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-75"></a><span class="sd">            Original image size.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-76"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-76" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-76"></a><span class="sd">        img_path (str): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-77"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-77" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-77"></a><span class="sd">            Image path or identifier.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-78"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-78" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-78"></a><span class="sd">        conf_thres (float, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-79"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-79" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-79"></a><span class="sd">            Confidence threshold for predictions. Defaults to 0.2.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-80"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-80" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-80"></a><span class="sd">        id_strip (str, optional): </span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-81"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-81" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-81"></a><span class="sd">            Characters to strip from img_id. Defaults to None.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-82"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-82" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-82"></a>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-83"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-83" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-83"></a><span class="sd">    Returns:</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-84"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-84" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-84"></a><span class="sd">        dict: Detection results.</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-85"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-85" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-85"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__span-0-86"><a id="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-86" name="PytorchWildlife.models.detection.base_detector.BaseDetector.single_image_detection--source--__codelineno-0-86"></a>    <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5200,10 +5200,10 @@ loading the model, generating results, and performing single and batch image det
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../../../assets/cat.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -4203,85 +4203,85 @@ downloaded to the "models" folder before running DFNE.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>PytorchWildlife/models/classification/timm_base/DFNE.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span>
-<span class="normal"><a href="#__codelineno-0-51">51</a></span>
-<span class="normal"><a href="#__codelineno-0-52">52</a></span>
-<span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span>
-<span class="normal"><a href="#__codelineno-0-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">DFNE</span><span class="p">(</span><span class="n">TIMM_BaseClassifierInference</span><span class="p">):</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    Base detector class for dinov2 classifier. This class provides utility methods</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">    for loading the model, performing single and batch image classifications, and </span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">    formatting results. Make sure the appropriate file for the model weights has been </span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">    downloaded to the &quot;models&quot; folder before running DFNE.</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="n">BACKBONE</span> <span class="o">=</span> <span class="s2">&quot;vit_large_patch14_dinov2.lvd142m&quot;</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;dfne_weights_v1_0.pth&quot;</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">182</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>                <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;American Marten&quot;</span><span class="p">,</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>                <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Bird sp.&quot;</span><span class="p">,</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>                <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Black Bear&quot;</span><span class="p">,</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>                <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Bobcat&quot;</span><span class="p">,</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>                <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Coyote&quot;</span><span class="p">,</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>                <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Domestic Cat&quot;</span><span class="p">,</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>                <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Domestic Cow&quot;</span><span class="p">,</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>                <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Domestic Dog&quot;</span><span class="p">,</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>                <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Fisher&quot;</span><span class="p">,</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>                <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Gray Fox&quot;</span><span class="p">,</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>                <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;Gray Squirrel&quot;</span><span class="p">,</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>                <span class="mi">11</span><span class="p">:</span> <span class="s2">&quot;Human&quot;</span><span class="p">,</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>                <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;Moose&quot;</span><span class="p">,</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>                <span class="mi">13</span><span class="p">:</span> <span class="s2">&quot;Mouse sp.&quot;</span><span class="p">,</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a>                <span class="mi">14</span><span class="p">:</span> <span class="s2">&quot;Opossum&quot;</span><span class="p">,</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>                <span class="mi">15</span><span class="p">:</span> <span class="s2">&quot;Raccoon&quot;</span><span class="p">,</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a>                <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;Red Fox&quot;</span><span class="p">,</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a>                <span class="mi">17</span><span class="p">:</span> <span class="s2">&quot;Red Squirrel&quot;</span><span class="p">,</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a>                <span class="mi">18</span><span class="p">:</span> <span class="s2">&quot;Skunk&quot;</span><span class="p">,</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a>                <span class="mi">19</span><span class="p">:</span> <span class="s2">&quot;Snowshoe Hare&quot;</span><span class="p">,</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>                <span class="mi">20</span><span class="p">:</span> <span class="s2">&quot;White-tailed Deer&quot;</span><span class="p">,</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>                <span class="mi">21</span><span class="p">:</span> <span class="s2">&quot;Wild Boar&quot;</span><span class="p">,</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>                <span class="mi">22</span><span class="p">:</span> <span class="s2">&quot;Wild Turkey&quot;</span><span class="p">,</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>                <span class="mi">23</span><span class="p">:</span> <span class="s2">&quot;no-species&quot;</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>            <span class="p">}</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://prod-is-usgs-sb-prod-publish.s3.amazonaws.com/67ae17fcd34e3f09c0e0f002/dfne_weights_v1_0.pth&#39;</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">DFNE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span> <span class="n">weights_key</span><span class="o">=</span><span class="s1">&#39;model_state_dict&#39;</span><span class="p">)</span>    
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-17"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-17" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">DFNE</span><span class="p">(</span><span class="n">TIMM_BaseClassifierInference</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-18"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-18" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-18"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-19"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-19" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-19"></a><span class="sd">    Base detector class for dinov2 classifier. This class provides utility methods</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-20"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-20" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-20"></a><span class="sd">    for loading the model, performing single and batch image classifications, and </span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-21"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-21" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-21"></a><span class="sd">    formatting results. Make sure the appropriate file for the model weights has been </span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-22"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-22" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-22"></a><span class="sd">    downloaded to the "models" folder before running DFNE.</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-23"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-23" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-23"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-24"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-24" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-24"></a>    <span class="n">BACKBONE</span> <span class="o">=</span> <span class="s2">"vit_large_patch14_dinov2.lvd142m"</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-25"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-25" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-25"></a>    <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">"dfne_weights_v1_0.pth"</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-26"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-26" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-26"></a>    <span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">182</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-27"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-27" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-27"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-28"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-28" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-28"></a>                <span class="mi">0</span><span class="p">:</span> <span class="s2">"American Marten"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-29"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-29" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-29"></a>                <span class="mi">1</span><span class="p">:</span> <span class="s2">"Bird sp."</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-30"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-30" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-30"></a>                <span class="mi">2</span><span class="p">:</span> <span class="s2">"Black Bear"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-31"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-31" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-31"></a>                <span class="mi">3</span><span class="p">:</span> <span class="s2">"Bobcat"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-32"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-32" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-32"></a>                <span class="mi">4</span><span class="p">:</span> <span class="s2">"Coyote"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-33"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-33" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-33"></a>                <span class="mi">5</span><span class="p">:</span> <span class="s2">"Domestic Cat"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-34"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-34" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-34"></a>                <span class="mi">6</span><span class="p">:</span> <span class="s2">"Domestic Cow"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-35"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-35" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-35"></a>                <span class="mi">7</span><span class="p">:</span> <span class="s2">"Domestic Dog"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-36"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-36" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-36"></a>                <span class="mi">8</span><span class="p">:</span> <span class="s2">"Fisher"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-37"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-37" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-37"></a>                <span class="mi">9</span><span class="p">:</span> <span class="s2">"Gray Fox"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-38"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-38" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-38"></a>                <span class="mi">10</span><span class="p">:</span> <span class="s2">"Gray Squirrel"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-39"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-39" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-39"></a>                <span class="mi">11</span><span class="p">:</span> <span class="s2">"Human"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-40"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-40" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-40"></a>                <span class="mi">12</span><span class="p">:</span> <span class="s2">"Moose"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-41"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-41" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-41"></a>                <span class="mi">13</span><span class="p">:</span> <span class="s2">"Mouse sp."</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-42"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-42" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-42"></a>                <span class="mi">14</span><span class="p">:</span> <span class="s2">"Opossum"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-43"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-43" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-43"></a>                <span class="mi">15</span><span class="p">:</span> <span class="s2">"Raccoon"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-44"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-44" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-44"></a>                <span class="mi">16</span><span class="p">:</span> <span class="s2">"Red Fox"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-45"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-45" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-45"></a>                <span class="mi">17</span><span class="p">:</span> <span class="s2">"Red Squirrel"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-46"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-46" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-46"></a>                <span class="mi">18</span><span class="p">:</span> <span class="s2">"Skunk"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-47"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-47" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-47"></a>                <span class="mi">19</span><span class="p">:</span> <span class="s2">"Snowshoe Hare"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-48"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-48" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-48"></a>                <span class="mi">20</span><span class="p">:</span> <span class="s2">"White-tailed Deer"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-49"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-49" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-49"></a>                <span class="mi">21</span><span class="p">:</span> <span class="s2">"Wild Boar"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-50"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-50" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-50"></a>                <span class="mi">22</span><span class="p">:</span> <span class="s2">"Wild Turkey"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-51"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-51" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-51"></a>                <span class="mi">23</span><span class="p">:</span> <span class="s2">"no-species"</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-52"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-52" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-52"></a>            <span class="p">}</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-53"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-53" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-53"></a>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-54"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-54" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-54"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-55"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-55" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-55"></a>        <span class="n">url</span> <span class="o">=</span> <span class="s1">'https://prod-is-usgs-sb-prod-publish.s3.amazonaws.com/67ae17fcd34e3f09c0e0f002/dfne_weights_v1_0.pth'</span>
+</span><span id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__span-0-56"><a id="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-56" name="PytorchWildlife.models.classification.timm_base.DFNE.DFNE--source--__codelineno-0-56"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">DFNE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span> <span class="n">weights_key</span><span class="o">=</span><span class="s1">'model_state_dict'</span><span class="p">)</span>    
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -4445,10 +4445,10 @@ downloaded to the "models" folder before running DFNE.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

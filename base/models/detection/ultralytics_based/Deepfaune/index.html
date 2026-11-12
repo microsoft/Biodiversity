@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../../../assets/cat.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -4260,63 +4260,63 @@ that is specifically designed for detecting animals, persons, and vehicles.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>PytorchWildlife/models/detection/ultralytics_based/Deepfaune.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="k">class</span><span class="w"> </span><span class="nc">DeepfauneDetector</span><span class="p">(</span><span class="n">YOLOV8Base</span><span class="p">):</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    MegaDetectorV6 is a specialized class derived from the YOLOV8Base class </span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="sd">    that is specifically designed for detecting animals, persons, and vehicles.</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">    Attributes:</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">        CLASS_NAMES (dict): Mapping of class IDs to their respective names.</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>        <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;animal&quot;</span><span class="p">,</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;person&quot;</span><span class="p">,</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;vehicle&quot;</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="p">}</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">):</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">        Initializes the MegaDetectorV5 model with the option to load pretrained weights.</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">            weights (str, optional): Path to the weights file.</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">            device (str, optional): Device to load the model on (e.g., &quot;cpu&quot; or &quot;cuda&quot;). Default is &quot;cpu&quot;.</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">960</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://pbil.univ-lyon1.fr/software/download/deepfaune/v1.3/deepfaune-yolov8s_960.pt&quot;</span> 
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;deepfaune-yolov8s_960.pt&quot;</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">DeepfauneDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-15"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-15" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-15"></a><span class="k">class</span><span class="w"> </span><span class="nc">DeepfauneDetector</span><span class="p">(</span><span class="n">YOLOV8Base</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-16"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-16" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-16"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-17"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-17" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-17"></a><span class="sd">    MegaDetectorV6 is a specialized class derived from the YOLOV8Base class </span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-18"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-18" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-18"></a><span class="sd">    that is specifically designed for detecting animals, persons, and vehicles.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-19"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-19" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-19"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-20"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-20" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-20"></a><span class="sd">    Attributes:</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-21"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-21" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-21"></a><span class="sd">        CLASS_NAMES (dict): Mapping of class IDs to their respective names.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-22"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-22" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-22"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-23"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-23" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-23"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-24"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-24" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-24"></a>    <span class="n">CLASS_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-25"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-25" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-25"></a>        <span class="mi">0</span><span class="p">:</span> <span class="s2">"animal"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-26"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-26" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-26"></a>        <span class="mi">1</span><span class="p">:</span> <span class="s2">"person"</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-27"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-27" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-27"></a>        <span class="mi">2</span><span class="p">:</span> <span class="s2">"vehicle"</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-28"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-28" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-28"></a>    <span class="p">}</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-29"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-29" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-29"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-30"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-30" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-30"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-31"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-31" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-31"></a><span class="w">        </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-32"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-32" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-32"></a><span class="sd">        Initializes the MegaDetectorV5 model with the option to load pretrained weights.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-33"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-33" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-33"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-34"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-34" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-34"></a><span class="sd">        Args:</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-35"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-35" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-35"></a><span class="sd">            weights (str, optional): Path to the weights file.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-36"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-36" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-36"></a><span class="sd">            device (str, optional): Device to load the model on (e.g., "cpu" or "cuda"). Default is "cpu".</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-37"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-37" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-37"></a><span class="sd">        """</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-38"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-38" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">960</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-39"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-39" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-39"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-40"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-40" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-40"></a>        <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://pbil.univ-lyon1.fr/software/download/deepfaune/v1.3/deepfaune-yolov8s_960.pt"</span> 
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-41"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-41" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">"deepfaune-yolov8s_960.pt"</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-42"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-42" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-42"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__span-0-43"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-43" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector--source--__codelineno-0-43"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">DeepfauneDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -4337,7 +4337,7 @@ that is specifically designed for detecting animals, persons, and vehicles.</p>
 
 
 <h3 id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__" class="doc doc-heading">
-            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">'cpu'</span><span class="p">)</span></code>
 
 <a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -4396,33 +4396,33 @@ that is specifically designed for detecting animals, persons, and vehicles.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/ultralytics_based/Deepfaune.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">):</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">    Initializes the MegaDetectorV5 model with the option to load pretrained weights.</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">        weights (str, optional): Path to the weights file.</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">        device (str, optional): Device to load the model on (e.g., &quot;cpu&quot; or &quot;cuda&quot;). Default is &quot;cpu&quot;.</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">960</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://pbil.univ-lyon1.fr/software/download/deepfaune/v1.3/deepfaune-yolov8s_960.pt&quot;</span> 
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;deepfaune-yolov8s_960.pt&quot;</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="nb">super</span><span class="p">(</span><span class="n">DeepfauneDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-30"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-30" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-30"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-31"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-31" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-31"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-32"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-32" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-32"></a><span class="sd">    Initializes the MegaDetectorV5 model with the option to load pretrained weights.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-33"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-33" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-33"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-34"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-34" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-34"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-35"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-35" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-35"></a><span class="sd">        weights (str, optional): Path to the weights file.</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-36"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-36" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-36"></a><span class="sd">        device (str, optional): Device to load the model on (e.g., "cpu" or "cuda"). Default is "cpu".</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-37"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-37" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-37"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-38"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-38" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-38"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_SIZE</span> <span class="o">=</span> <span class="mi">960</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-39"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-39" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-39"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-40"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-40" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-40"></a>    <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://pbil.univ-lyon1.fr/software/download/deepfaune/v1.3/deepfaune-yolov8s_960.pt"</span> 
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-41"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-41" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-41"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">"deepfaune-yolov8s_960.pt"</span>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-42"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-42" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-42"></a>
+</span><span id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__span-0-43"><a id="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-43" name="PytorchWildlife.models.detection.ultralytics_based.Deepfaune.DeepfauneDetector.__init__--source--__codelineno-0-43"></a>    <span class="nb">super</span><span class="p">(</span><span class="n">DeepfauneDetector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4576,10 +4576,10 @@ that is specifically designed for detecting animals, persons, and vehicles.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

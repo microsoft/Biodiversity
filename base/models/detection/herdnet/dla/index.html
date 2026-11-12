@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../../../assets/cat.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -4183,13 +4183,13 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/models/detection/localization/dla.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="k">def</span><span class="w"> </span><span class="nf">conv3x3</span><span class="p">(</span><span class="n">in_planes</span><span class="p">,</span> <span class="n">out_planes</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="s2">&quot;3x3 convolution with padding&quot;</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_planes</span><span class="p">,</span> <span class="n">out_planes</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>                     <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__span-0-38"><a id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-38" name="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-38"></a><span class="k">def</span><span class="w"> </span><span class="nf">conv3x3</span><span class="p">(</span><span class="n">in_planes</span><span class="p">,</span> <span class="n">out_planes</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__span-0-39"><a id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-39" name="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-39"></a>    <span class="s2">"3x3 convolution with padding"</span>
+</span><span id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__span-0-40"><a id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-40" name="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-40"></a>    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_planes</span><span class="p">,</span> <span class="n">out_planes</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span>
+</span><span id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__span-0-41"><a id="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-41" name="PytorchWildlife.models.detection.localization.dla.conv3x3--source--__codelineno-0-41"></a>                     <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4334,10 +4334,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

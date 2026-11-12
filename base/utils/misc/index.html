@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../../assets/cat.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -4102,7 +4102,7 @@
 
 
 <h2 id="PytorchWildlife.utils.misc.process_video" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">process_video</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">target_fps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">codec</span><span class="o">=</span><span class="s1">&#39;mp4v&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">process_video</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">target_fps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">codec</span><span class="o">=</span><span class="s1">'mp4v'</span><span class="p">)</span></code>
 
 <a href="#PytorchWildlife.utils.misc.process_video" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -4194,79 +4194,79 @@ to a new video. This version includes a progress bar and allows codec selection.
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>PytorchWildlife/utils/misc.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span>
-<span class="normal"><a href="#__codelineno-0-51">51</a></span>
-<span class="normal"><a href="#__codelineno-0-52">52</a></span>
-<span class="normal"><a href="#__codelineno-0-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">process_video</span><span class="p">(</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">target_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">target_fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="n">codec</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mp4v&quot;</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    Process a video frame-by-frame, applying a callback function to each frame and saving the results </span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">    to a new video. This version includes a progress bar and allows codec selection.</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">        source_path (str): </span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">            Path to the source video file.</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">        target_path (str): </span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">            Path to save the processed video.</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="sd">        callback (Callable[[np.ndarray, int], np.ndarray]): </span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">            A function that takes a video frame and its index as input and returns the processed frame.</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">        codec (str, optional): </span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">            Codec used to encode the processed video. Default is &quot;avc1&quot;.</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="n">source_video_info</span> <span class="o">=</span> <span class="n">VideoInfo</span><span class="o">.</span><span class="n">from_video_path</span><span class="p">(</span><span class="n">video_path</span><span class="o">=</span><span class="n">source_path</span><span class="p">)</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="k">if</span> <span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">&gt;</span> <span class="n">target_fps</span><span class="p">:</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="n">stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">/</span> <span class="n">target_fps</span><span class="p">)</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="n">target_fps</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a>        <span class="n">stride</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="k">with</span> <span class="n">VideoSink</span><span class="p">(</span><span class="n">target_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">,</span> <span class="n">video_info</span><span class="o">=</span><span class="n">source_video_info</span><span class="p">,</span> <span class="n">codec</span><span class="o">=</span><span class="n">codec</span><span class="p">)</span> <span class="k">as</span> <span class="n">sink</span><span class="p">:</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">source_video_info</span><span class="o">.</span><span class="n">total_frames</span> <span class="o">/</span> <span class="n">stride</span><span class="p">))</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span> 
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>                <span class="n">get_video_frames_generator</span><span class="p">(</span><span class="n">source_path</span><span class="o">=</span><span class="n">source_path</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">)</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>            <span class="p">):</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>                <span class="n">result_frame</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>                <span class="n">sink</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">result_frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">))</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#PytorchWildlife.utils.misc.process_video--source--__codelineno-0-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-17"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-17" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">process_video</span><span class="p">(</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-18"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-18" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-18"></a>    <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-19"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-19" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-19"></a>    <span class="n">target_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-20"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-20" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-20"></a>    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-21"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-21" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-21"></a>    <span class="n">target_fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-22"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-22" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-22"></a>    <span class="n">codec</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"mp4v"</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-23"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-23" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-23"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-24"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-24" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-24"></a><span class="w">    </span><span class="sd">"""</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-25"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-25" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-25"></a><span class="sd">    Process a video frame-by-frame, applying a callback function to each frame and saving the results </span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-26"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-26" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-26"></a><span class="sd">    to a new video. This version includes a progress bar and allows codec selection.</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-27"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-27" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-27"></a>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-28"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-28" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-28"></a><span class="sd">    Args:</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-29"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-29" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-29"></a><span class="sd">        source_path (str): </span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-30"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-30" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-30"></a><span class="sd">            Path to the source video file.</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-31"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-31" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-31"></a><span class="sd">        target_path (str): </span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-32"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-32" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-32"></a><span class="sd">            Path to save the processed video.</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-33"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-33" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-33"></a><span class="sd">        callback (Callable[[np.ndarray, int], np.ndarray]): </span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-34"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-34" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-34"></a><span class="sd">            A function that takes a video frame and its index as input and returns the processed frame.</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-35"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-35" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-35"></a><span class="sd">        codec (str, optional): </span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-36"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-36" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-36"></a><span class="sd">            Codec used to encode the processed video. Default is "avc1".</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-37"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-37" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-37"></a><span class="sd">    """</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-38"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-38" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-38"></a>    <span class="n">source_video_info</span> <span class="o">=</span> <span class="n">VideoInfo</span><span class="o">.</span><span class="n">from_video_path</span><span class="p">(</span><span class="n">video_path</span><span class="o">=</span><span class="n">source_path</span><span class="p">)</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-39"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-39" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-39"></a>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-40"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-40" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-40"></a>    <span class="k">if</span> <span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">&gt;</span> <span class="n">target_fps</span><span class="p">:</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-41"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-41" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-41"></a>        <span class="n">stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">/</span> <span class="n">target_fps</span><span class="p">)</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-42"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-42" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-42"></a>        <span class="n">source_video_info</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="n">target_fps</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-43"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-43" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-43"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-44"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-44" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-44"></a>        <span class="n">stride</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-45"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-45" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-45"></a>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-46"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-46" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-46"></a>    <span class="k">with</span> <span class="n">VideoSink</span><span class="p">(</span><span class="n">target_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">,</span> <span class="n">video_info</span><span class="o">=</span><span class="n">source_video_info</span><span class="p">,</span> <span class="n">codec</span><span class="o">=</span><span class="n">codec</span><span class="p">)</span> <span class="k">as</span> <span class="n">sink</span><span class="p">:</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-47"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-47" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-47"></a>        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">source_video_info</span><span class="o">.</span><span class="n">total_frames</span> <span class="o">/</span> <span class="n">stride</span><span class="p">))</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span> 
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-48"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-48" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-48"></a>            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-49"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-49" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-49"></a>                <span class="n">get_video_frames_generator</span><span class="p">(</span><span class="n">source_path</span><span class="o">=</span><span class="n">source_path</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">)</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-50"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-50" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-50"></a>            <span class="p">):</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-51"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-51" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-51"></a>                <span class="n">result_frame</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-52"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-52" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-52"></a>                <span class="n">sink</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">result_frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">))</span>
+</span><span id="PytorchWildlife.utils.misc.process_video--source--__span-0-53"><a id="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-53" name="PytorchWildlife.utils.misc.process_video--source--__codelineno-0-53"></a>                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4411,10 +4411,10 @@ to a new video. This version includes a progress bar and allows codec selection.
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.path", "toc.follow", "navigation.top", "search.suggest", "search.share", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>
