@@ -76,9 +76,9 @@ nav:
     - Project catalogue: ecosystem.md
     - MegaDetector: megadetector.md
     - MegaDetector-Acoustic: bioacoustics.md
-  - What's New?:
-    - Latest Release: releases/release_notes.md
-    - Past Releases: releases/past_releases.md
+  - Release history:
+    - PyTorch-Wildlife 1.3.0: releases/release_notes.md
+    - PyTorch-Wildlife past releases: releases/past_releases.md
   - Community:
     - Existing Collaborators: collaborators.md
     - Contributors: contributors.md

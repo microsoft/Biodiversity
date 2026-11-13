@@ -9,10 +9,12 @@ tags:
   - PW-Engine
 ---
 
-# Main changes and additions
+<a id="main-changes-and-additions"></a>
+
+# PyTorch-Wildlife release notes
 
 !!! note "PyTorch-Wildlife has ended"
-    This page and [Past Releases](past_releases.md) are the release history of PyTorch-Wildlife, which ended with the `PytorchWildlife` 1.3.1 package and is now [SPARROW Playground](https://github.com/microsoft/SPARROW-Playground). Each SPARROW project now publishes its own releases; the [home page](../index.md#recent-releases) lists the latest ones.
+    This page and [Past Releases](past_releases.md) are the release history of PyTorch-Wildlife, which ended with the `PytorchWildlife` 1.3.1 package and is now [SPARROW Playground](https://github.com/microsoft/SPARROW-Playground). 1.3.1 was the [final release](https://github.com/microsoft/SPARROW-Playground/releases/tag/v1.3.1): it adds a `FutureWarning` on import and no further releases or fixes are planned. Each SPARROW project now publishes its own releases; the [home page](../index.md#recent-releases) lists the latest ones.
 
 ### V 1.3.0
 
