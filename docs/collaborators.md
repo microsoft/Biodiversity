@@ -1,6 +1,6 @@
 ---
 title: "Existing Collaborators"
-description: "Organizations worldwide using MegaDetector and PyTorch-Wildlife for conservation AI — national parks, research universities, NGOs, and wildlife agencies."
+description: "Organizations worldwide using MegaDetector for conservation AI — national parks, research universities, NGOs, and wildlife agencies."
 tags:
   - MegaDetector collaborators
   - conservation AI partners
@@ -10,7 +10,7 @@ tags:
 
 # 👥 Existing Collaborators
 
-The extensive collaborative efforts of Megadetector have genuinely inspired us, and we deeply value its significant contributions to the community. As we continue to advance with PyTorch-Wildlife, our commitment to delivering technical support to our existing partners on MegaDetector remains the same.
+The extensive collaborative efforts of Megadetector have genuinely inspired us, and we deeply value its significant contributions to the community. As we continue to develop the SPARROW ecosystem, which grew out of MegaDetector and PyTorch-Wildlife, our commitment to delivering technical support to our existing partners on MegaDetector remains the same.
 
 Here we list a few of the organizations that have used MegaDetector. We're only listing organizations who have given us permission to refer to them here or have posted publicly about their use of MegaDetector.
 

@@ -36,12 +36,12 @@ We can no longer use the word "PyTorch" in our project names, and our inference 
 ### Recent releases
 
 - **[Sparrow Comm](https://github.com/microsoft/SPARROW-Comm) v0.1.0** (November 2026): receivers for SPARROW field data over the device API, Reconyx, e-mail and FTPS. `pip install sparrow-comm`
-- **[Sparrow Engine](https://github.com/microsoft/SPARROW-Engine) v0.1.32** (November 2026): `pip install sparrow-engine`, or on macOS `brew tap microsoft/sparrow-engine && brew install sparrow-engine`
-- **[SPARROWmini](https://github.com/microsoft/SPARROWmini)**: a small solar-powered field node that runs detection on the device and relays results over a radio mesh to a SPARROW gateway
+- **[Sparrow Engine](https://github.com/microsoft/SPARROW-Engine) v0.1.32** (November 2026): `pip install sparrow-engine`, or with Homebrew on macOS arm64 or Linux x86_64 `brew tap microsoft/sparrow-engine && brew install sparrow-engine`
+- **[SPARROWmini](https://github.com/microsoft/SPARROWmini)**: a small solar-powered field node that runs detection on the device and sends results over a radio mesh to a SPARROW gateway or, where it has Wi-Fi or 4G, directly to the SPARROW server
 - **[SPARROW Model Zoo Uploader](https://github.com/microsoft/SPARROW-Model-Zoo-Uploader)**: a toolkit for converting a model, checking that its outputs match the original, and submitting it to the Sparrow Engine model zoo
 
 #### Previous versions
-- [Release notes](https://microsoft.github.io/Biodiversity/releases/release_notes/)
+- [PyTorch-Wildlife release notes](https://microsoft.github.io/Biodiversity/releases/release_notes/) (ended with 1.3.1)
 
 ## Projects
 
@@ -71,7 +71,7 @@ Not sure where to start? The [project catalogue](https://microsoft.github.io/Bio
 | Repo | What it is |
 |---|---|
 | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) | Solar-Powered Acoustic and Remote Recording Observation Watch: an AI edge device for remote field sites, with 4G or satellite uplink |
-| [microsoft/SPARROWmini](https://github.com/microsoft/SPARROWmini) | Small, low-power field node (Raspberry Pi Zero 2 W) that runs detection on the device and relays results over a radio mesh to a SPARROW gateway |
+| [microsoft/SPARROWmini](https://github.com/microsoft/SPARROWmini) | Small, low-power field node (Raspberry Pi Zero 2 W) that runs detection on the device and sends results over a radio mesh to a SPARROW gateway, or directly over Wi-Fi or 4G |
 
 ## Cite us
 

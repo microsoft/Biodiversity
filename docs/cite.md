@@ -26,7 +26,7 @@ Also, don't forget to cite our original paper for MegaDetector:
 @misc{beery2019efficient,
       title={Efficient Pipeline for Camera Trap Image Review},
       author={Sara Beery and Dan Morris and Siyu Yang},
-      year={2019}
+      year={2019},
       eprint={1907.06772},
       archivePrefix={arXiv},
 }
