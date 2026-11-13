@@ -73,6 +73,7 @@ theme:
 nav:
   - Home: index.md
   - Projects:
+    - Project catalogue: ecosystem.md
     - MegaDetector: megadetector.md
     - MegaDetector-Acoustic: bioacoustics.md
   - What's New?:
