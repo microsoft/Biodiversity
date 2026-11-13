@@ -54,6 +54,8 @@ We can no longer use the word "PyTorch" in our project names, and our inference 
 
 ## Projects
 
+Not sure where to start? The [project catalogue](ecosystem.md#which-project-should-i-use) matches common tasks to projects and links the model zoo.
+
 ### AI models
 
 | Repo | What it is |
