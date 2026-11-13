@@ -31,3 +31,9 @@ Also, don't forget to cite our original paper for MegaDetector:
       archivePrefix={arXiv},
 }
 ```
+
+## Sparrow Engine and SPARROW Playground
+Please cite the PyTorch-Wildlife paper above for Sparrow Engine, SPARROW Playground and models accessed through them.
+
+## SPARROW devices
+For the SPARROW field devices, please cite *Listening to the Earth in Real Time: SPARROW and the Future of Conservation Technology* (Lavista Ferres et al., 2025). The paper is in preparation; see the [SPARROW repository](https://github.com/microsoft/SPARROW) for updates.

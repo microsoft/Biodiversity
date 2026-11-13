@@ -1,32 +1,10 @@
 ---
-title: "Microsoft Biodiversity: Open-Source Conservation AI Hub"
-description: "Microsoft AI for Good Lab's open-source conservation AI hub for biodiversity and wildlife monitoring: MegaDetector, PyTorch-Wildlife, SPARROW, and more."
+title: "PyTorch-Wildlife (legacy)"
+description: "Overview of the legacy PyTorch-Wildlife framework, now replaced by SPARROW Playground and Sparrow Engine."
 tags:
-  - Microsoft biodiversity AI
-  - open source conservation AI
-  - wildlife monitoring AI tools
-  - AI for Good biodiversity
-  - MegaDetector
   - PyTorch-Wildlife
-  - conservation AI
+  - MegaDetector
 ---
-
-![Microsoft Biodiversity banner showing wildlife monitored by AI across camera traps, bioacoustics, and aerial detection, powered by PyTorch-Wildlife and MegaDetector](assets/biodiversity-banner.png)
-
-<div align="center"> 
-<font size="6"> Open-source AI for camera traps, bioacoustics, and wildlife monitoring </font>
-<br>
-<hr>
-<a href="https://pypi.org/project/PytorchWildlife"><img src="https://img.shields.io/pypi/v/PytorchWildlife?color=limegreen" /></a> 
-<a href="https://pypi.org/project/PytorchWildlife"><img src="https://static.pepy.tech/badge/pytorchwildlife" /></a> 
-<a href="https://pypi.org/project/PytorchWildlife"><img src="https://img.shields.io/pypi/pyversions/PytorchWildlife" /></a> 
-<a href="https://huggingface.co/spaces/ai-for-good-lab/pytorch-wildlife"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" /></a>
-<a href="https://colab.research.google.com/drive/1rjqHrTMzEHkMualr4vB55dQWCsCKMNXi?usp=sharing"><img src="https://img.shields.io/badge/Colab-Demo-blue?logo=GoogleColab" /></a>
-<a href="https://github.com/microsoft/Biodiversity/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" /></a>
-<a href="https://discord.gg/TeEVxzaYtm"><img src="https://img.shields.io/badge/Discord-Join_us-5865F2?logo=discord&logoColor=white" /></a>
-<br><br>
-</div>
-
 
 !!! important "PyTorch-Wildlife is now SPARROW Playground"
     The PyTorch-Wildlife repository has been renamed and rebuilt as [SPARROW Playground](https://github.com/microsoft/SPARROW-Playground), built on the [SPARROW Engine](https://github.com/microsoft/SPARROW-Engine) Python package (`pip install sparrow-engine`). The pages in this section describe the old PyTorch-Wildlife framework and are kept for reference only; the `PytorchWildlife` package ends at 1.3.1 and is no longer maintained. Fine-tuning has moved to [microsoft/MegaDetector-Classifier](https://github.com/microsoft/MegaDetector-Classifier).
