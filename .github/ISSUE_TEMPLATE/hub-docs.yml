@@ -1,0 +1,21 @@
+name: Hub or documentation problem
+description: Report a broken link, a missing project or outdated text on this hub or its documentation site.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository only holds the hub pages and the documentation site at https://microsoft.github.io/Biodiversity/.
+        For problems with a project's code or models, please open the issue in that project's repository (see the links on the previous page).
+  - type: input
+    attributes:
+      label: Page
+      description: The URL or file of the page with the problem.
+      placeholder: https://microsoft.github.io/Biodiversity/...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What is wrong
+      description: Describe the broken link, missing project or outdated text, and what it should say if you know.
+    validations:
+      required: true

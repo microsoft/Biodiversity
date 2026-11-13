@@ -23,9 +23,6 @@ Microsoft AI for Good Lab: the SPARROW ecosystem for camera-trap detection, bioa
 <a href="https://github.com/microsoft/Biodiversity/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" /></a>
 <a href="https://discord.gg/TeEVxzaYtm"><img src="https://img.shields.io/badge/Discord-Join_us-5865F2?logo=discord&logoColor=white" /></a>
 <a href="https://pypi.org/project/sparrow-engine"><img src="https://img.shields.io/pypi/v/sparrow-engine?label=sparrow-engine" /></a>
-<a href="https://pypi.org/project/PytorchWildlife"><img src="https://static.pepy.tech/badge/pytorchwildlife" /></a>
-<a href="https://huggingface.co/spaces/ai-for-good-lab/pytorch-wildlife"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue" /></a>
-<a href="https://colab.research.google.com/drive/1rjqHrTMzEHkMualr4vB55dQWCsCKMNXi?usp=sharing"><img src="https://img.shields.io/badge/Colab-Demo-blue?logo=GoogleColab" /></a>
 </div>
 
 ## 📣 Announcements
@@ -42,7 +39,7 @@ We can no longer use the word "PyTorch" in our project names, and our inference 
 
 - Old `microsoft/Pytorch-Wildlife` links, issues and clones redirect to SPARROW Playground automatically.
 - The old PyTorch-Wildlife code is kept, unmaintained, in the [`archive/pytorch-wildlife`](https://github.com/microsoft/SPARROW-Playground/tree/archive/pytorch-wildlife) branch and tag [`v1.3.1`](https://github.com/microsoft/SPARROW-Playground/tree/v1.3.1).
-- The `PytorchWildlife` PyPI package ends at 1.3.1. It still installs and works, but it will get no further updates; we suggest switching to `sparrow-engine`.
+- The `PytorchWildlife` PyPI package ends at 1.3.1 and will get no further updates; we suggest switching to `sparrow-engine`. To install 1.3.1 in a new environment, add the packages it uses but does not declare: `pip install PytorchWildlife==1.3.1 soundfile librosa "setuptools<82"`.
 - Fine-tuning has moved to dedicated repositories, starting with [microsoft/MegaDetector-Classifier](https://github.com/microsoft/MegaDetector-Classifier).
 
 ### Recent releases
@@ -54,7 +51,6 @@ We can no longer use the word "PyTorch" in our project names, and our inference 
 
 #### Previous versions
 - [Release notes](releases/release_notes.md)
-- [PyTorch-Wildlife overview (legacy)](pytorch_wildlife.md)
 
 ## Projects
 

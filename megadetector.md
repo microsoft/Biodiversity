@@ -11,19 +11,18 @@
 | You want… | Go to |
 |---|---|
 | MegaDetector source, releases, issues, V1–V6 history, benchmarks | **[microsoft/MegaDetector](https://github.com/microsoft/MegaDetector)** |
-| The PyTorch-Wildlife framework that hosts MegaDetector and classifiers | [microsoft/Pytorch-Wildlife](https://github.com/microsoft/Pytorch-Wildlife) |
+| The inference engine that runs MegaDetector and the rest of the model zoo | [microsoft/SPARROW-Engine](https://github.com/microsoft/SPARROW-Engine) |
+| Notebooks for running MegaDetector on your own images and videos | [microsoft/SPARROW-Playground](https://github.com/microsoft/SPARROW-Playground) (formerly PyTorch-Wildlife) |
 | The biodiversity ecosystem umbrella (all repos, one hub) | [microsoft/Biodiversity](https://github.com/microsoft/Biodiversity) |
 | The AI-enabled edge device that runs MegaDetector in the field | [microsoft/SPARROW](https://github.com/microsoft/SPARROW) |
 
 ## Run MegaDetectorV6 quickly
 
-The current generation is **MegaDetectorV6** (smaller, faster architectures including YOLOv9, YOLOv10, and RT-DETR; the compact variant is roughly 2% of the V5 parameter count at comparable accuracy). Try it without writing code via the [Hugging Face Space](https://huggingface.co/spaces/ai-for-good-lab/pytorch-wildlife), or load it through PyTorch-Wildlife:
+The current generation is **MegaDetectorV6** (smaller, faster architectures including YOLOv9, YOLOv10, and RT-DETR; the compact variant is roughly 2% of the V5 parameter count at comparable accuracy). To get started:
 
-```python
-from PytorchWildlife.models import detection as pw_detection
-detection_model = pw_detection.MegaDetectorV6()
-```
-
+- Follow the [Quick Start](https://github.com/microsoft/MegaDetector#quick-start) in the MegaDetector repository.
+- Run the [quickstart notebook](https://github.com/microsoft/SPARROW-Playground/blob/main/notebooks/00_quickstart.ipynb) in SPARROW Playground, which uses [Sparrow Engine](https://github.com/microsoft/SPARROW-Engine) (`pip install sparrow-engine`).
+- Try it without writing code in the [Hugging Face Space](https://huggingface.co/spaces/ai-for-good-lab/pytorch-wildlife).
 Full usage, model selection, and the fine-tuning pipeline are documented in **[microsoft/MegaDetector](https://github.com/microsoft/MegaDetector)**.
 
 ## MegaDetectorV5 and earlier
@@ -36,4 +35,4 @@ A `citation.cff` is maintained on [microsoft/MegaDetector](https://github.com/mi
 
 ## Contact
 
-Questions about MegaDetector or PyTorch-Wildlife: open an issue on [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector/issues) or join the [Discord](https://discord.gg/TeEVxzaYtm).
+Questions about MegaDetector: open an issue on [microsoft/MegaDetector](https://github.com/microsoft/MegaDetector/issues) or join the [Discord](https://discord.gg/TeEVxzaYtm).

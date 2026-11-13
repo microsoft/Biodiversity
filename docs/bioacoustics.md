@@ -10,7 +10,7 @@ tags:
 
 # MegaDetector-Acoustic
 
-**MegaDetector-Acoustic** provides training, inference, and dataset preparation for audio classification in wildlife monitoring. The module is maintained at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) and builds on core APIs in `PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`.
+**MegaDetector-Acoustic** provides training, inference, and dataset preparation for audio classification in wildlife monitoring. The module is maintained at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) and builds on the bioacoustics APIs of the `PytorchWildlife` package (`PytorchWildlife.data.bioacoustics` and `PytorchWildlife.models.bioacoustics`). That package is no longer updated; its source is archived in the [`archive/pytorch-wildlife`](https://github.com/microsoft/SPARROW-Playground/tree/archive/pytorch-wildlife) branch of SPARROW Playground.
 
 ## What's included
 
@@ -20,7 +20,7 @@ tags:
 - **Annotation readers** (COCO-like JSON), including support for the PteroSet / Raven Pro format
 - **`MD_AudioBirds_V1`** — a pre-trained bird classifier distributed as ONNX for direct inference
 
-See the [MegaDetector-Acoustic model zoo](model_zoo/bioacoustics.md) for the released models.
+See the [Sparrow Engine model zoo catalogue](https://github.com/microsoft/SPARROW-Engine/blob/main/docs/model-zoo-catalogue.md#acoustics--detector) for the released acoustic models, including `md-audiobirds-v1`.
 
 ## Demo
 
@@ -40,8 +40,9 @@ It uses recordings from the [PteroSet](https://zenodo.org/records/19137071) data
 ## Install
 
 ```bash
-pip install PytorchWildlife
-pip install librosa soundfile pyyaml torchmetrics
+git clone https://github.com/microsoft/MegaDetector-Acoustic
+cd MegaDetector-Acoustic
+pip install -r requirements.txt
 ```
 
-See the [MegaDetector-Acoustic README](https://github.com/microsoft/MegaDetector-Acoustic) for full configuration options, training arguments, and output formats.
+See the [MegaDetector-Acoustic README](https://github.com/microsoft/MegaDetector-Acoustic#installation) for requirements, configuration options, training arguments, and output formats.

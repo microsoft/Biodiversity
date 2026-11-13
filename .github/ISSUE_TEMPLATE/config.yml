@@ -1,0 +1,35 @@
+blank_issues_enabled: false
+contact_links:
+  - name: MegaDetector
+    url: https://github.com/microsoft/MegaDetector/issues
+    about: Camera-trap detection model for animals, people and vehicles.
+  - name: MegaDetector-Classifier
+    url: https://github.com/microsoft/MegaDetector-Classifier/issues
+    about: Camera-trap species classification and fine-tuning.
+  - name: MegaDetector-Acoustic
+    url: https://github.com/microsoft/MegaDetector-Acoustic/issues
+    about: Bioacoustic detection and classification.
+  - name: MegaDetector-Overhead
+    url: https://github.com/microsoft/MegaDetector-Overhead/issues
+    about: Wildlife detection in drone and aerial imagery.
+  - name: Sparrow Engine
+    url: https://github.com/microsoft/SPARROW-Engine/issues
+    about: Inference engine, Python package, CLI and the model zoo.
+  - name: SPARROW Playground (formerly PyTorch-Wildlife)
+    url: https://github.com/microsoft/SPARROW-Playground/issues
+    about: Notebooks and scripts, and questions about the archived PyTorch-Wildlife code.
+  - name: Sparrow Comm
+    url: https://github.com/microsoft/SPARROW-Comm/issues
+    about: Receivers for field data from SPARROW devices and cameras.
+  - name: SPARROW Model Zoo Uploader
+    url: https://github.com/microsoft/SPARROW-Model-Zoo-Uploader/issues
+    about: Converting and submitting models to the Sparrow Engine model zoo.
+  - name: SPARROW
+    url: https://github.com/microsoft/SPARROW/issues
+    about: The SPARROW AI edge device for remote field sites.
+  - name: SPARROWmini
+    url: https://github.com/microsoft/SPARROWmini/issues
+    about: The small low-power SPARROW field node.
+  - name: Discord
+    url: https://discord.gg/TeEVxzaYtm
+    about: General questions and discussion with the team.
