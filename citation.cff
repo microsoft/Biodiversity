@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 title: Microsoft Biodiversity
-message: "If you use PyTorch-Wildlife, please cite it using the metadata from this file."
+message: "If you use the SPARROW ecosystem, Sparrow Engine or PyTorch-Wildlife, please cite it using the metadata from this file."
 type: software
-version: "1.3.0"
-date-released: "2026-05-14"
+version: "2.0.0"
+date-released: "2026-11-13"
 authors:
   - given-names: Andres
     family-names: Hernandez
@@ -28,6 +28,8 @@ identifiers:
 repository-code: "https://github.com/microsoft/Biodiversity"
 url: "https://microsoft.github.io/Biodiversity/"
 keywords:
+  - SPARROW
+  - Sparrow Engine
   - PyTorch-Wildlife
   - MegaDetector
   - camera traps
@@ -36,5 +38,6 @@ keywords:
   - conservation
   - computer vision
   - bioacoustics
+  - edge computing
   - ai-for-good
 license: MIT
