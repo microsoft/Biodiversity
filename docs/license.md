@@ -1,7 +1,7 @@
 ---
-description: "PyTorch-Wildlife license information: MIT for the core package and utilities. Model-specific licenses (AGPL-3.0, CC BY-SA) are listed in the model zoo."
+description: "Licensing for the Microsoft Biodiversity hub and the SPARROW projects: MIT for this repository, per-project licences in each repository, and per-model licences in the Sparrow Engine model zoo catalogue."
 tags:
-  - PyTorch-Wildlife license
+  - license
   - MIT license
   - open source wildlife AI
   - model licensing
@@ -9,16 +9,21 @@ tags:
 
 # License
 
-## :bangbang: Model licensing 
+## This repository
 
-The **PyTorch-Wildlife** package is under MIT, however some of the models in the model zoo are not. For example, MegaDetectorV5, which is trained using the Ultralytics package, a package under AGPL-3.0, and is not for closed-source commercial uses if they are using updated 'ultralytics' packages. 
+The content of this repository (the hub pages and documentation) is released under the MIT license, reproduced below.
 
-There may be a confusion because YOLOv5 was initially released before the establishment of the AGPL-3.0 license. According to the official [Ultralytics-Yolov5](https://github.com/ultralytics/yolov5) package, it is under AGPL-3.0 now, and the maintainers have discussed how their licensing policy has evolved over time in their issues section. 
+## Projects
 
-We want to make PyTorch-Wildlife a platform where different models with different licenses can be hosted and want to enable different use cases. To reduce user confusions, in our [model zoo](model_zoo/megadetector.md) section, we list all existing and planned future models in our model zoo, their corresponding license, and release schedules. 
+Each project in the SPARROW ecosystem is its own repository with its own `LICENSE` file. Check the repository of the project you use; the [home page](index.md#projects) lists them all.
 
-In addition, since the **PyTorch-Wildlife** package is under MIT, all the utility functions, including data pre-/post-processing functions and model fine-tuning functions in this packages are under MIT as well.
+The archived PyTorch-Wildlife code (the `PytorchWildlife` package, kept in the [`archive/pytorch-wildlife`](https://github.com/microsoft/SPARROW-Playground/tree/archive/pytorch-wildlife) branch of SPARROW Playground) was released under MIT.
 
+## :bangbang: Model licensing
+
+Code licences and model licences are separate. Some models in our model zoo are not under MIT. For example, the YOLOv9 and YOLOv10 variants of MegaDetectorV6 are built with Ultralytics, which is under AGPL-3.0, and the catalogue lists those models under AGPL-3.0.
+
+The [Sparrow Engine model zoo catalogue](https://github.com/microsoft/SPARROW-Engine/blob/main/docs/model-zoo-catalogue.md#licensing-at-a-glance) lists the licence, hosting status and commercial-use status of every model. Check it before you use a model.
 
 ```
 --8<-- "LICENSE"

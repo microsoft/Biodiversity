@@ -11,6 +11,9 @@ tags:
 
 # Main changes and additions
 
+!!! note "PyTorch-Wildlife has ended"
+    This page and [Past Releases](past_releases.md) are the release history of PyTorch-Wildlife, which ended with the `PytorchWildlife` 1.3.1 package and is now [SPARROW Playground](https://github.com/microsoft/SPARROW-Playground). Each SPARROW project now publishes its own releases; the [home page](../index.md#recent-releases) lists the latest ones.
+
 ### V 1.3.0
 
 This release has three parts plus a preview of what's next.
@@ -30,12 +33,12 @@ SPARROW Studio is our new graphical frontend — data management, inference, ana
 
 #### MegaDetector-Acoustic
 
-MegaDetector-Acoustic is available at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [MegaDetector-Acoustic overview](../bioacoustics.md), the [model-zoo entry](../model_zoo/bioacoustics.md), and the end-to-end demo at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic).
+MegaDetector-Acoustic is available at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic) with CLI scripts for dataset preparation, training, and inference on audio recordings, plus a pre-trained bird classifier (`MD_AudioBirds_V1`). See the [MegaDetector-Acoustic overview](../bioacoustics.md), the [model zoo catalogue](https://github.com/microsoft/SPARROW-Engine/blob/main/docs/model-zoo-catalogue.md#acoustics--detector), and the end-to-end demo at [microsoft/MegaDetector-Acoustic](https://github.com/microsoft/MegaDetector-Acoustic).
 
 #### MegaDetector-Overhead
 
-A new generalized, point-based detection model for overhead imagery. Two variants are released — MegaDetector-Overhead-T and MegaDetector-Overhead-C — listed in the [Other Detectors](../model_zoo/other_detectors.md) model zoo. Demo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead).
+A new generalized, point-based detection model for overhead imagery. Two variants are released — MegaDetector-Overhead-T and MegaDetector-Overhead-C — listed in the [overhead detectors](https://github.com/microsoft/SPARROW-Engine/blob/main/docs/model-zoo-catalogue.md#overhead--detector) section of the model zoo catalogue. Demo: [microsoft/MegaDetector-Overhead](https://github.com/microsoft/MegaDetector-Overhead).
 
 #### Looking ahead — PW-Engine
 
-The future of PyTorchWildlife is [**PW-Engine**](../pw_engine_overview.md), a Rust-based, model-agnostic inference core that powers SPARROW Studio and can also be consumed directly via HTTP, CLI, Python bindings, or a native C library. See the PW-Engine overview for what it is, how it fits alongside the current Python API, and how to pilot it.
+The future of PyTorchWildlife is **PW-Engine**, a Rust-based, model-agnostic inference core that powers SPARROW Studio and can also be consumed directly via HTTP, CLI, Python bindings, or a native C library. PW-Engine has since been released as [Sparrow Engine](https://github.com/microsoft/SPARROW-Engine) (`pip install sparrow-engine`).
