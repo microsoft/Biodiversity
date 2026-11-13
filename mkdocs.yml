@@ -1,6 +1,6 @@
 site_name: Microsoft Biodiversity
 site_url: https://microsoft.github.io/Biodiversity/
-site_description: "Microsoft AI for Good Lab Biodiversity hub: open-source conservation AI for wildlife monitoring. Home of MegaDetector, PyTorch-Wildlife, SPARROW, and MegaDetector-Acoustic."
+site_description: "Microsoft AI for Good Lab Biodiversity hub: open-source conservation AI for wildlife monitoring. Home of the SPARROW ecosystem, MegaDetector, Sparrow Engine and MegaDetector-Acoustic."
 docs_dir: docs
 site_dir: site
 repo_url: https://github.com/microsoft/Biodiversity
@@ -71,8 +71,9 @@ theme:
     - navigation.footer
 
 nav:
-  - PyTorch-Wildlife:
-    - Overview: index.md
+  - Home: index.md
+  - PyTorch-Wildlife (legacy):
+    - Overview: pytorch_wildlife.md
     - Core Features: core_features.md
     - MegaDetector: megadetector.md
     - MegaDetector-Acoustic: bioacoustics.md
